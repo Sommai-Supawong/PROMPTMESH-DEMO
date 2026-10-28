@@ -274,65 +274,132 @@
     }
 
     /* ==========================================================================
-       VIEW 1: HOMEPAGE / DASHBOARD STYLES
+       VIEW 1: HOMEPAGE / DASHBOARD STYLES (Strict Soft UI & Kanit Typography)
        ========================================================================== */
+
+    /* Typography Enforcement: Ensure Kanit font is strictly applied to all dashboard elements */
+    #view-home,
+    #view-home *,
+    .dashboard-header,
+    .user-greeting,
+    .user-greeting-title,
+    .user-greeting-location,
+    #user-display-name,
+    #user-display-location,
+    .wallet-card,
+    .wallet-title,
+    .wallet-balance,
+    .wallet-balance *,
+    .wallet-balance-currency,
+    #citizen-wallet-balance,
+    .wallet-subtext,
+    .quick-actions-grid,
+    .quick-action-item,
+    .quick-action-title,
+    .quick-action-sub,
+    .risk-alert-card,
+    .risk-alert-title,
+    .risk-alert-desc,
+    .risk-alert-cta,
+    .section-title,
+    .section-link,
+    .store-name,
+    .store-address,
+    .store-distance,
+    .store-badges,
+    .store-stock-info,
+    #btn-scan-voucher,
+    .role-dash-card,
+    .role-dash-title,
+    .stat-kpi-label,
+    .stat-kpi-val,
+    .stat-kpi-sub,
+    .inventory-item,
+    .ledger-item,
+    .ai-search-card,
+    .ai-search-title,
+    .ai-search-subtitle,
+    .ai-nlp-input,
+    .ai-chip-label,
+    .ai-query-chip {
+      font-family: 'Kanit', var(--font-family-base) !important;
+    }
+
     .dashboard-header {
-      padding: 16px 20px;
+      padding: 18px 20px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      background: transparent;
     }
     .user-greeting {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
     }
     .user-greeting-title {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 22px;
       font-weight: 600;
       color: var(--pm-text-main);
       display: flex;
       align-items: center;
       gap: 8px;
+      line-height: 1.25;
     }
     .user-greeting-location {
+      font-family: 'Kanit', var(--font-family-base) !important;
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 400;
       color: var(--pm-text-secondary);
+      line-height: 1.3;
     }
     .header-status-pill {
       display: none;
     }
+
+    /* Header Avatar with Soft UI Diffused Drop Shadow */
     .header-avatar {
       width: 44px;
       height: 44px;
       border-radius: 50%;
       background-color: var(--pm-primary-light);
       border: 2px solid #ffffff;
-      box-shadow: var(--pm-shadow-1);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.22), var(--pm-shadow-2);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--pm-primary);
       cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+    .header-avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28), var(--pm-shadow-3);
+      border-color: var(--pm-primary-subtle);
+    }
+    .header-avatar:active {
+      transform: scale(0.96);
     }
 
+    /* Refined Spacing & Breathing Room on Mobile & Desktop */
     .dashboard-content {
-      padding: 0 18px 24px;
+      padding: 0 18px 48px; /* Generous bottom padding to prevent bottom nav collision */
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px; /* 20px vertical spacing between cards */
       width: 100%;
     }
 
     .dashboard-col-left, .dashboard-col-right {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px; /* 20px vertical spacing between cards */
       width: 100%;
     }
 
@@ -341,10 +408,11 @@
       background-color: var(--pm-danger-bg);
       border: 1.5px solid var(--pm-danger-border);
       border-radius: var(--pm-radius-lg);
-      padding: 18px;
+      padding: 18px 20px;
       box-shadow: 0 4px 16px rgba(239, 68, 68, 0.08);
       position: relative;
       overflow: hidden;
+      transition: all 0.2s ease;
     }
     .risk-alert-header {
       display: flex;
@@ -353,6 +421,7 @@
       margin-bottom: 8px;
     }
     .risk-alert-tag {
+      font-family: 'Kanit', var(--font-family-base) !important;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -375,6 +444,7 @@
       100% { transform: scale(0.9); opacity: 1; }
     }
     .risk-alert-title {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 19px;
       font-weight: 600;
       color: var(--pm-danger-text);
@@ -382,6 +452,7 @@
       margin-bottom: 6px;
     }
     .risk-alert-desc {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 13.5px;
       color: #7f1d1d;
       font-weight: 400;
@@ -389,6 +460,7 @@
       margin-bottom: 14px;
     }
     .risk-alert-cta {
+      font-family: 'Kanit', var(--font-family-base) !important;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -400,22 +472,37 @@
       border-radius: var(--pm-radius-md);
       border: 1px solid var(--pm-danger-border);
       cursor: pointer;
-      transition: all 0.15s ease;
+      box-shadow: 0 2px 6px rgba(239, 68, 68, 0.08);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .risk-alert-cta:hover {
       background-color: #fee2e2;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.14);
+    }
+    .risk-alert-cta:active {
+      transform: translateY(0);
     }
 
-    /* E-Voucher Wallet Card */
+    /* Enhanced E-Voucher Wallet Card */
     .wallet-card {
-      padding: 20px;
+      padding: 22px;
       position: relative;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border: 1.5px solid var(--pm-border);
+      border-radius: var(--pm-radius-lg);
+      box-shadow: var(--pm-shadow-2);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .wallet-card:hover {
+      border-color: var(--pm-border-focus);
+      box-shadow: var(--pm-shadow-3);
     }
     .wallet-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .wallet-badge-wrap {
       display: flex;
@@ -423,7 +510,8 @@
       gap: 8px;
     }
     .wallet-title {
-      font-size: 14px;
+      font-family: 'Kanit', var(--font-family-base) !important;
+      font-size: 14.5px;
       font-weight: 500;
       color: var(--pm-text-secondary);
     }
@@ -434,56 +522,106 @@
       margin-bottom: 14px;
     }
     .wallet-balance {
-      font-size: 34px;
+      font-family: 'Kanit', var(--font-family-base) !important;
+      font-size: 42px;
       font-weight: 700;
       color: var(--pm-text-main);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: baseline;
     }
     .wallet-balance-currency {
-      font-size: 20px;
-      font-weight: 500;
+      font-family: 'Kanit', var(--font-family-base) !important;
+      font-size: 26px;
+      font-weight: 600;
       color: var(--pm-primary);
-      margin-right: 2px;
+      margin-right: 4px;
     }
     .wallet-subtext {
-      font-size: 12.5px;
+      font-family: 'Kanit', var(--font-family-base) !important;
+      font-size: 13px;
       font-weight: 300;
       color: var(--pm-text-muted);
+      margin-top: 2px;
     }
     .wallet-tags {
       display: flex;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
 
-    /* Quick Actions 2x2 Grid */
+    /* Enhanced Stand-out QR Scan Voucher CTA Button */
+    #btn-scan-voucher {
+      width: 100%;
+      height: 52px;
+      background-color: var(--pm-primary);
+      color: #ffffff;
+      font-family: 'Kanit', var(--font-family-base) !important;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: var(--pm-radius-md);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--pm-shadow-fab);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      outline: none;
+      letter-spacing: 0.01em;
+    }
+    #btn-scan-voucher:hover {
+      background-color: var(--pm-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45), 0 3px 8px rgba(37, 99, 235, 0.22);
+    }
+    #btn-scan-voucher:active {
+      background-color: var(--pm-primary-active);
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28);
+    }
+    #btn-scan-voucher .svg-icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.2px;
+    }
+
+    /* Polished Quick Actions 2x2 Grid (Uniform Height & Hover States) */
     .quick-actions-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 14px;
     }
     .quick-action-item {
       background-color: var(--pm-surface);
       border: 1px solid var(--pm-border);
       border-radius: var(--pm-radius-lg);
-      padding: 16px;
+      padding: 16px 14px;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
       align-items: flex-start;
       gap: 10px;
+      min-height: 128px; /* Uniform height enforcement */
       box-shadow: var(--pm-shadow-1);
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: left;
+      position: relative;
     }
     .quick-action-item:hover {
       transform: translateY(-2px);
       box-shadow: var(--pm-shadow-2);
       border-color: var(--pm-border-focus);
+      background-color: #fafbfc;
     }
     .quick-action-item:active {
-      transform: scale(0.98);
+      transform: translateY(0);
+      box-shadow: var(--pm-shadow-1);
     }
     .quick-action-icon {
       width: 42px;
@@ -492,17 +630,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
+    }
+    .quick-action-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
     .quick-action-title {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--pm-text-main);
+      line-height: 1.3;
     }
     .quick-action-sub {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 12px;
-      font-weight: 300;
+      font-weight: 400;
       color: var(--pm-text-secondary);
-      margin-top: -6px;
+      line-height: 1.35;
     }
 
     /* Nearby Micro-Relief Stations Section */
@@ -513,16 +660,23 @@
       margin-top: 4px;
     }
     .section-title {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 17px;
       font-weight: 600;
       color: var(--pm-text-main);
     }
     .section-link {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 13px;
       font-weight: 500;
       color: var(--pm-primary);
       cursor: pointer;
       text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .section-link:hover {
+      color: var(--pm-primary-hover);
+      text-decoration: underline;
     }
     .store-list {
       display: flex;
@@ -532,11 +686,15 @@
     .store-card {
       padding: 16px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .store-card:hover {
+      transform: translateY(-2px);
       border-color: var(--pm-border-focus);
       box-shadow: var(--pm-shadow-2);
+    }
+    .store-card:active {
+      transform: translateY(0);
     }
     .store-top-row {
       display: flex;
@@ -545,11 +703,13 @@
       margin-bottom: 6px;
     }
     .store-name {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 16px;
       font-weight: 600;
       color: var(--pm-text-main);
     }
     .store-distance {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 12px;
       font-weight: 500;
       color: var(--pm-text-secondary);
@@ -558,6 +718,7 @@
       border-radius: var(--pm-radius-pill);
     }
     .store-address {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 13px;
       font-weight: 400;
       color: var(--pm-text-secondary);
@@ -570,6 +731,7 @@
       flex-wrap: wrap;
     }
     .store-stock-info {
+      font-family: 'Kanit', var(--font-family-base) !important;
       font-size: 12px;
       font-weight: 400;
       color: var(--pm-text-secondary);
@@ -1456,12 +1618,866 @@
         gap: 28px;
       }
     }
+  
+    /* ==========================================================================
+       HACKATHON UPGRADE FEATURES: ROLE AUTH, AI NLP SEARCH & PRE-TRIP CHECKLIST
+       ========================================================================== */
+
+    /* 1. ROLE-BASED AUTHENTICATION (FULL-SCREEN LOGIN VIEW) */
+    .login-view {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background-color: var(--pm-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      overflow-y: auto;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .login-card {
+      background-color: var(--pm-surface);
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-sheet);
+      box-shadow: var(--pm-shadow-4);
+      width: 100%;
+      max-width: 580px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .login-brand-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .login-brand-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--pm-radius-md);
+      background-color: var(--pm-primary-light);
+      color: var(--pm-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--pm-border-focus);
+    }
+
+    .login-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--pm-text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .login-tagline {
+      font-size: 13px;
+      color: var(--pm-text-secondary);
+      line-height: 1.4;
+      max-width: 460px;
+    }
+
+    .role-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .role-select-card {
+      background-color: var(--pm-surface);
+      border: 1.5px solid var(--pm-border);
+      border-radius: var(--pm-radius-lg);
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      position: relative;
+      outline: none;
+    }
+
+    .role-select-card:hover {
+      border-color: var(--pm-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--pm-shadow-2);
+      background-color: #fafbfc;
+    }
+
+    .role-select-card:active {
+      transform: translateY(0);
+    }
+
+    .role-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--pm-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid transparent;
+    }
+
+    .role-info-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .role-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .role-card-title {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+    }
+
+    .role-card-desc {
+      font-size: 12.5px;
+      color: var(--pm-text-secondary);
+      line-height: 1.45;
+    }
+
+    .role-arrow-icon {
+      color: var(--pm-text-muted);
+      flex-shrink: 0;
+      align-self: center;
+      transition: transform 0.2s ease;
+    }
+
+    .role-select-card:hover .role-arrow-icon {
+      color: var(--pm-primary);
+      transform: translateX(3px);
+    }
+
+    .login-footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--pm-text-muted);
+      border-top: 1px solid var(--pm-border);
+      padding-top: 14px;
+    }
+
+    /* Role Switch Button in Header & Sidebar */
+    .role-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 0 12px;
+      background-color: #ffffff;
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-pill);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--pm-text-secondary);
+      cursor: pointer;
+      box-shadow: var(--pm-shadow-1);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .role-switch-btn:hover {
+      border-color: var(--pm-primary);
+      color: var(--pm-primary);
+      background-color: var(--pm-primary-light);
+    }
+
+    /* 2. ROLE DASHBOARD PANELS (MERCHANT, RESCUE, GOV) */
+    .role-dash-card {
+      background-color: var(--pm-surface);
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-xl);
+      padding: 22px;
+      box-shadow: var(--pm-shadow-2);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: modalFadeIn 0.25s ease forwards;
+    }
+
+    .role-dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .role-dash-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .role-dash-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+    }
+
+    .stat-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .stat-kpi-box {
+      background-color: #f8fafc;
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-md);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-kpi-label {
+      font-size: 11.5px;
+      color: var(--pm-text-secondary);
+      font-weight: 400;
+    }
+
+    .stat-kpi-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--pm-text-main);
+    }
+
+    .stat-kpi-sub {
+      font-size: 11px;
+      color: var(--pm-success-text);
+      font-weight: 500;
+    }
+
+    .inventory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .inventory-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background-color: #f8fafc;
+      border-radius: var(--pm-radius-sm);
+      font-size: 13px;
+    }
+
+    .inventory-item-name {
+      font-weight: 500;
+      color: var(--pm-text-main);
+    }
+
+    .ledger-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ledger-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background-color: #f8fafc;
+      border-radius: var(--pm-radius-sm);
+      font-size: 12px;
+    }
+
+    /* 3. AI SEMANTIC SUPPLY SEARCH (TRACK 2 NLP) */
+    .ai-search-card {
+      background: #ffffff;
+      border: 1.5px solid var(--pm-border-focus);
+      border-radius: var(--pm-radius-xl);
+      padding: 20px;
+      box-shadow: var(--pm-shadow-2);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .ai-search-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .ai-search-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--pm-primary-light);
+      color: var(--pm-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--pm-border-focus);
+      flex-shrink: 0;
+    }
+
+    .ai-search-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+    }
+
+    .ai-search-subtitle {
+      font-size: 12px;
+      color: var(--pm-text-secondary);
+    }
+
+    /* Target the Search Row Container */
+    .ai-search-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* Fix the Input Field & Wrapper */
+    .ai-search-input-wrap {
+      flex: 1 1 auto;
+      min-width: 0;
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .ai-input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--pm-primary);
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .ai-nlp-input {
+      flex: 1 1 auto;
+      min-width: 0;
+      width: 100%;
+      height: 46px;
+      padding: 0 16px 0 42px;
+      background-color: #ffffff;
+      border: 1.5px solid var(--pm-border);
+      border-radius: var(--pm-radius-pill);
+      font-size: 13px;
+      color: var(--pm-text-main);
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--pm-shadow-1);
+      box-sizing: border-box;
+    }
+
+    .ai-nlp-input:focus {
+      border-color: var(--pm-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* Fix the "วิเคราะห์" Button (Prevent Stretching & Overflow) */
+    .pm-btn-primary.ai-search-btn,
+    .ai-search-btn {
+      flex: 0 0 auto;
+      width: auto;
+      white-space: nowrap;
+      padding: 0 20px;
+      height: 46px;
+      border-radius: var(--pm-radius-pill);
+      background-color: var(--pm-primary);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .pm-btn-primary.ai-search-btn:hover,
+    .ai-search-btn:hover {
+      background-color: var(--pm-primary-hover);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .pm-btn-primary.ai-search-btn:active,
+    .ai-search-btn:active {
+      background-color: var(--pm-primary-active);
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+    }
+
+    .ai-query-chips {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .ai-chip-label {
+      font-size: 11.5px;
+      color: var(--pm-text-muted);
+      font-weight: 500;
+    }
+
+    .ai-query-chip {
+      background-color: #f1f5f9;
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-pill);
+      padding: 4px 10px;
+      font-size: 11.5px;
+      color: var(--pm-text-secondary);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .ai-query-chip:hover, .ai-query-chip.active {
+      background-color: var(--pm-primary-light);
+      border-color: var(--pm-border-focus);
+      color: var(--pm-primary);
+    }
+
+    /* AI Processing Pulse Animation */
+    .ai-pulse-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-pulse-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: rgba(37, 99, 235, 0.2);
+      animation: aiPulseRing 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    }
+
+    .ai-pulse-core {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background-color: var(--pm-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+    }
+
+    @keyframes aiPulseRing {
+      0% {
+        transform: scale(0.8);
+        opacity: 0.9;
+      }
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    .ai-loading-progress-bar {
+      width: 100%;
+      height: 6px;
+      background-color: #f1f5f9;
+      border-radius: var(--pm-radius-pill);
+      overflow: hidden;
+      margin-top: 18px;
+    }
+
+    .ai-progress-fill {
+      height: 100%;
+      width: 75%;
+      background-color: var(--pm-primary);
+      border-radius: var(--pm-radius-pill);
+      animation: progressIndeterminate 1.2s ease-in-out infinite;
+    }
+
+    @keyframes progressIndeterminate {
+      0% { transform: translateX(-100%); width: 40%; }
+      50% { transform: translateX(20%); width: 70%; }
+      100% { transform: translateX(120%); width: 40%; }
+    }
+
+    /* AI Result Highlight Modal Box */
+    .ai-result-highlight-card {
+      background-color: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      border-radius: var(--pm-radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ai-result-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .ai-result-quote {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.45;
+    }
+
+    .ai-insights-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .ai-insight-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      border-bottom: 1px dashed var(--pm-border);
+      padding-bottom: 6px;
+    }
+
+    .ai-insight-label {
+      color: var(--pm-text-secondary);
+    }
+
+    .ai-insight-value {
+      color: var(--pm-text-main);
+      font-weight: 500;
+    }
+
+    .ai-matched-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ai-matched-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f8fafc;
+      padding: 8px 12px;
+      border-radius: var(--pm-radius-sm);
+      font-size: 13px;
+    }
+
+    .ai-matched-name {
+      font-weight: 500;
+      color: var(--pm-text-main);
+    }
+
+    /* Map AI Search Bar */
+    .map-search-bar-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .map-ai-submit-btn {
+      position: absolute;
+      right: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--pm-primary);
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--pm-shadow-1);
+      transition: all 0.15s ease;
+    }
+
+    .map-ai-submit-btn:hover {
+      background-color: var(--pm-primary-hover);
+      transform: scale(1.05);
+    }
+
+    /* 4. VEHICLE EVACUATION READINESS CHECKLIST MODAL */
+    .checklist-vehicle-banner {
+      background-color: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: var(--pm-radius-md);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .checklist-vehicle-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--pm-radius-sm);
+      background-color: #ffffff;
+      color: var(--pm-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--pm-shadow-1);
+    }
+
+    .checklist-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checklist-item-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background-color: #ffffff;
+      border: 1.5px solid var(--pm-border);
+      border-radius: var(--pm-radius-lg);
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      position: relative;
+    }
+
+    .checklist-item-card:hover {
+      border-color: var(--pm-border-focus);
+      background-color: #fbfcfe;
+    }
+
+    .checklist-checkbox {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .checklist-custom-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #cbd5e1;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .checklist-custom-check svg {
+      width: 14px;
+      height: 14px;
+      color: #ffffff;
+      opacity: 0;
+      stroke-width: 2.5;
+      transition: opacity 0.15s ease;
+    }
+
+    .checklist-checkbox:checked + .checklist-custom-check {
+      background-color: var(--pm-primary);
+      border-color: var(--pm-primary);
+    }
+
+    .checklist-checkbox:checked + .checklist-custom-check svg {
+      opacity: 1;
+    }
+
+    .checklist-item-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .checklist-item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+    }
+
+    .checklist-item-desc {
+      font-size: 12px;
+      color: var(--pm-text-secondary);
+      line-height: 1.4;
+    }
+
+    .checklist-action-footer {
+      margin-top: 18px;
+    }
+
   </style>
 </head>
 <body>
 
+  <!-- ======================================================================
+       FEATURE 1: ROLE-BASED AUTHENTICATION (#login-view)
+       ====================================================================== -->
+  <div id="login-view" class="login-view">
+    <div class="login-card">
+      
+      <!-- Brand Header -->
+      <div class="login-brand-header">
+        <div class="login-brand-logo">
+          <svg class="svg-icon" style="width: 28px; height: 28px;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h1 class="login-title">PromptMesh</h1>
+        <div class="brand-badge" style="background-color: var(--pm-primary-light); color: var(--pm-primary); padding: 4px 10px; border-radius: var(--pm-radius-pill); font-size: 11px; font-weight: 600;">
+          HYPERLOCAL D2C MESH • CRISIS DEMO SYSTEM
+        </div>
+        <p class="login-tagline">
+          เลือกระบบทดสอบบทบาทผู้ใช้งาน (Interactive Hackathon Demo Roles)<br>
+          เพื่อทดสอบระบบจำลองสภาวะวิกฤตแบบ Multi-Stakeholder Continuum
+        </p>
+      </div>
+
+      <!-- 4 Prominent Role Selection Cards -->
+      <div class="role-grid">
+        
+        <!-- Role 1: ประชาชน (Resident) -->
+        <button class="role-select-card" id="btn-role-resident" onclick="selectDemoRole('resident')">
+          <div class="role-icon-box" style="background-color: #eff6ff; color: #2563eb; border-color: #bfdbfe;">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="role-info-col">
+            <div class="role-card-header">
+              <span class="role-card-title">ประชาชน (Resident)</span>
+              <span class="pm-badge pm-badge-primary">ผู้ประสบภัย</span>
+            </div>
+            <div class="role-card-desc">
+              เตือนภัยระดับซอย, รับ E-Voucher ฿1,500 จาก อปท., สแกน QR แลกรับเสบียงชุมชน และนำทางหลบน้ำท่วมตามประเภทรถ
+            </div>
+          </div>
+          <div class="role-arrow-icon">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </button>
+
+        <!-- Role 2: ร้านค้า SME (Merchant) -->
+        <button class="role-select-card" id="btn-role-merchant" onclick="selectDemoRole('merchant')">
+          <div class="role-icon-box" style="background-color: #ecfdf5; color: #10b981; border-color: #a7f3d0;">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
+          </div>
+          <div class="role-info-col">
+            <div class="role-card-header">
+              <span class="role-card-title">ร้านค้า SME (Merchant)</span>
+              <span class="pm-badge pm-badge-success">สถานีเสบียง</span>
+            </div>
+            <div class="role-card-desc">
+              เปลี่ยนโชห่วยเป็น Micro-Relief Station, ตรวจสอบยอดขายคูปอง (฿18,450), สแกนรับสิทธิ์ และจัดการสต็อกจำเป็น
+            </div>
+          </div>
+          <div class="role-arrow-icon">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </button>
+
+        <!-- Role 3: ทีมกู้ภัย (Rescue) -->
+        <button class="role-select-card" id="btn-role-rescue" onclick="selectDemoRole('rescue')">
+          <div class="role-icon-box" style="background-color: #fffbeb; color: #f59e0b; border-color: #fde68a;">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="role-info-col">
+            <div class="role-card-header">
+              <span class="role-card-title">ทีมกู้ภัย (Rescue)</span>
+              <span class="pm-badge pm-badge-warning">หน่วยฉุกเฉิน</span>
+            </div>
+            <div class="role-card-desc">
+              รับแจ้งเหตุผู้ป่วยติดเตียงเร่งด่วน, ตรวจเช็กความพร้อมยานพาหนะก่อนลุยน้ำ, นำทางรถ 4x4 / เรือ, และปักหมุดสิ่งกีดขวาง
+            </div>
+          </div>
+          <div class="role-arrow-icon">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </button>
+
+        <!-- Role 4: อปท. (Gov/Donor) -->
+        <button class="role-select-card" id="btn-role-gov" onclick="selectDemoRole('gov')">
+          <div class="role-icon-box" style="background-color: #f3e8ff; color: #9333ea; border-color: #e9d5ff;">
+            <svg class="svg-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          </div>
+          <div class="role-info-col">
+            <div class="role-card-header">
+              <span class="role-card-title">อปท. (Gov/Donor)</span>
+              <span class="pm-badge" style="background-color: #f3e8ff; color: #7e22ce;">กองทุนเยียวยา</span>
+            </div>
+            <div class="role-card-desc">
+              บริหารงบประมาณเยียวยา ฿2,500,000, จำลองการอัดฉีดงบฉุกเฉินระดับซอยผ่าน Krungthai Open API และตรวจสอบความโปร่งใส
+            </div>
+          </div>
+          <div class="role-arrow-icon">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- Footer Note -->
+      <div class="login-footer-note">
+        จำลองสถานการณ์น้ำท่วมชุมชนลุ่มน้ำท่าจีน (ซอยไร่ขิง 26 อ.สามพราน จ.นครปฐม) • มาตรฐาน Soft UI & Apple OS
+      </div>
+
+    </div>
+  </div>
+
+
   <!-- RESPONSIVE ROOT CONTAINER (100vw / 100vh) -->
-  <div class="app-root">
+  <div class="app-root" id="app-root">
 
     <!-- ======================================================================
          GLOBAL NAVIGATION BAR (Left Sidebar on Desktop / Bottom Bar on Mobile)
@@ -1509,17 +2525,24 @@
           <span>ระบบเตือนภัย</span>
           <span class="nav-tab-dot"></span>
         </button>
+
+        <!-- Tab 5: Role Switcher (Mobile & Desktop) -->
+        <button class="nav-tab-item" id="nav-btn-switch-role" onclick="openLoginView()" title="เปลี่ยนบทบาท">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 17l-3-3 3-3"/><path d="M15 14h4"/></svg>
+          <span>สลับบทบาท</span>
+          <span class="nav-tab-dot"></span>
+        </button>
       </div>
 
       <!-- Desktop Sidebar Footer: Profile & Telemetry Link -->
       <div class="sidebar-footer">
-        <div class="sidebar-user-card">
+        <div class="sidebar-user-card" onclick="openLoginView()" style="cursor: pointer;" title="คลิกเพื่อสลับบทบาท (Demo Login)">
           <div class="user-avatar-small">
             <svg class="svg-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <div class="user-info-text">
-            <span class="sidebar-user-name">คุณสมศักดิ์ นครปฐม</span>
-            <span class="sidebar-user-zone">ซอยไร่ขิง 26 • อ.สามพราน</span>
+            <span class="sidebar-user-name" id="sidebar-user-name">คุณสมศักดิ์ นครปฐม</span>
+            <span class="sidebar-user-zone" id="sidebar-user-zone">ซอยไร่ขิง 26 • แตะเพื่อสลับบทบาท</span>
           </div>
         </div>
         <div class="sidebar-system-status">
@@ -1533,7 +2556,7 @@
     <!-- ======================================================================
          MAIN SCREEN VIEW CONTAINER
          ====================================================================== -->
-    <main class="app-screen">
+    <main class="app-screen" id="app-screen">
 
       <!-- ======================================================================
            VIEW 1: HOMEPAGE / DASHBOARD (Responsive Multi-Column on Desktop)
@@ -1544,22 +2567,28 @@
         <header class="dashboard-header">
           <div class="user-greeting">
             <h1 class="user-greeting-title">
-              <span>สวัสดีคุณสมศักดิ์</span>
-              <span class="pm-badge pm-badge-primary" style="font-size: 11px;">ยืนยันสิทธิ์ อปท.</span>
+              <span id="user-display-name">สวัสดีคุณสมศักดิ์</span>
+              <span class="pm-badge pm-badge-primary" id="user-role-badge" style="font-size: 11px;">ยืนยันสิทธิ์ อปท.</span>
             </h1>
             <div class="user-greeting-location">
               <svg class="svg-icon" style="width: 16px; height: 16px; color: var(--pm-primary);" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>ซอยไร่ขิง 26 • ตำบลไร่ขิง อำเภอสามพราน จังหวัดนครปฐม</span>
+              <span id="user-display-location">ซอยไร่ขิง 26 • ตำบลไร่ขิง อำเภอสามพราน จังหวัดนครปฐม</span>
             </div>
           </div>
           
           <!-- Desktop Status Bar Widget -->
-          <div class="header-status-pill">
+          <div class="header-status-pill" id="header-status-pill">
             <span style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--pm-warning);"></span>
-            <span>สถานะซอย: น้ำเอ่อล้น (เฝ้าระวังระดับ 2)</span>
+            <span id="header-status-text">สถานะซอย: น้ำเอ่อล้น (เฝ้าระวังระดับ 2)</span>
           </div>
 
-          <div class="header-avatar" title="โปรไฟล์ผู้ประสบภัย">
+          <!-- Switch Role / Logout Button -->
+          <button class="role-switch-btn" id="btn-logout-header" onclick="openLoginView()" title="Logout / เปลี่ยนบทบาท">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12"/></svg>
+            <span>เปลี่ยนบทบาท</span>
+          </button>
+
+          <div class="header-avatar" id="header-avatar" onclick="openLoginView()" title="โปรไฟล์ผู้ใช้งาน / แตะเพื่อสลับบทบาท" style="cursor: pointer;">
             <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
         </header>
@@ -1591,8 +2620,8 @@
               </button>
             </article>
 
-            <!-- 2. E-Voucher Wallet Card -->
-            <article class="pm-card wallet-card">
+            <!-- 2A. Resident E-Voucher Wallet Card -->
+            <article class="pm-card wallet-card" id="citizen-wallet-card">
               <div class="wallet-header">
                 <div class="wallet-badge-wrap">
                   <svg class="svg-icon" style="color: var(--pm-primary);" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
@@ -1603,7 +2632,7 @@
               
               <div class="wallet-balance-row">
                 <div>
-                  <div class="wallet-balance"><span class="wallet-balance-currency">฿</span>1,500</div>
+                  <div class="wallet-balance"><span class="wallet-balance-currency">฿</span><span id="citizen-wallet-balance">1,500</span></div>
                   <div class="wallet-subtext">เงินสนับสนุนฉุกเฉินจาก กองทุนช่วยเหลือ อปท. นครปฐม</div>
                 </div>
               </div>
@@ -1626,6 +2655,229 @@
               </button>
             </article>
 
+            <!-- 2B. SME Merchant Store Sales Dashboard Mockup -->
+            <article class="role-dash-card" id="dashboard-merchant" style="display: none;">
+              <div class="role-dash-header">
+                <div class="role-dash-title-wrap">
+                  <div class="role-icon-box" style="background-color: #ecfdf5; color: #10b981; width: 38px; height: 38px;">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
+                  </div>
+                  <div>
+                    <div class="role-dash-title">Store Sales Dashboard</div>
+                    <div style="font-size: 12px; color: var(--pm-text-secondary);">ร้านป้าพร โชห่วยซอย 26 • Micro-Relief Station</div>
+                  </div>
+                </div>
+                <span class="pm-badge pm-badge-success">SME-NKP-042</span>
+              </div>
+
+              <!-- Sales KPI Metrics -->
+              <div class="stat-kpi-grid">
+                <div class="stat-kpi-box">
+                  <span class="stat-kpi-label">ยอดรับชำระคูปองวันนี้</span>
+                  <span class="stat-kpi-val" id="merchant-revenue-val" style="color: var(--pm-primary);">฿18,450</span>
+                  <span class="stat-kpi-sub">42 ธุรกรรมสำเร็จ</span>
+                </div>
+                <div class="stat-kpi-box">
+                  <span class="stat-kpi-label">รอบโอนเข้า พร้อมเพย์</span>
+                  <span class="stat-kpi-val" style="color: #059669;">18:00 น.</span>
+                  <span class="stat-kpi-sub">Krungthai Open API</span>
+                </div>
+              </div>
+
+              <!-- Merchant Action Buttons -->
+              <div style="display: flex; gap: 8px;">
+                <button class="pm-btn-primary" style="flex: 1; height: 42px; font-size: 13.5px;" onclick="simulateMerchantScan()">
+                  <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/></svg>
+                  <span>สแกน QR คูปอง (POS Mode)</span>
+                </button>
+                <button class="pm-btn-secondary" style="height: 42px; padding: 0 14px; font-size: 13px;" onclick="showToast('สต็อกเสบียงซิงก์กับศูนย์บรรเทาทุกข์แล้ว')">
+                  <span>ตรวจสต็อก</span>
+                </button>
+              </div>
+
+              <!-- Live Emergency Inventory Summary -->
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: var(--pm-text-main); margin-bottom: 8px;">สถานะคลังเสบียงฉุกเฉินประจำร้าน:</div>
+                <div class="inventory-list">
+                  <div class="inventory-item">
+                    <span class="inventory-item-name">น้ำดื่มสะอาด 1.5 ลิตร</span>
+                    <span class="pm-badge pm-badge-primary">คงเหลือ 45 แพ็ค</span>
+                  </div>
+                  <div class="inventory-item">
+                    <span class="inventory-item-name">แผ่นรองซับผู้ใหญ่ (ขนาด L)</span>
+                    <span class="pm-badge pm-badge-warning" style="background-color: #fffbeb; color: #b45309;">คงเหลือ 15 แพ็ค (ใกล้หมด)</span>
+                  </div>
+                  <div class="inventory-item">
+                    <span class="inventory-item-name">ข้าวสาร & อาหารแห้ง</span>
+                    <span class="pm-badge pm-badge-success">คงเหลือ 80 ชุด</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Voucher Redemptions Log -->
+              <div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--pm-text-secondary); margin-bottom: 6px;">ประวัติการแลกรับล่าสุด:</div>
+                <div class="ledger-list" id="merchant-ledger-list">
+                  <div class="ledger-item">
+                    <span>10:14 น. • คูปองเยียวยา ฿300 (น้ำดื่ม + ข้าวสาร)</span>
+                    <span style="color: var(--pm-success-text); font-weight: 600;">#TX-8821</span>
+                  </div>
+                  <div class="ledger-item">
+                    <span>09:48 น. • คูปองเยียวยา ฿500 (แผ่นรองซับ 2 แพ็ค)</span>
+                    <span style="color: var(--pm-success-text); font-weight: 600;">#TX-8820</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- 2C. Rescue Operations Command Dashboard Mockup -->
+            <article class="role-dash-card" id="dashboard-rescue" style="display: none;">
+              <div class="role-dash-header">
+                <div class="role-dash-title-wrap">
+                  <div class="role-icon-box" style="background-color: #fffbeb; color: #f59e0b; width: 38px; height: 38px;">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  </div>
+                  <div>
+                    <div class="role-dash-title">Rescue Operations Command</div>
+                    <div style="font-size: 12px; color: var(--pm-text-secondary);">มูลนิธิร่วมกตัญญู (จุดสามพราน) • หน่วยเคลื่อนที่เร็ว 03</div>
+                  </div>
+                </div>
+                <span class="pm-badge pm-badge-warning">Active Duty</span>
+              </div>
+
+              <!-- Rescue KPIs -->
+              <div class="stat-kpi-grid">
+                <div class="stat-kpi-box">
+                  <span class="stat-kpi-label">เคสขอความช่วยเหลือด่วน</span>
+                  <span class="stat-kpi-val" style="color: var(--pm-danger);">3 เหตุการณ์</span>
+                  <span class="stat-kpi-sub">ผู้ป่วยติดเตียง 1 ราย</span>
+                </div>
+                <div class="stat-kpi-box">
+                  <span class="stat-kpi-label">เครือข่าย LoRa Mesh</span>
+                  <span class="stat-kpi-val" style="color: #059669;">8 โหนด</span>
+                  <span class="stat-kpi-sub">ครอบคลุมรัศมี 15 กม.</span>
+                </div>
+              </div>
+
+              <!-- Priority Incident Queue -->
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: var(--pm-text-main); margin-bottom: 8px;">คิวภารกิจช่วยเหลือฉุกเฉิน (Priority Queue):</div>
+                <div class="inventory-list">
+                  <div class="inventory-item" style="border-left: 3px solid var(--pm-danger); padding-left: 10px;">
+                    <div>
+                      <div style="font-weight: 600; color: var(--pm-danger);">[วิกฤตสูงสุด] Case #R-104: คุณยายติดเตียง</div>
+                      <div style="font-size: 11.5px; color: var(--pm-text-secondary);">ซอยไร่ขิง 26 (น้ำลึก 35 ซม.) • ต้องการเรือ + แผ่นรองซับ</div>
+                    </div>
+                    <button class="pm-btn-primary" style="height: 32px; padding: 0 10px; font-size: 12px;" onclick="switchView('view-map'); openPreTripChecklist();">
+                      นำทางช่วยเหลือ
+                    </button>
+                  </div>
+                  <div class="inventory-item" style="border-left: 3px solid var(--pm-warning); padding-left: 10px;">
+                    <div>
+                      <div style="font-weight: 600; color: var(--pm-warning);">Case #R-102: ครอบครัว 4 ราย ขออพยพ</div>
+                      <div style="font-size: 11.5px; color: var(--pm-text-secondary);">ปลายทางวัดไร่ขิง (น้ำลึก 20 ซม.) • จัดสรรรถกระบะ 4WD</div>
+                    </div>
+                    <span class="pm-badge pm-badge-warning">รับเรื่องแล้ว</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Rescue Action Button -->
+              <div style="display: flex; gap: 8px;">
+                <button class="pm-btn-primary" style="flex: 1; height: 42px; font-size: 13px;" onclick="switchView('view-map'); openPreTripChecklist();">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  <span>ตรวจเช็กยานพาหนะ & วางแผนนำทาง</span>
+                </button>
+                <button class="pm-btn-secondary" style="height: 42px; padding: 0 12px; font-size: 13px;" onclick="openModal('modal-report-flood')">
+                  <span>ปักหมุดสิ่งกีดขวาง</span>
+                </button>
+              </div>
+            </article>
+
+            <!-- 2D. Gov & Donor Fund Injection Portal Mockup -->
+            <article class="role-dash-card" id="dashboard-gov" style="display: none;">
+              <div class="role-dash-header">
+                <div class="role-dash-title-wrap">
+                  <div class="role-icon-box" style="background-color: #f3e8ff; color: #9333ea; width: 38px; height: 38px;">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                  </div>
+                  <div>
+                    <div class="role-dash-title">Gov & Donor Fund Portal</div>
+                    <div style="font-size: 12px; color: var(--pm-text-secondary);">เทศบาลเมืองไร่ขิง • กองทุนช่วยเหลือผู้ประสบอุทกภัย</div>
+                  </div>
+                </div>
+                <span class="pm-badge" style="background-color: #f3e8ff; color: #7e22ce;">Krungthai API</span>
+              </div>
+
+              <!-- Fund Injection KPIs -->
+              <div class="stat-kpi-grid">
+                <div class="stat-kpi-box">
+                  <span class="stat-kpi-label">งบเยียวยาจัดสรรรวม</span>
+                  <span class="stat-kpi-val" style="color: var(--pm-primary);">฿2,500,000</span>
+                  <span class="stat-kpi-sub">ครอบคลุม 7,800 ราย</span>
+                </div>
+                <div class="stat-kpi-box">
+                  <span class="stat-kpi-label">เบิกจ่ายสู่ SME ชุมชนแล้ว</span>
+                  <span class="stat-kpi-val" id="gov-disbursed-amount" style="color: #059669;">฿1,840,000</span>
+                  <span class="stat-kpi-sub">28 ร้านค้า SME ได้รับเงิน</span>
+                </div>
+              </div>
+
+              <!-- Interactive Fund Injection Tool -->
+              <div style="background-color: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: var(--pm-radius-md); padding: 14px;">
+                <div style="font-size: 13px; font-weight: 600; color: var(--pm-text-main); margin-bottom: 4px;">จำลองการอัดฉีดงบฉุกเฉินเจาะจงระดับซอย (Fund Injection):</div>
+                <div style="font-size: 12px; color: var(--pm-text-secondary); margin-bottom: 12px;">
+                  พื้นที่เป้าหมาย: <strong>ซอยไร่ขิง 26 (ระดับความเสี่ยงสีแดง)</strong> • ระบบจะโอนเข้า E-Voucher ประชาชนทันที
+                </div>
+                <button class="pm-btn-primary" style="width: 100%; height: 42px; font-size: 13.5px;" onclick="simulateFundInjection()">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  <span>อัดฉีดงบฉุกเฉิน +฿500,000 ผ่าน Krungthai API</span>
+                </button>
+              </div>
+
+              <!-- Transparency & Auditability -->
+              <div style="font-size: 11.5px; color: var(--pm-text-muted); display: flex; align-items: center; gap: 6px;">
+                <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--pm-success);" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>ตรวจสอบย้อนกลับได้ 100% ผ่าน PromptPay & Krungthai Open API Ledger</span>
+              </div>
+            </article>
+
+            <!-- FEATURE 2: AI SEMANTIC SUPPLY SEARCH (TRACK 2 NLP UPGRADE) -->
+            <article class="ai-search-card" id="card-ai-supply-search">
+              <div class="ai-search-header">
+                <div class="ai-search-badge-wrap">
+                  <div class="ai-icon-circle">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                  </div>
+                  <div>
+                    <div class="ai-search-title">AI Semantic Supply Search</div>
+                    <div class="ai-search-subtitle">สกัดความต้องการภาษาธรรมชาติ & สแกนสต็อกเสบียง SME ท้องถิ่น</div>
+                  </div>
+                </div>
+                <span class="pm-badge pm-badge-primary">Track 2 NLP</span>
+              </div>
+
+              <!-- Search Input Box -->
+              <div class="ai-search-box">
+                <div class="ai-search-input-wrap">
+                  <svg class="svg-icon ai-input-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="ai-supply-search-input" class="ai-nlp-input" placeholder="ค้นหาเสบียงด้วย AI (เช่น ยายป่วย ไฟดับ ต้องการแผ่นรองซับ...)" value="ยายป่วย ไฟดับ ต้องการแผ่นรองซับ...">
+                </div>
+                <button class="pm-btn-primary ai-search-btn" id="btn-trigger-ai-search" onclick="performAISupplySearch()">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  <span>วิเคราะห์</span>
+                </button>
+              </div>
+
+              <!-- Quick Suggestion Query Chips -->
+              <div class="ai-query-chips">
+                <span class="ai-chip-label">ตัวอย่างค้นหา:</span>
+                <button class="ai-query-chip active" onclick="setAndRunAISearch('ยายป่วย ไฟดับ ต้องการแผ่นรองซับ...')">ยายป่วย ไฟดับ ต้องการแผ่นรองซับ...</button>
+                <button class="ai-query-chip" onclick="setAndRunAISearch('เด็กทารก นมผง น้ำดื่มสะอาด 3 แพ็ค')">เด็กทารก นมผง น้ำดื่มสะอาด</button>
+                <button class="ai-query-chip" onclick="setAndRunAISearch('ชุดทำแผล ยาพารา แบตเตอรี่สำรอง')">ชุดทำแผล ยาพารา แบตเตอรี่</button>
+              </div>
+            </article>
+
           </div>
 
           <!-- RIGHT COLUMN: Quick Actions & Nearby SME Micro-Relief Stations -->
@@ -1640,7 +2892,7 @@
                   <div class="quick-action-icon" style="background-color: var(--pm-primary-light); color: var(--pm-primary);">
                     <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
                   </div>
-                  <div>
+                  <div class="quick-action-text-wrap">
                     <div class="quick-action-title">นำทางปลอดภัย</div>
                     <div class="quick-action-sub">หลบน้ำตามรุ่นรถ</div>
                   </div>
@@ -1651,7 +2903,7 @@
                   <div class="quick-action-icon" style="background-color: var(--pm-success-bg); color: var(--pm-success);">
                     <svg class="svg-icon" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
                   </div>
-                  <div>
+                  <div class="quick-action-text-wrap">
                     <div class="quick-action-title">ค้นหาเสบียง</div>
                     <div class="quick-action-sub">ร้าน SME มีสต็อก</div>
                   </div>
@@ -1662,7 +2914,7 @@
                   <div class="quick-action-icon" style="background-color: var(--pm-warning-bg); color: var(--pm-warning);">
                     <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
                   </div>
-                  <div>
+                  <div class="quick-action-text-wrap">
                     <div class="quick-action-title">รายงานน้ำท่วม</div>
                     <div class="quick-action-sub">แชร์ภาพจุดเสี่ยง</div>
                   </div>
@@ -1673,7 +2925,7 @@
                   <div class="quick-action-icon" style="background-color: #f3e8ff; color: #9333ea;">
                     <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19.3 14.8C18.9 14.2 18 12.8 18 8a6 6 0 0 0-12 0c0 4.8-.9 6.2-1.3 6.8-.3.5-.1 1.2.5 1.2h13.6c.6 0 .8-.7.5-1.2z"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><line x1="19" x2="19" y1="2" y2="8"/><line x1="16" x2="22" y1="5" y2="5"/></svg>
                   </div>
-                  <div>
+                  <div class="quick-action-text-wrap">
                     <div class="quick-action-title">ติดตามซอย</div>
                     <div class="quick-action-sub">เตือนผ่าน SMS/Push</div>
                   </div>
@@ -1773,15 +3025,20 @@
           <!-- Real Google Maps Interactive Canvas -->
           <div id="google-map-canvas"></div>
 
-          <!-- Floating Map Controls: Top Glass Search Bar -->
+          <!-- Floating Map Controls: Top Glass Search Bar with AI Semantic Search -->
           <div class="pm-glass-panel map-top-bar">
             <button class="map-back-btn" id="btn-map-back-home" title="กลับหน้าแรก">
               <svg class="svg-icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
             </button>
-            <input type="text" class="map-search-input" value="นำทางไป: จุดปลอดภัยวัดไร่ขิง (ลานยกสูง)" placeholder="ค้นหาจุดหมาย หรือสถานีเสบียง..." readonly />
+            <div class="map-search-bar-wrap">
+              <input type="text" id="map-ai-search-input" class="map-search-input" value="ค้นหาเสบียงด้วย AI (เช่น ยายป่วย ไฟดับ ต้องการแผ่นรองซับ...)" placeholder="ค้นหาเสบียงด้วย AI (เช่น ยายป่วย ไฟดับ ต้องการแผ่นรองซับ...)" />
+              <button class="map-ai-submit-btn" id="btn-map-ai-search" title="ค้นหาเสบียงด้วย AI" onclick="setAndRunAISearch(document.getElementById('map-ai-search-input').value)">
+                <svg class="svg-icon" style="width: 15px; height: 15px;" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              </button>
+            </div>
             <div class="map-gps-pill">
               <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--pm-success);"></span>
-              <span>GPS ±3ม.</span>
+              <span>GPS ไร่ขิง</span>
             </div>
           </div>
 
@@ -1897,6 +3154,181 @@
     <!-- ======================================================================
          MODAL 1: AI ASSISTANT MODAL (Glassmorphic Analysis Window)
          ====================================================================== -->
+        <!-- ======================================================================
+         FEATURE 3: VEHICLE EVACUATION READINESS CHECKLIST MODAL (#modal-pre-trip-checklist)
+         ====================================================================== -->
+    <div class="modal-backdrop" id="modal-pre-trip-checklist">
+      <div class="modal-sheet" style="max-width: 480px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <div class="modal-icon-badge" style="background-color: var(--pm-warning-bg); color: var(--pm-warning);">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 600; color: var(--pm-text-main);">ตรวจสอบความพร้อมยานพาหนะก่อนลุยน้ำ</div>
+              <div style="font-size: 12px; color: var(--pm-text-secondary); font-weight: 400;">Track 5: Pre-Trip Flood Evacuation Checklist</div>
+            </div>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-pre-trip-checklist')">
+            <svg class="svg-icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="checklist-vehicle-banner">
+            <div class="checklist-vehicle-icon">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--pm-primary);" id="checklist-vehicle-name">ยานพาหนะ: รถเก๋ง (Sedan) • ขีดจำกัดน้ำ ≤ 15 ซม.</div>
+              <div style="font-size: 11.5px; color: var(--pm-text-secondary);">โปรดยืนยันจุดตรวจเช็กความปลอดภัย 3 จุดสำคัญ เพื่อป้องกันเครื่องยนต์ดับกลางน้ำท่วม</div>
+            </div>
+          </div>
+
+          <div class="checklist-items-list">
+            <!-- Checklist Item 1 -->
+            <label class="checklist-item-card" for="chk-item-1">
+              <input type="checkbox" id="chk-item-1" class="checklist-checkbox" checked>
+              <div class="checklist-custom-check">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="checklist-item-content">
+                <div class="checklist-item-title">ตรวจสอบระบบสวิตช์ไฟฉุกเฉิน และรีเลย์ไฟเลี้ยว</div>
+                <div class="checklist-item-desc">ทดสอบเปิดไฟฉุกเฉินทำงานปกติ ป้องกันระบบไฟช็อตและไฟดับขณะวิ่งผ่านมวลน้ำเอ่อล้น</div>
+              </div>
+            </label>
+
+            <!-- Checklist Item 2 -->
+            <label class="checklist-item-card" for="chk-item-2">
+              <input type="checkbox" id="chk-item-2" class="checklist-checkbox" checked>
+              <div class="checklist-custom-check">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="checklist-item-content">
+                <div class="checklist-item-title">เช็กความแน่นหนาของน็อตอ่างน้ำมันเครื่องแบบแม่เหล็ก</div>
+                <div class="checklist-item-desc">ป้องกันน้ำซึมเข้าห้องเครื่องยนต์และแคร้งค์น้ำมันเครื่องขณะดับเครื่องยนต์กะทันหัน</div>
+              </div>
+            </label>
+
+            <!-- Checklist Item 3 -->
+            <label class="checklist-item-card" for="chk-item-3">
+              <input type="checkbox" id="chk-item-3" class="checklist-checkbox" checked>
+              <div class="checklist-custom-check">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="checklist-item-content">
+                <div class="checklist-item-title">ตรวจสอบซีลยางขอบประตูและระดับท่อไอเสีย</div>
+                <div class="checklist-item-desc">รักษาระดับรอบเครื่องยนต์ ป้องกันน้ำดูดเข้าท่อไอเสียและน้ำซึมเข้าห้องโดยสาร</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="checklist-action-footer">
+            <button class="pm-btn-primary" id="btn-confirm-checklist" style="width: 100%;">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <span>ยืนยันความปลอดภัย & เริ่มนำทาง</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         FEATURE 2: AI PROCESSING LOADING STATE MODAL (#modal-ai-search-loading)
+         ====================================================================== -->
+    <div class="modal-backdrop" id="modal-ai-search-loading">
+      <div class="modal-sheet" style="max-width: 380px; text-align: center; padding: 32px 24px;">
+        <div class="ai-pulse-container">
+          <div class="ai-pulse-ring"></div>
+          <div class="ai-pulse-core">
+            <svg class="svg-icon" style="width: 28px; height: 28px; color: #ffffff;" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          </div>
+        </div>
+        <div style="font-size: 17px; font-weight: 600; color: var(--pm-text-main); margin-top: 20px;">AI กำลังประมวลผลคำค้นหา...</div>
+        <div style="font-size: 13px; color: var(--pm-text-secondary); margin-top: 6px; line-height: 1.5;" id="ai-loading-status-text">
+          วิเคราะห์ความหมาย (NLP) สกัดความต้องการฉุกเฉิน และสแกนสต็อกเสบียงจาก 28 ร้านค้า SME...
+        </div>
+        <div class="ai-loading-progress-bar">
+          <div class="ai-progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         FEATURE 2: AI SEARCH RESULT MODAL (#modal-ai-search-result)
+         ====================================================================== -->
+    <div class="modal-backdrop" id="modal-ai-search-result">
+      <div class="modal-sheet" style="max-width: 480px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <div class="modal-icon-badge" style="background-color: var(--pm-success-bg); color: var(--pm-success);">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 600; color: var(--pm-text-main);">AI วิเคราะห์บริบทสำเร็จ (Track 2 NLP)</div>
+              <div style="font-size: 12px; color: var(--pm-text-secondary); font-weight: 400;">จับคู่ความต้องการวิกฤตกับคลังเสบียง SME ชุมชน</div>
+            </div>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-ai-search-result')">
+            <svg class="svg-icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Highlight Result Box -->
+          <div class="ai-result-highlight-card">
+            <div class="ai-result-tag">
+              <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>ความแม่นยำ NLP 98.4% • สต็อกพร้อมแลก</span>
+            </div>
+            <div class="ai-result-quote">
+              "AI วิเคราะห์บริบท: พบร้าน 'ป้าพร โชห่วยซอย 26' มีแผ่นรองซับผู้ใหญ่ 15 แพ็ค และชุดปฐมพยาบาล"
+            </div>
+          </div>
+
+          <!-- Context Insights Breakdown -->
+          <div class="ai-insights-grid">
+            <div class="ai-insight-item">
+              <span class="ai-insight-label">บริบทความต้องการที่พบ:</span>
+              <span class="ai-insight-value" id="ai-detected-context">ผู้ป่วยติดเตียง • ไฟฟ้าดับ • อุปกรณ์ปฐมพยาบาล</span>
+            </div>
+            <div class="ai-insight-item">
+              <span class="ai-insight-label">ร้านค้าที่แนะนำอันดับ 1:</span>
+              <span class="ai-insight-value" style="color: var(--pm-primary); font-weight: 600;">ร้านป้าพร โชห่วยซอย 26</span>
+            </div>
+            <div class="ai-insight-item">
+              <span class="ai-insight-label">ระยะห่าง & สภาพเส้นทาง:</span>
+              <span class="ai-insight-value">800 ม. (3 นาที) • น้ำท่วม 0 ซม. (ผ่านได้ 100%)</span>
+            </div>
+          </div>
+
+          <!-- Matched Items Pill List -->
+          <div style="font-size: 13px; font-weight: 600; color: var(--pm-text-main); margin-bottom: 8px;">รายการเสบียงพร้อมแลกรับด้วย E-Voucher:</div>
+          <div class="ai-matched-items-list">
+            <div class="ai-matched-item">
+              <div class="ai-matched-name">แผ่นรองซับผู้ใหญ่ (ขนาด L)</div>
+              <span class="pm-badge pm-badge-success">มีสต็อก 15 แพ็ค</span>
+            </div>
+            <div class="ai-matched-item">
+              <div class="ai-matched-name">ชุดทำแผลและยาปฐมพยาบาล</div>
+              <span class="pm-badge pm-badge-success">มีสต็อก 8 ชุด</span>
+            </div>
+            <div class="ai-matched-item">
+              <div class="ai-matched-name">น้ำดื่มสะอาด 1.5 ลิตร</div>
+              <span class="pm-badge pm-badge-primary">มีสต็อก 45 แพ็ค</span>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <div style="margin-top: 20px;">
+            <button class="pm-btn-primary" id="btn-highlight-store-map" style="width: 100%;" onclick="highlightStoreOnMap()">
+              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <span>ไฮไลต์พิกัดร้านบนแผนที่ & นำทางทันที</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal-backdrop" id="modal-ai-assistant">
       <div class="modal-sheet">
         <div class="modal-header">
@@ -2031,10 +3463,13 @@
   <script>
     // App State Management
     const appState = {
+      activeRole: 'resident', // resident, merchant, rescue, gov
       currentView: 'view-home',
-      activeVehicle: 'sedan',
+      activeVehicle: 'sedan', // sedan, pickup, boat
       timelineStep: 2, // 1: +1h, 2: +3h, 3: +6h
       voucherBalance: 1500,
+      merchantRevenue: 18450,
+      govDisbursed: 1840000,
       layers: {
         water: true,
         rain: true,
@@ -2618,9 +4053,27 @@
       }, scanDuration);
     }
 
-    // Attach Click Handler to Calculate Safe Route Button
+    // Feature 3: Intercept "คำนวณเส้นทางปลอดภัย" and open Vehicle Pre-Trip Readiness Checklist
     document.getElementById('btn-calc-route').addEventListener('click', () => {
+      openPreTripChecklist();
+    });
+
+    function openPreTripChecklist() {
+      const vehicle = appState.activeVehicle || 'sedan';
+      const vNameEl = document.getElementById('checklist-vehicle-name');
+      if (vNameEl) {
+        if (vehicle === 'sedan') vNameEl.innerText = 'ยานพาหนะ: รถยนต์นั่งส่วนบุคคล (Sedan) • ขีดจำกัดน้ำ ≤ 15 ซม.';
+        else if (vehicle === 'pickup') vNameEl.innerText = 'ยานพาหนะ: รถกระบะยกสูง 4WD (Pickup) • ขีดจำกัดน้ำ ≤ 40 ซม.';
+        else if (vehicle === 'boat') vNameEl.innerText = 'ยานพาหนะ: เรือท้องแบนกู้ภัย (Rescue Boat) • ขีดจำกัดน้ำ > 30 ซม.';
+      }
+      openModal('modal-pre-trip-checklist');
+    }
+
+    // When primary button "ยืนยันความปลอดภัย & เริ่มนำทาง" is clicked
+    document.getElementById('btn-confirm-checklist').addEventListener('click', () => {
+      closeModal('modal-pre-trip-checklist');
       calculateSafeRoute({ silent: false });
+      showToast('ยืนยันความปลอดภัยยานพาหนะแล้ว กำลังนำทางสู่จุดปลอดภัย...');
     });
 
     // --------------------------------------------------------------------------
@@ -2768,6 +4221,225 @@
         }
       });
     });
+
+    // ==========================================================================
+    // ROLE SWITCHING & MULTI-STAKEHOLDER SYSTEM (FEATURE 1)
+    // ==========================================================================
+    function selectDemoRole(role) {
+      appState.activeRole = role;
+      const loginView = document.getElementById('login-view');
+      const appRoot = document.getElementById('app-root');
+      if (loginView) loginView.style.display = 'none';
+      if (appRoot) appRoot.style.display = 'flex';
+      
+      const displayName = document.getElementById('user-display-name');
+      const roleBadge = document.getElementById('user-role-badge');
+      const displayLocation = document.getElementById('user-display-location');
+      const statusPillText = document.getElementById('header-status-text');
+      const sidebarUserName = document.getElementById('sidebar-user-name');
+      const sidebarUserZone = document.getElementById('sidebar-user-zone');
+
+      const citizenWallet = document.getElementById('citizen-wallet-card');
+      const merchantDash = document.getElementById('dashboard-merchant');
+      const rescueDash = document.getElementById('dashboard-rescue');
+      const govDash = document.getElementById('dashboard-gov');
+
+      if (role === 'resident') {
+        if (displayName) displayName.innerText = 'สวัสดีคุณสมศักดิ์';
+        if (roleBadge) {
+          roleBadge.innerText = 'ประชาชนในพื้นที่เสี่ยง';
+          roleBadge.className = 'pm-badge pm-badge-primary';
+          roleBadge.style.backgroundColor = '';
+          roleBadge.style.color = '';
+        }
+        if (displayLocation) displayLocation.innerText = 'ซอยไร่ขิง 26 • ตำบลไร่ขิง อำเภอสามพราน จังหวัดนครปฐม';
+        if (statusPillText) statusPillText.innerText = 'สถานะซอย: น้ำเอ่อล้น (เฝ้าระวังระดับ 2)';
+        if (sidebarUserName) sidebarUserName.innerText = 'คุณสมศักดิ์ สุขประเสริฐ';
+        if (sidebarUserZone) sidebarUserZone.innerText = 'ซอย 26 • อ.สามพราน (ประชาชน)';
+        
+        if (citizenWallet) citizenWallet.style.display = 'block';
+        if (merchantDash) merchantDash.style.display = 'none';
+        if (rescueDash) rescueDash.style.display = 'none';
+        if (govDash) govDash.style.display = 'none';
+        showToast('เข้าสู่ระบบในบทบาท: ประชาชนในพื้นที่เสี่ยง (E-Voucher ฿1,500)');
+      } else if (role === 'merchant') {
+        if (displayName) displayName.innerText = 'ร้านป้าพร โชห่วยซอย 26';
+        if (roleBadge) {
+          roleBadge.innerText = 'Micro-Relief Station (SME-NKP-042)';
+          roleBadge.className = 'pm-badge pm-badge-success';
+          roleBadge.style.backgroundColor = '';
+          roleBadge.style.color = '';
+        }
+        if (displayLocation) displayLocation.innerText = 'ปากซอยไร่ขิง 26 • ร้านค้า SME พร้อมแจกเสบียง';
+        if (statusPillText) statusPillText.innerText = 'สถานะร้านค้า: พร้อมแจกเสบียง (E-Voucher Active)';
+        if (sidebarUserName) sidebarUserName.innerText = 'ร้านป้าพร โชห่วยซอย 26';
+        if (sidebarUserZone) sidebarUserZone.innerText = 'สถานีเสบียง SME-NKP-042';
+
+        if (citizenWallet) citizenWallet.style.display = 'none';
+        if (merchantDash) merchantDash.style.display = 'block';
+        if (rescueDash) rescueDash.style.display = 'none';
+        if (govDash) govDash.style.display = 'none';
+        showToast('เข้าสู่ระบบในบทบาท: ร้านค้า SME (Store Sales Dashboard)');
+      } else if (role === 'rescue') {
+        if (displayName) displayName.innerText = 'ศูนย์กู้ภัยร่วมกตัญญู';
+        if (roleBadge) {
+          roleBadge.innerText = 'Verified Rescue Team (หน่วย 03)';
+          roleBadge.className = 'pm-badge pm-badge-warning';
+          roleBadge.style.backgroundColor = '';
+          roleBadge.style.color = '';
+        }
+        if (displayLocation) displayLocation.innerText = 'จุดอำเภอสามพราน • เครือข่าย LoRa Mesh 8 โหนด';
+        if (statusPillText) statusPillText.innerText = 'สถานะหน่วย: พร้อมออกปฏิบัติการฉุกเฉิน (Active Duty)';
+        if (sidebarUserName) sidebarUserName.innerText = 'ทีมกู้ภัยร่วมกตัญญู';
+        if (sidebarUserZone) sidebarUserZone.innerText = 'หน่วยเคลื่อนที่เร็ว 03 (กู้ภัย)';
+
+        if (citizenWallet) citizenWallet.style.display = 'none';
+        if (merchantDash) merchantDash.style.display = 'none';
+        if (rescueDash) rescueDash.style.display = 'block';
+        if (govDash) govDash.style.display = 'none';
+        showToast('เข้าสู่ระบบในบทบาท: ทีมกู้ภัย (Rescue Operations)');
+      } else if (role === 'gov') {
+        if (displayName) displayName.innerText = 'เทศบาลเมืองไร่ขิง (อปท.)';
+        if (roleBadge) {
+          roleBadge.innerText = 'ผู้บริหารกองทุนเยียวยาอุทกภัย';
+          roleBadge.className = 'pm-badge';
+          roleBadge.style.backgroundColor = '#f3e8ff';
+          roleBadge.style.color = '#7e22ce';
+        }
+        if (displayLocation) displayLocation.innerText = 'ฝ่ายป้องกันและบรรเทาสาธารณภัย • อำเภอสามพราน';
+        if (statusPillText) statusPillText.innerText = 'สถานะงบประมาณ: เบิกจ่ายแล้ว 73.6% (28 ร้านค้า SME)';
+        if (sidebarUserName) sidebarUserName.innerText = 'เทศบาลเมืองไร่ขิง (อปท.)';
+        if (sidebarUserZone) sidebarUserZone.innerText = 'ผู้บริหารกองทุนเยียวยา';
+
+        if (citizenWallet) citizenWallet.style.display = 'none';
+        if (merchantDash) merchantDash.style.display = 'none';
+        if (rescueDash) rescueDash.style.display = 'none';
+        if (govDash) govDash.style.display = 'block';
+        showToast('เข้าสู่ระบบในบทบาท: อปท. & ผู้บริหารกองทุน (Fund Injection Portal)');
+      }
+
+      switchView('view-home');
+    }
+
+    function openLoginView() {
+      const loginView = document.getElementById('login-view');
+      if (loginView) {
+        loginView.style.display = 'flex';
+        loginView.scrollTop = 0;
+      }
+    }
+
+    // ==========================================================================
+    // AI SEMANTIC SUPPLY SEARCH SYSTEM (FEATURE 2: TRACK 2 NLP)
+    // ==========================================================================
+    function performAISupplySearch(userQuery) {
+      const query = userQuery || document.getElementById('ai-supply-search-input')?.value || 'ยายป่วย ไฟดับ ต้องการแผ่นรองซับ...';
+      
+      openModal('modal-ai-search-loading');
+      const loadingText = document.getElementById('ai-loading-status-text');
+      if (loadingText) {
+        loadingText.innerText = `วิเคราะห์บริบท: "${query}" ... สแกนสต็อกเสบียงจาก 28 ร้านค้า SME ชุมชน`;
+      }
+
+      setTimeout(() => {
+        closeModal('modal-ai-search-loading');
+        
+        const contextEl = document.getElementById('ai-detected-context');
+        if (contextEl) {
+          if (query.includes('เด็ก') || query.includes('นม')) {
+            contextEl.innerText = 'เด็กทารก • อาหารเสริมและนมผง • น้ำดื่มสะอาด';
+          } else if (query.includes('แผล') || query.includes('ยา')) {
+            contextEl.innerText = 'ผู้บาดเจ็บ • เวชภัณฑ์และยาสามัญ • พลังงานสำรอง';
+          } else {
+            contextEl.innerText = 'ผู้ป่วยติดเตียง • ไฟฟ้าดับ • อุปกรณ์ปฐมพยาบาล';
+          }
+        }
+
+        openModal('modal-ai-search-result');
+      }, 950);
+    }
+
+    function setAndRunAISearch(queryText) {
+      const inputHome = document.getElementById('ai-supply-search-input');
+      const inputMap = document.getElementById('map-ai-search-input');
+      if (inputHome) inputHome.value = queryText;
+      if (inputMap) inputMap.value = queryText;
+      performAISupplySearch(queryText);
+    }
+
+    function highlightStoreOnMap() {
+      closeModal('modal-ai-search-result');
+      switchView('view-map');
+      
+      const paPhonLat = 13.7390;
+      const paPhonLng = 100.2710;
+      
+      if (map) {
+        map.panTo({ lat: paPhonLat, lng: paPhonLng });
+        map.setZoom(16);
+      }
+
+      if (storeMarkers && storeMarkers.length > 0) {
+        const storeMarker = storeMarkers[0];
+        if (storeMarker) {
+          if (storeMarker.setAnimation) {
+            storeMarker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(() => storeMarker.setAnimation(null), 2400);
+          }
+          
+          const aiHighlightInfo = new google.maps.InfoWindow({
+            content: `
+              <div style="font-family: 'Kanit', sans-serif; font-size: 13px; line-height: 1.4; color: #0f172a; max-width: 230px;">
+                <div style="background-color: #ecfdf5; color: #065f46; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; margin-bottom: 6px; display: inline-block;">
+                  AI Semantic Match (แม่นยำ 98.4%)
+                </div>
+                <strong style="color: #2563eb; font-size: 14px; display: block; margin-bottom: 4px;">ร้านป้าพร โชห่วยซอย 26</strong>
+                <div style="color: #475569; font-size: 12px; margin-bottom: 6px;">ปากซอยไร่ขิง 26 • ห่าง 800 ม. (น้ำท่วม 0 ซม.)</div>
+                <div style="background-color: #eff6ff; padding: 6px 8px; border-radius: 6px; color: #1e40af; font-size: 11px; font-weight: 500;">
+                  แผ่นรองซับผู้ใหญ่: 15 แพ็ค<br>
+                  ชุดปฐมพยาบาล: 8 ชุด • น้ำดื่ม: 45 แพ็ค
+                </div>
+              </div>
+            `
+          });
+          aiHighlightInfo.open(map, storeMarker);
+        }
+      }
+
+      calculateSafeRoute({ destination: { lat: paPhonLat, lng: paPhonLng } });
+      showToast("AI ไฮไลต์ร้าน 'ป้าพร โชห่วยซอย 26' เรียบร้อยแล้ว (มีแผ่นรองซับ 15 แพ็ค)");
+    }
+
+    // ==========================================================================
+    // INTERACTIVE SME MERCHANT & GOV ACTIONS
+    // ==========================================================================
+    function simulateMerchantScan() {
+      openModal('modal-qr-scanner');
+      showToast('เปิดโหมดเครื่องสแกนร้านค้า (Merchant POS Scanner)');
+    }
+
+    function simulateFundInjection() {
+      appState.govDisbursed += 500000;
+      const govDisbursedEl = document.getElementById('gov-disbursed-amount');
+      if (govDisbursedEl) {
+        govDisbursedEl.innerText = '฿' + appState.govDisbursed.toLocaleString();
+      }
+      showToast('อัดฉีดงบฉุกเฉิน +฿500,000 ผ่าน Krungthai Open API เรียบร้อยแล้ว!');
+    }
+
+    // Enter key triggers on AI inputs
+    const inputHome = document.getElementById('ai-supply-search-input');
+    if (inputHome) {
+      inputHome.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') performAISupplySearch(inputHome.value);
+      });
+    }
+    const inputMap = document.getElementById('map-ai-search-input');
+    if (inputMap) {
+      inputMap.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') setAndRunAISearch(inputMap.value);
+      });
+    }
   </script>
 
   <!-- Google Maps JavaScript API (API Key injected from .env) -->
