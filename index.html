@@ -8,6 +8,9 @@
   <!-- Google Font: Kanit (Complete Typography Scale 300, 400, 500, 600, 700) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Lucide Icons Library (Strict Zero-Emoji Policy Enforcer) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
   <style>
@@ -2362,18 +2365,28 @@
     }
 
   
-    /* ==========================================================================
-       E2E INTERACTIVE WORKFLOW STYLES (SME STOCK, SOS FORM, CI/CD PIPELINE)
+        /* ==========================================================================
+       DESIGN SYSTEM ENFORCEMENT: ZERO-EMOJI, LUCIDE & POLISHED SOFT UI
        ========================================================================== */
-    /* SME Inventory Counter Styles */
+    /* Lucide Icon Standard Styling */
+    [data-lucide], .lucide {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      vertical-align: middle;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    /* SME Inventory Card & Counter Proportions */
     .inventory-manage-card {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: var(--pm-radius-md);
       border: 1px solid var(--pm-card-border);
       padding: 16px;
-      margin-top: 14px;
+      margin-top: 16px;
       box-shadow: var(--pm-shadow-sm);
     }
 
@@ -2381,78 +2394,100 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin: 12px 0;
+      margin: 14px 0;
     }
 
     .stock-item-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 12px 14px;
+      background: #ffffff;
+      border: 1px solid var(--pm-card-border);
       border-radius: var(--pm-radius-sm);
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
     }
 
     .stock-item-row:hover {
-      border-color: rgba(37, 99, 235, 0.3);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
     }
 
     .stock-item-info {
       flex: 1;
       min-width: 0;
-      padding-right: 8px;
+      padding-right: 12px;
     }
 
     .stock-item-name {
       font-size: 13.5px;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--pm-text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
+    .stock-item-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .stock-item-icon.color-water { color: #0284c7; }
+    .stock-item-icon.color-rice { color: #d97706; }
+    .stock-item-icon.color-meds { color: #dc2626; }
+    .stock-item-icon.color-pads { color: #7c3aed; }
+
     .stock-item-sku {
       font-size: 11px;
       color: var(--pm-text-secondary);
-      margin-top: 2px;
+      margin-top: 3px;
+      padding-left: 24px;
     }
 
     .stock-counter-group {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-shrink: 0;
     }
 
+    /* Polished Square Counter Buttons */
     .stock-ctrl-btn {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
       background: #f8fafc;
       color: var(--pm-text-main);
       font-size: 16px;
-      font-weight: 700;
-      display: flex;
+      font-weight: 600;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all 0.15s ease;
+      user-select: none;
       touch-action: manipulation;
+      line-height: 1;
+      padding: 0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
     .stock-ctrl-btn:hover {
-      background: #e2e8f0;
+      background: #f1f5f9;
       border-color: #94a3b8;
+      color: var(--pm-primary);
     }
 
     .stock-ctrl-btn:active {
       transform: scale(0.92);
-      background: #cbd5e1;
+      background: #e2e8f0;
     }
 
     .stock-count-val {
@@ -2462,6 +2497,7 @@
       font-weight: 700;
       color: var(--pm-primary);
       font-variant-numeric: tabular-nums;
+      font-family: 'Kanit', sans-serif;
     }
 
     .stock-unit-label {
@@ -2470,7 +2506,7 @@
       width: 28px;
     }
 
-    /* SOS Resident Banner & Pulse */
+    /* SOS Resident Banner */
     .sos-trigger-btn {
       position: relative;
       background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
@@ -2478,15 +2514,16 @@
       border: none !important;
       box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35) !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      margin-top: 10px;
+      margin-top: 12px;
       width: 100%;
-      height: 44px;
-      display: flex;
+      height: 46px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       font-weight: 600;
       font-size: 13.5px;
+      border-radius: var(--pm-radius-sm);
     }
 
     .sos-trigger-btn:hover {
@@ -2494,166 +2531,261 @@
       transform: translateY(-1.5px);
     }
 
-    /* CI/CD Pipeline Container & Nodes */
-    .cicd-pipeline-flow {
+    /* Soft UI CSS Stepper Pipeline */
+    .stepper-pipeline {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       margin: 16px 0 12px;
-      padding: 12px 8px;
-      background: rgba(248, 250, 252, 0.85);
+      padding: 14px 12px;
+      background: rgba(248, 250, 252, 0.9);
       border: 1px solid rgba(226, 232, 240, 0.9);
-      border-radius: var(--pm-radius-sm);
+      border-radius: var(--pm-radius-md);
       position: relative;
     }
 
-    .cicd-node {
+    .stepper-step {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       flex: 1;
+      position: relative;
       z-index: 2;
     }
 
-    .cicd-node-icon {
-      width: 32px;
-      height: 32px;
+    .stepper-dot {
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      background: #e2e8f0;
-      color: #64748b;
+      background: #f1f5f9;
+      border: 2px solid #cbd5e1;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 6px;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    .cicd-node-icon .svg-icon {
-      width: 16px;
-      height: 16px;
+    .stepper-dot-inner {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #94a3b8;
+      transition: all 0.3s ease;
     }
 
-    .cicd-node-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: #64748b;
-      transition: color 0.3s ease;
-    }
-
-    .cicd-node-sub {
-      font-size: 10px;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
-
-    .cicd-line {
-      height: 3px;
-      flex: 0 0 24px;
+    .stepper-connector {
+      flex: 1;
+      height: 2px;
       background: #e2e8f0;
-      margin-top: -18px;
+      margin: 11px 4px 0 4px;
       z-index: 1;
       transition: background 0.3s ease;
     }
 
-    /* Pipeline Node Active/Passed States */
-    .cicd-node.state-pending .cicd-node-icon {
+    .stepper-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748b;
+      line-height: 1.3;
+      transition: color 0.3s ease;
+    }
+
+    .stepper-subtitle {
+      font-size: 10.5px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* Stepper Active / Passed States */
+    .stepper-step.active-pending .stepper-dot {
       background: #fee2e2;
-      color: #ef4444;
-      border: 2px solid #ef4444;
-      animation: pulseAlert 1.8s infinite;
+      border-color: var(--pm-danger);
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
     }
-    .cicd-node.state-pending .cicd-node-title {
+    .stepper-step.active-pending .stepper-dot-inner {
+      background: var(--pm-danger);
+      animation: pulseDot 1.6s infinite;
+    }
+    .stepper-step.active-pending .stepper-title {
       color: #b91c1c;
-      font-weight: 700;
+      font-weight: 600;
     }
 
-    .cicd-node.state-dispatched .cicd-node-icon {
+    .stepper-step.active-dispatched .stepper-dot {
       background: #fef3c7;
-      color: #d97706;
-      border: 2px solid #f59e0b;
-      animation: pulseAlert 1.8s infinite;
+      border-color: var(--pm-warning);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
     }
-    .cicd-node.state-dispatched .cicd-node-title {
+    .stepper-step.active-dispatched .stepper-dot-inner {
+      background: var(--pm-warning);
+      animation: pulseDot 1.6s infinite;
+    }
+    .stepper-step.active-dispatched .stepper-title {
       color: #b45309;
-      font-weight: 700;
+      font-weight: 600;
     }
 
-    .cicd-node.state-passed .cicd-node-icon {
+    .stepper-step.passed .stepper-dot {
       background: #dcfce7;
-      color: #15803d;
-      border: 2px solid #16a34a;
+      border-color: var(--pm-success);
     }
-    .cicd-node.state-passed .cicd-node-title {
+    .stepper-step.passed .stepper-dot-inner {
+      background: var(--pm-success);
+      width: 10px;
+      height: 10px;
+    }
+    .stepper-step.passed .stepper-title {
       color: #15803d;
+      font-weight: 500;
     }
 
-    .cicd-line.line-passed {
-      background: #16a34a;
+    .stepper-connector.connector-passed {
+      background: var(--pm-success);
     }
 
-    .cicd-line.line-active {
-      background: linear-gradient(90deg, #16a34a, #f59e0b);
+    .stepper-connector.connector-active {
+      background: linear-gradient(90deg, var(--pm-success), var(--pm-warning));
     }
+
+    @keyframes pulseDot {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    .pipeline-badge-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .pipeline-badge-dot.dot-danger { background-color: var(--pm-danger); }
+    .pipeline-badge-dot.dot-warning { background-color: var(--pm-warning); }
+    .pipeline-badge-dot.dot-success { background-color: var(--pm-success); }
 
     .cicd-status-box {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: var(--pm-radius-sm);
-      padding: 10px 12px;
-      margin-top: 8px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
     }
 
-    .live-dot-pulse {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: #ef4444;
-      box-shadow: 0 0 0 rgba(239, 68, 68, 0.4);
-      animation: pulseAlert 1.5s infinite;
+    /* SOS Form Elements with Proportional Padding & Inset Shadow */
+    .sos-form-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    /* SOS Form Modal Elements */
     .sos-form-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .sos-form-label {
-      font-size: 12.5px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 500;
       color: var(--pm-text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sos-input-field {
+      width: 100%;
+      box-sizing: border-box;
+      height: 46px;
+      padding: 12px 16px;
+      background: #ffffff;
+      border: 1px solid var(--pm-card-border);
+      border-radius: var(--pm-radius-md);
+      font-family: 'Kanit', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13.5px;
+      color: var(--pm-text-main);
+      box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: all 0.2s ease;
+    }
+
+    .sos-input-field:focus {
+      outline: none;
+      border-color: var(--pm-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .sos-textarea-field {
+      width: 100%;
+      box-sizing: border-box;
+      height: 72px;
+      padding: 12px 16px;
+      background: #ffffff;
+      border: 1px solid var(--pm-card-border);
+      border-radius: var(--pm-radius-md);
+      font-family: 'Kanit', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      color: var(--pm-text-main);
+      box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.04);
+      resize: none;
+      transition: all 0.2s ease;
+      line-height: 1.45;
+    }
+
+    .sos-textarea-field:focus {
+      outline: none;
+      border-color: var(--pm-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .sos-checkbox-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .sos-checkbox-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 12.5px;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #ffffff;
+      border: 1px solid var(--pm-card-border);
+      border-radius: var(--pm-radius-sm);
+      font-size: 13px;
       color: var(--pm-text-main);
       cursor: pointer;
-      transition: background 0.15s ease;
+      transition: all 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .sos-checkbox-item:hover {
-      background: #f1f5f9;
+      background: #f8fafc;
+      border-color: #cbd5e1;
     }
 
     .sos-checkbox-item input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      accent-color: #ef4444;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--pm-danger);
       cursor: pointer;
+      flex-shrink: 0;
     }
-
-  </style>
+  
+</style>
 </head>
 <body>
 
@@ -2948,84 +3080,87 @@
 
               <!-- SOS Rescue Request Trigger Button -->
               <button class="pm-btn-primary sos-trigger-btn" id="btn-open-sos-modal" onclick="openSOSModal()">
-                <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <span>🚨 SOS ขอความช่วยเหลือด่วน (Emergency Rescue)</span>
+                <i data-lucide="life-buoy"></i>
+                <span>SOS ขอความช่วยเหลือด่วน (Emergency Rescue)</span>
               </button>
             </article>
 
-            <!-- 2A-2. Resident SOS CI/CD Action Status Pipeline Card -->
-            <article class="role-dash-card" id="resident-sos-pipeline-card" style="display: none; margin-top: 14px;">
+            <!-- 2A-2. Resident SOS CI/CD Action Status Pipeline Card (Soft UI Stepper) -->
+            <article class="role-dash-card" id="resident-sos-pipeline-card" style="display: none; margin-top: 16px;">
               <div class="role-dash-header">
                 <div class="role-dash-title-wrap">
                   <div class="role-icon-box" id="sos-pipeline-status-icon" style="background-color: #fee2e2; color: #ef4444; width: 38px; height: 38px;">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <i data-lucide="activity"></i>
                   </div>
                   <div>
-                    <div class="role-dash-title" style="display: flex; align-items: center; gap: 6px;">
+                    <div class="role-dash-title" style="display: flex; align-items: center; gap: 8px;">
                       <span>สถานะตั๋วช่วยเหลือฉุกเฉิน (SOS Pipeline)</span>
                       <span class="live-dot-pulse"></span>
                     </div>
                     <div style="font-size: 12px; color: var(--pm-text-secondary);" id="sos-ticket-id-display">ตั๋ว #SOS-NKP-881 • จุดติดเกาะซอย 26</div>
                   </div>
                 </div>
-                <span class="pm-badge pm-badge-danger" id="sos-pipeline-badge">🔴 รอรับเรื่อง</span>
+                <span class="pm-badge pm-badge-danger" id="sos-pipeline-badge">
+                  <span class="pipeline-badge-dot dot-danger"></span>รอรับเรื่อง
+                </span>
               </div>
 
-              <!-- CI/CD Visual Pipeline Steps -->
-              <div class="cicd-pipeline-flow">
+              <!-- Soft UI CSS Stepper Pipeline -->
+              <div class="stepper-pipeline">
                 <!-- Step 1: Pending -->
-                <div class="cicd-node state-pending" id="cicd-step-1">
-                  <div class="cicd-node-icon">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div class="stepper-step active-pending" id="cicd-step-1">
+                  <div class="stepper-dot">
+                    <div class="stepper-dot-inner"></div>
                   </div>
-                  <div class="cicd-node-title">1. รอรับเรื่อง</div>
-                  <div class="cicd-node-sub" id="cicd-time-1">22:30 น. (LoRa)</div>
+                  <div class="stepper-title">1. รอรับเรื่อง</div>
+                  <div class="stepper-subtitle" id="cicd-time-1">22:30 น. (LoRa)</div>
                 </div>
 
                 <!-- Connector 1-2 -->
-                <div class="cicd-line" id="cicd-line-1"></div>
+                <div class="stepper-connector" id="cicd-line-1"></div>
 
                 <!-- Step 2: Dispatched -->
-                <div class="cicd-node" id="cicd-step-2">
-                  <div class="cicd-node-icon">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                <div class="stepper-step" id="cicd-step-2">
+                  <div class="stepper-dot">
+                    <div class="stepper-dot-inner"></div>
                   </div>
-                  <div class="cicd-node-title">2. กำลังเดินทาง</div>
-                  <div class="cicd-node-sub" id="cicd-time-2">รอรับเรื่อง</div>
+                  <div class="stepper-title">2. กำลังเดินทาง</div>
+                  <div class="stepper-subtitle" id="cicd-time-2">รอรับเรื่อง</div>
                 </div>
 
                 <!-- Connector 2-3 -->
-                <div class="cicd-line" id="cicd-line-2"></div>
+                <div class="stepper-connector" id="cicd-line-2"></div>
 
                 <!-- Step 3: Resolved -->
-                <div class="cicd-node" id="cicd-step-3">
-                  <div class="cicd-node-icon">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div class="stepper-step" id="cicd-step-3">
+                  <div class="stepper-dot">
+                    <div class="stepper-dot-inner"></div>
                   </div>
-                  <div class="cicd-node-title">3. ปลอดภัยสำเร็จ</div>
-                  <div class="cicd-node-sub" id="cicd-time-3">เสร็จสิ้น</div>
+                  <div class="stepper-title">3. ปลอดภัยสำเร็จ</div>
+                  <div class="stepper-subtitle" id="cicd-time-3">เสร็จสิ้น</div>
                 </div>
               </div>
 
               <!-- Operator Live Status Box -->
               <div class="cicd-status-box" id="sos-operator-note-box">
-                <div style="font-weight: 600; font-size: 12.5px; color: var(--pm-text-main); display: flex; align-items: center; gap: 6px;">
-                  <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--pm-primary);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <div style="font-weight: 500; font-size: 12.5px; color: var(--pm-text-main); display: flex; align-items: center; gap: 6px;">
+                  <i data-lucide="info" style="width: 14px; height: 14px; color: var(--pm-primary);"></i>
                   <span id="sos-operator-note-title">สถานะสดจากศูนย์สั่งการกู้ภัย:</span>
                 </div>
-                <div style="font-size: 12px; color: var(--pm-text-secondary); margin-top: 3px;" id="sos-operator-note-desc">
+                <div style="font-size: 12px; color: var(--pm-text-secondary); margin-top: 4px; line-height: 1.45;" id="sos-operator-note-desc">
                   ส่งสัญญาณฉุกเฉินผ่าน LoRa Mesh เรียบร้อยแล้ว กำลังรอหน่วยเคลื่อนที่เร็วกดรับเคส
                 </div>
               </div>
 
               <!-- Actions -->
-              <div style="display: flex; gap: 8px; margin-top: 12px;">
-                <button class="pm-btn-primary" style="flex: 1; height: 38px; font-size: 12.5px;" onclick="viewSOSTicketOnMap()">
-                  <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <div style="display: flex; gap: 10px; margin-top: 14px;">
+                <button class="pm-btn-primary" style="flex: 1; height: 40px; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="viewSOSTicketOnMap()">
+                  <i data-lucide="map-pin" style="width: 15px; height: 15px;"></i>
                   <span>ดูหมุด SOS บนแผนที่</span>
                 </button>
-                <button class="pm-btn-secondary" style="height: 38px; padding: 0 12px; font-size: 12px;" onclick="openSOSModal()">
-                  <span>แก้ไขข้อมูล / รายละเอียด</span>
+                <button class="pm-btn-secondary" style="height: 40px; padding: 0 14px; font-size: 12.5px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="openSOSModal()">
+                  <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+                  <span>แก้ไขข้อมูล</span>
                 </button>
               </div>
             </article>
@@ -3072,17 +3207,19 @@
 
               <!-- SME Emergency Inventory Management Card & Instant CSV Export -->
               <div class="inventory-manage-card">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
                   <div style="display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 30px; height: 30px; border-radius: 8px; background: #ecfdf5; color: #10b981; display: flex; align-items: center; justify-content: center;">
-                      <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: #ecfdf5; color: #10b981; display: flex; align-items: center; justify-content: center;">
+                      <i data-lucide="boxes" style="width: 17px; height: 17px;"></i>
                     </div>
                     <div>
                       <div style="font-size: 13.5px; font-weight: 600; color: var(--pm-text-main);">ระบบจัดการสต็อกเสบียงชุมชน (Live Stock)</div>
                       <div style="font-size: 11px; color: var(--pm-text-secondary);">จัดการสินค้าบรรเทาทุกข์ ปรับยอด และส่งออกข้อมูล</div>
                     </div>
                   </div>
-                  <span class="pm-badge pm-badge-success" id="merchant-stock-status-badge">พร้อมแจกจ่าย</span>
+                  <span class="pm-badge pm-badge-success" id="merchant-stock-status-badge">
+                    <span class="pipeline-badge-dot dot-success"></span>พร้อมแจกจ่าย
+                  </span>
                 </div>
 
                 <!-- Stock Items List with +/- Counters -->
@@ -3090,13 +3227,16 @@
                   <!-- 1. Water -->
                   <div class="stock-item-row" id="stock-row-water">
                     <div class="stock-item-info">
-                      <div class="stock-item-name">💧 น้ำดื่มสะอาด 1.5 ลิตร (แพ็ค 6)</div>
+                      <div class="stock-item-name">
+                        <i data-lucide="droplets" class="stock-item-icon color-water"></i>
+                        <span>น้ำดื่มสะอาด 1.5 ลิตร (แพ็ค 6)</span>
+                      </div>
                       <div class="stock-item-sku">SKU-WTR-01 • เกณฑ์ขั้นต่ำ: 10 แพ็ค</div>
                     </div>
                     <div class="stock-counter-group">
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('water', -1)" title="ลดจำนวน">-</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('water', -1)" title="ลดจำนวน" aria-label="Decrease water stock">-</button>
                       <span class="stock-count-val" id="stock-val-water">45</span>
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('water', 1)" title="เพิ่มจำนวน">+</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('water', 1)" title="เพิ่มจำนวน" aria-label="Increase water stock">+</button>
                       <span class="stock-unit-label">แพ็ค</span>
                     </div>
                   </div>
@@ -3104,13 +3244,16 @@
                   <!-- 2. Rice -->
                   <div class="stock-item-row" id="stock-row-rice">
                     <div class="stock-item-info">
-                      <div class="stock-item-name">🌾 ข้าวสารหอมมะลิ (5 กิโลกรัม)</div>
+                      <div class="stock-item-name">
+                        <i data-lucide="wheat" class="stock-item-icon color-rice"></i>
+                        <span>ข้าวสารหอมมะลิ (5 กิโลกรัม)</span>
+                      </div>
                       <div class="stock-item-sku">SKU-RCE-02 • เกณฑ์ขั้นต่ำ: 5 ถุง</div>
                     </div>
                     <div class="stock-counter-group">
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('rice', -1)" title="ลดจำนวน">-</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('rice', -1)" title="ลดจำนวน" aria-label="Decrease rice stock">-</button>
                       <span class="stock-count-val" id="stock-val-rice">20</span>
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('rice', 1)" title="เพิ่มจำนวน">+</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('rice', 1)" title="เพิ่มจำนวน" aria-label="Increase rice stock">+</button>
                       <span class="stock-unit-label">ถุง</span>
                     </div>
                   </div>
@@ -3118,13 +3261,16 @@
                   <!-- 3. Meds -->
                   <div class="stock-item-row" id="stock-row-meds">
                     <div class="stock-item-info">
-                      <div class="stock-item-name">🩹 ยาสามัญและชุดปฐมพยาบาล</div>
+                      <div class="stock-item-name">
+                        <i data-lucide="cross" class="stock-item-icon color-meds"></i>
+                        <span>ยาสามัญและชุดปฐมพยาบาล</span>
+                      </div>
                       <div class="stock-item-sku">SKU-MED-03 • เกณฑ์ขั้นต่ำ: 5 ชุด</div>
                     </div>
                     <div class="stock-counter-group">
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('meds', -1)" title="ลดจำนวน">-</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('meds', -1)" title="ลดจำนวน" aria-label="Decrease meds stock">-</button>
                       <span class="stock-count-val" id="stock-val-meds">18</span>
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('meds', 1)" title="เพิ่มจำนวน">+</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('meds', 1)" title="เพิ่มจำนวน" aria-label="Increase meds stock">+</button>
                       <span class="stock-unit-label">ชุด</span>
                     </div>
                   </div>
@@ -3132,26 +3278,29 @@
                   <!-- 4. Pads -->
                   <div class="stock-item-row" id="stock-row-pads">
                     <div class="stock-item-info">
-                      <div class="stock-item-name">🧷 แผ่นรองซับผู้ใหญ่ (ขนาด L)</div>
+                      <div class="stock-item-name">
+                        <i data-lucide="package" class="stock-item-icon color-pads"></i>
+                        <span>แผ่นรองซับผู้ใหญ่ (ขนาด L)</span>
+                      </div>
                       <div class="stock-item-sku">SKU-PAD-04 • เกณฑ์ขั้นต่ำ: 5 แพ็ค</div>
                     </div>
                     <div class="stock-counter-group">
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('pads', -1)" title="ลดจำนวน">-</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('pads', -1)" title="ลดจำนวน" aria-label="Decrease pads stock">-</button>
                       <span class="stock-count-val" id="stock-val-pads">15</span>
-                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('pads', 1)" title="เพิ่มจำนวน">+</button>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('pads', 1)" title="เพิ่มจำนวน" aria-label="Increase pads stock">+</button>
                       <span class="stock-unit-label">แพ็ค</span>
                     </div>
                   </div>
                 </div>
 
-                <!-- Primary Export Button (Blob & URL.createObjectURL) -->
-                <div style="display: flex; gap: 8px; margin-top: 12px;">
-                  <button class="pm-btn-primary" id="btn-export-merchant-csv" onclick="exportMerchantStockCSV()" style="flex: 1; height: 42px; font-size: 13.5px; background: linear-gradient(135deg, #059669 0%, #10b981 100%); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    <span>📥 Export Stock (.CSV)</span>
+                <!-- Primary Export Button (Zero Emoji & Lucide File-Down) -->
+                <div style="display: flex; gap: 10px; margin-top: 14px;">
+                  <button class="pm-btn-primary" id="btn-export-merchant-csv" onclick="exportMerchantStockCSV()" style="flex: 1; height: 44px; font-size: 13.5px; background: linear-gradient(135deg, #059669 0%, #10b981 100%); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i data-lucide="file-down" style="width: 17px; height: 17px;"></i>
+                    <span>Export CSV</span>
                   </button>
-                  <button class="pm-btn-secondary" style="height: 42px; padding: 0 14px; font-size: 12.5px;" onclick="syncStockWithMesh()">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                  <button class="pm-btn-secondary" style="height: 44px; padding: 0 14px; font-size: 12.5px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="syncStockWithMesh()">
+                    <i data-lucide="radio" style="width: 15px; height: 15px;"></i>
                     <span>ซิงก์ Mesh</span>
                   </button>
                 </div>
@@ -3595,7 +3744,7 @@
         <div class="modal-header">
           <div class="modal-title">
             <div class="modal-icon-badge" style="background-color: #fee2e2; color: #ef4444;">
-              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <i data-lucide="life-buoy" style="width: 20px; height: 20px;"></i>
             </div>
             <div>
               <div style="font-size: 16px; font-weight: 600; color: var(--pm-text-main);">ขอความช่วยเหลือด่วน (SOS Request)</div>
@@ -3608,53 +3757,72 @@
         </div>
 
         <div class="modal-body">
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="sos-form-wrap">
             <div class="sos-form-group">
-              <label class="sos-form-label">ชื่อผู้ขอรับความช่วยเหลือ / ผู้ติดต่อ:</label>
-              <input type="text" class="pm-input" id="sos-input-name" value="คุณสมศักดิ์ รักสงบ" placeholder="ระบุชื่อ-นามสกุล">
+              <label class="sos-form-label">
+                <i data-lucide="user" style="width: 14px; height: 14px; color: var(--pm-text-secondary);"></i>
+                <span>ชื่อผู้ขอรับความช่วยเหลือ / ผู้ติดต่อ:</span>
+              </label>
+              <input type="text" class="sos-input-field" id="sos-input-name" value="คุณสมศักดิ์ รักสงบ" placeholder="ระบุชื่อ-นามสกุล">
             </div>
 
             <div class="sos-form-group">
-              <label class="sos-form-label">เบอร์โทรศัพท์ฉุกเฉิน (เชื่อมต่อ LoRa SMS Gateway):</label>
-              <input type="tel" class="pm-input" id="sos-input-phone" value="081-998-7654" placeholder="08x-xxx-xxxx">
+              <label class="sos-form-label">
+                <i data-lucide="phone" style="width: 14px; height: 14px; color: var(--pm-text-secondary);"></i>
+                <span>เบอร์โทรศัพท์ฉุกเฉิน (เชื่อมต่อ LoRa SMS Gateway):</span>
+              </label>
+              <input type="tel" class="sos-input-field" id="sos-input-phone" value="081-998-7654" placeholder="08x-xxx-xxxx">
             </div>
 
             <div class="sos-form-group">
-              <label class="sos-form-label">ประเภทความช่วยเหลือเร่งด่วน:</label>
-              <div style="display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 4px;">
+              <label class="sos-form-label">
+                <i data-lucide="alert-circle" style="width: 14px; height: 14px; color: var(--pm-text-secondary);"></i>
+                <span>ประเภทความช่วยเหลือเร่งด่วน:</span>
+              </label>
+              <div class="sos-checkbox-grid">
                 <label class="sos-checkbox-item">
                   <input type="checkbox" id="sos-req-bedridden" checked>
-                  <span>👵 มีผู้ป่วยติดเตียง / ผู้สูงอายุช่วยเหลือตนเองไม่ได้</span>
+                  <i data-lucide="user-x" style="width: 16px; height: 16px; color: #dc2626;"></i>
+                  <span>มีผู้ป่วยติดเตียง / ผู้สูงอายุช่วยเหลือตนเองไม่ได้</span>
                 </label>
                 <label class="sos-checkbox-item">
                   <input type="checkbox" id="sos-req-boat" checked>
-                  <span>🚤 น้ำท่วมสูงเกิน 30 ซม. ต้องการเรือท้องแบน/เจ็ตสกีอพยพ</span>
+                  <i data-lucide="ship" style="width: 16px; height: 16px; color: #2563eb;"></i>
+                  <span>น้ำท่วมสูงเกิน 30 ซม. ต้องการเรือท้องแบน/เจ็ตสกีอพยพ</span>
                 </label>
                 <label class="sos-checkbox-item">
                   <input type="checkbox" id="sos-req-pads" checked>
-                  <span>🧷 ขาดแคลนผ้าอ้อม / แผ่นรองซับผู้ใหญ่เร่งด่วน</span>
+                  <i data-lucide="package-plus" style="width: 16px; height: 16px; color: #7c3aed;"></i>
+                  <span>ขาดแคลนผ้าอ้อม / แผ่นรองซับผู้ใหญ่เร่งด่วน</span>
                 </label>
                 <label class="sos-checkbox-item">
                   <input type="checkbox" id="sos-req-food">
-                  <span>🍱 ต้องการเสบียงอาหารปรุงสุก และน้ำดื่มสะอาด</span>
+                  <i data-lucide="utensils" style="width: 16px; height: 16px; color: #059669;"></i>
+                  <span>ต้องการเสบียงอาหารปรุงสุก และน้ำดื่มสะอาด</span>
                 </label>
               </div>
             </div>
 
             <div class="sos-form-group">
-              <label class="sos-form-label">พิกัด / จุดสังเกตของบ้าน:</label>
-              <input type="text" class="pm-input" id="sos-input-location" value="บ้านเลขที่ 45 ซอยไร่ขิง 26 (จุดติดเกาะน้ำลึก 35 ซม.)">
+              <label class="sos-form-label">
+                <i data-lucide="map-pin" style="width: 14px; height: 14px; color: var(--pm-text-secondary);"></i>
+                <span>พิกัด / จุดสังเกตของบ้าน:</span>
+              </label>
+              <input type="text" class="sos-input-field" id="sos-input-location" value="บ้านเลขที่ 45 ซอยไร่ขิง 26 (จุดติดเกาะน้ำลึก 35 ซม.)">
             </div>
 
             <div class="sos-form-group">
-              <label class="sos-form-label">รายละเอียดเพิ่มเติม:</label>
-              <textarea class="pm-input" id="sos-input-notes" style="height: 60px; resize: none;">ไฟฟ้าดับมาแล้ว 6 ชม. ระดับน้ำในบ้านเริ่มเอ่อท่วมเตียงคนไข้ ต้องการเรือกู้ภัยด่วนครับ</textarea>
+              <label class="sos-form-label">
+                <i data-lucide="message-square" style="width: 14px; height: 14px; color: var(--pm-text-secondary);"></i>
+                <span>รายละเอียดเพิ่มเติม:</span>
+              </label>
+              <textarea class="sos-textarea-field" id="sos-input-notes">ไฟฟ้าดับมาแล้ว 6 ชม. ระดับน้ำในบ้านเริ่มเอ่อท่วมเตียงคนไข้ ต้องการเรือกู้ภัยด่วนครับ</textarea>
             </div>
 
-            <div style="margin-top: 8px;">
-              <button class="pm-btn-primary" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); width: 100%; height: 46px; font-size: 14px; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);" onclick="submitSOSRequest()">
-                <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <span>🚨 ยืนยันส่งสัญญาณฉุกเฉิน (Broadcast SOS)</span>
+            <div style="margin-top: 6px;">
+              <button class="pm-btn-primary" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); width: 100%; height: 48px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35); display: inline-flex; align-items: center; justify-content: center; gap: 8px;" onclick="submitSOSRequest()">
+                <i data-lucide="send" style="width: 18px; height: 18px;"></i>
+                <span>ยืนยันส่งสัญญาณฉุกเฉิน (Broadcast SOS)</span>
               </button>
             </div>
           </div>
@@ -3662,9 +3830,6 @@
       </div>
     </div>
 
-    <!-- ======================================================================
-         FEATURE 3: VEHICLE EVACUATION READINESS CHECKLIST MODAL (#modal-pre-trip-checklist)
-         ====================================================================== -->
     <div class="modal-backdrop" id="modal-pre-trip-checklist">
       <div class="modal-sheet" style="max-width: 480px;">
         <div class="modal-header">
@@ -3988,7 +4153,7 @@
         id: 'SOS-NKP-881',
         name: 'คุณสมศักดิ์ รักสงบ',
         phone: '081-998-7654',
-        needs: '👵 ผู้ป่วยติดเตียง, 🚤 ต้องการเรือท้องแบน, 🧷 แผ่นรองซับ',
+        needs: 'ผู้ป่วยติดเตียง, ต้องการเรือท้องแบน, แผ่นรองซับผู้ใหญ่',
         location: 'บ้านเลขที่ 45 ซอยไร่ขิง 26 (จุดติดเกาะน้ำลึก 35 ซม.)',
         notes: 'ไฟฟ้าดับมาแล้ว 6 ชม. ระดับน้ำเริ่มท่วมเตียงคนไข้ ต้องการกู้ภัยด่วนครับ',
         coords: { lat: 13.7345, lng: 100.2778 },
@@ -4891,10 +5056,10 @@ layers: {
         let isLow = Object.values(appState.merchantStock).some(i => i.count <= i.min);
         if (isLow) {
           badgeEl.className = 'pm-badge pm-badge-warning';
-          badgeEl.innerText = 'สต็อกบางรายการต่ำ';
+          badgeEl.innerHTML = '<span class="pipeline-badge-dot dot-warning"></span>สต็อกบางรายการต่ำ';
         } else {
           badgeEl.className = 'pm-badge pm-badge-success';
-          badgeEl.innerText = 'พร้อมแจกจ่าย';
+          badgeEl.innerHTML = '<span class="pipeline-badge-dot dot-success"></span>พร้อมแจกจ่าย';
         }
       }
       
@@ -4908,6 +5073,9 @@ layers: {
         const valEl = document.getElementById(`stock-val-${k}`);
         if (valEl) valEl.innerText = item.count;
       });
+      if (window.lucide && lucide.createIcons) {
+        lucide.createIcons();
+      }
     }
 
     function exportMerchantStockCSV() {
@@ -4915,7 +5083,7 @@ layers: {
       const now = new Date();
       const dateStr = now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
       
-      // CSV Header with UTF-8 BOM (﻿) for perfect Thai display in Excel
+      // CSV Header with UTF-8 BOM (\uFEFF) for perfect Thai display in Excel
       let csvContent = '\uFEFF';
       csvContent += 'รหัสสินค้า (SKU),ชื่อรายการเสบียง,จำนวนคงเหลือ,หน่วยนับ,เกณฑ์ปลอดภัยขั้นต่ำ,สถานะความพร้อม,เวลาอัปเดตล่าสุด\r\n';
       
@@ -4939,13 +5107,13 @@ layers: {
       document.body.removeChild(tempLink);
       URL.revokeObjectURL(downloadUrl);
 
-      showToast('📥 ดาวน์โหลด PromptMesh_Stock_Report.csv สำเร็จแล้ว!');
+      showToast('ดาวน์โหลด PromptMesh_Stock_Report.csv สำเร็จแล้ว');
     }
 
     function syncStockWithMesh() {
       showToast('กำลังบรอดแคสต์ข้อมูลสต็อก 4 รายการ ไปยัง LoRa Mesh โหนดใกล้เคียง...');
       setTimeout(() => {
-        showToast('📡 ซิงก์สต็อกเสบียงกับศูนย์กู้ภัยและ อปท. สำเร็จ (0.8s)');
+        showToast('ซิงก์สต็อกเสบียงกับศูนย์กู้ภัยและ อปท. สำเร็จ (0.8s)');
       }, 900);
     }
 
@@ -4954,6 +5122,9 @@ layers: {
     // ==========================================================================
     function openSOSModal() {
       openModal('modal-sos-request');
+      if (window.lucide && lucide.createIcons) {
+        lucide.createIcons();
+      }
     }
 
     function submitSOSRequest() {
@@ -4963,10 +5134,10 @@ layers: {
       const notes = document.getElementById('sos-input-notes')?.value || 'ต้องการเรืออพยพด่วน';
       
       const needs = [];
-      if (document.getElementById('sos-req-bedridden')?.checked) needs.push('👵 ผู้ป่วยติดเตียง');
-      if (document.getElementById('sos-req-boat')?.checked) needs.push('🚤 ต้องการเรือท้องแบน');
-      if (document.getElementById('sos-req-pads')?.checked) needs.push('🧷 แผ่นรองซับผู้ใหญ่');
-      if (document.getElementById('sos-req-food')?.checked) needs.push('🍱 เสบียงอาหาร/น้ำดื่ม');
+      if (document.getElementById('sos-req-bedridden')?.checked) needs.push('ผู้ป่วยติดเตียง');
+      if (document.getElementById('sos-req-boat')?.checked) needs.push('ต้องการเรือท้องแบน');
+      if (document.getElementById('sos-req-pads')?.checked) needs.push('แผ่นรองซับผู้ใหญ่');
+      if (document.getElementById('sos-req-food')?.checked) needs.push('เสบียงอาหาร/น้ำดื่ม');
 
       const now = new Date();
       const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} น.`;
@@ -4994,7 +5165,7 @@ layers: {
       const pipelineCard = document.getElementById('resident-sos-pipeline-card');
       if (pipelineCard) pipelineCard.style.display = 'block';
 
-      showToast('🚨 ส่งสัญญาณ SOS ฉุกเฉินแล้ว! ตั๋ว #SOS-NKP-881 กระจายผ่าน LoRa Mesh');
+      showToast('ส่งสัญญาณ SOS ฉุกเฉินแล้ว! ตั๋ว #SOS-NKP-881 กระจายผ่าน LoRa Mesh');
     }
 
     // Google Maps Flashing SOS Marker
@@ -5011,20 +5182,22 @@ layers: {
         const sosInfoWindow = new google.maps.InfoWindow();
         sosMarker.addListener('click', () => {
           let badgeColor = ticket.status === 'pending' ? '#ef4444' : (ticket.status === 'dispatched' ? '#f59e0b' : '#10b981');
-          let statusText = ticket.status === 'pending' ? '🔴 รอรับเรื่อง (Pending)' : (ticket.status === 'dispatched' ? '🟡 กำลังเดินทาง (Dispatched)' : '🟢 ช่วยเหลือสำเร็จ (Resolved)');
+          let statusText = ticket.status === 'pending' ? 'รอรับเรื่อง (Pending)' : (ticket.status === 'dispatched' ? 'กำลังเดินทาง (Dispatched)' : 'ช่วยเหลือสำเร็จ (Resolved)');
           
           sosInfoWindow.setContent(`
-            <div style="font-family: 'Kanit', sans-serif; font-size: 13px; line-height: 1.5; color: #0f172a; max-width: 240px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <div style="font-family: 'Kanit', sans-serif; font-size: 13px; line-height: 1.5; color: #0f172a; max-width: 240px; padding: 2px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
                 <strong style="color: ${badgeColor}; font-size: 14px;">${ticket.id}</strong>
-                <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; background: ${badgeColor}20; color: ${badgeColor}; font-weight: 600;">${statusText}</span>
+                <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: ${badgeColor}18; color: ${badgeColor}; font-weight: 600;">
+                  ${statusText}
+                </span>
               </div>
               <div style="font-weight: 600; color: #1e293b;">${ticket.name} (${ticket.phone})</div>
-              <div style="color: #64748b; font-size: 12px; margin-top: 2px;">📍 ${ticket.location}</div>
-              <div style="color: #b91c1c; font-size: 12px; margin-top: 4px; background: #fef2f2; padding: 4px 6px; border-radius: 4px;">
+              <div style="color: #64748b; font-size: 12px; margin-top: 3px;">พิกัด: ${ticket.location}</div>
+              <div style="color: #b91c1c; font-size: 12px; margin-top: 5px; background: #fef2f2; padding: 5px 8px; border-radius: 6px; border: 1px solid #fee2e2;">
                 <strong>ความต้องการ:</strong> ${ticket.needs}
               </div>
-              <div style="color: #64748b; font-size: 11.5px; margin-top: 4px;">"${ticket.notes}"</div>
+              <div style="color: #64748b; font-size: 11.5px; margin-top: 5px; font-style: italic;">"${ticket.notes}"</div>
             </div>
           `);
           sosInfoWindow.open(map, sosMarker);
@@ -5108,60 +5281,64 @@ layers: {
       if (ticket.status === 'pending') {
         if (badge) {
           badge.className = 'pm-badge pm-badge-danger';
-          badge.innerText = '🔴 รอรับเรื่อง (Pending)';
+          badge.innerHTML = '<span class="pipeline-badge-dot dot-danger"></span>รอรับเรื่อง (Pending)';
         }
         if (iconBox) {
           iconBox.style.backgroundColor = '#fee2e2';
           iconBox.style.color = '#ef4444';
         }
-        if (step1) step1.className = 'cicd-node state-pending';
-        if (step2) step2.className = 'cicd-node';
-        if (step3) step3.className = 'cicd-node';
-        if (line1) line1.className = 'cicd-line';
-        if (line2) line2.className = 'cicd-line';
+        if (step1) step1.className = 'stepper-step active-pending';
+        if (step2) step2.className = 'stepper-step';
+        if (step3) step3.className = 'stepper-step';
+        if (line1) line1.className = 'stepper-connector';
+        if (line2) line2.className = 'stepper-connector';
         if (time1) time1.innerText = ticket.createdAt;
-        if (time2) time2.innerText = 'รอทีมกู้ภัยกดรับ';
-        if (time3) time3.innerText = 'รอความช่วยเหลือ';
+        if (time2) time2.innerText = 'รอรับเรื่อง';
+        if (time3) time3.innerText = 'เสร็จสิ้น';
         if (noteTitle) noteTitle.innerText = 'สถานะสด: กำลังรอการตอบรับจากทีมกู้ภัย';
         if (noteDesc) noteDesc.innerText = 'ส่งพิกัดฉุกเฉินผ่าน LoRa Mesh แล้ว ทีมกู้ภัยร่วมกตัญญูกำลังจัดสรรพาหนะที่เหมาะสม';
       } else if (ticket.status === 'dispatched') {
         if (badge) {
           badge.className = 'pm-badge pm-badge-warning';
-          badge.innerText = '🟡 กำลังเดินทาง (Dispatched)';
+          badge.innerHTML = '<span class="pipeline-badge-dot dot-warning"></span>กำลังเดินทาง (Dispatched)';
         }
         if (iconBox) {
           iconBox.style.backgroundColor = '#fef3c7';
           iconBox.style.color = '#f59e0b';
         }
-        if (step1) step1.className = 'cicd-node state-passed';
-        if (step2) step2.className = 'cicd-node state-dispatched';
-        if (step3) step3.className = 'cicd-node';
-        if (line1) line1.className = 'cicd-line line-passed';
-        if (line2) line2.className = 'cicd-line';
+        if (step1) step1.className = 'stepper-step passed';
+        if (step2) step2.className = 'stepper-step active-dispatched';
+        if (step3) step3.className = 'stepper-step';
+        if (line1) line1.className = 'stepper-connector connector-passed';
+        if (line2) line2.className = 'stepper-connector connector-active';
         if (time1) time1.innerText = 'ผ่านแล้ว';
         if (time2) time2.innerText = ticket.dispatchedAt || 'กำลังเดินทาง';
-        if (time3) time3.innerText = 'กำลังเข้าพื้นที่';
+        if (time3) time3.innerText = 'เสร็จสิ้น';
         if (noteTitle) noteTitle.innerText = 'สถานะสด: ทีมกู้ภัยกำลังเดินทางเข้าช่วยเหลือ!';
         if (noteDesc) noteDesc.innerText = `หน่วยเคลื่อนที่เร็ว 03 รับเคสแล้ว นำเรือท้องแบนและเสบียงมุ่งหน้าไปยัง ${ticket.location}`;
       } else if (ticket.status === 'resolved') {
         if (badge) {
           badge.className = 'pm-badge pm-badge-success';
-          badge.innerText = '🟢 ช่วยเหลือสำเร็จ (Resolved)';
+          badge.innerHTML = '<span class="pipeline-badge-dot dot-success"></span>ช่วยเหลือสำเร็จ (Resolved)';
         }
         if (iconBox) {
           iconBox.style.backgroundColor = '#ecfdf5';
           iconBox.style.color = '#10b981';
         }
-        if (step1) step1.className = 'cicd-node state-passed';
-        if (step2) step2.className = 'cicd-node state-passed';
-        if (step3) step3.className = 'cicd-node state-passed';
-        if (line1) line1.className = 'cicd-line line-passed';
-        if (line2) line2.className = 'cicd-line line-passed';
+        if (step1) step1.className = 'stepper-step passed';
+        if (step2) step2.className = 'stepper-step passed';
+        if (step3) step3.className = 'stepper-step passed';
+        if (line1) line1.className = 'stepper-connector connector-passed';
+        if (line2) line2.className = 'stepper-connector connector-passed';
         if (time1) time1.innerText = 'ผ่านแล้ว';
-        if (time2) time2.innerText = 'สำเร็จ';
+        if (time2) time2.innerText = 'ผ่านแล้ว';
         if (time3) time3.innerText = ticket.resolvedAt || 'ปลอดภัยแล้ว';
-        if (noteTitle) noteTitle.innerText = 'ภารกิจสำเร็จสมบูรณ์: ผู้ประสบภัยปลอดภัยแล้ว 🎉';
+        if (noteTitle) noteTitle.innerText = 'ภารกิจสำเร็จสมบูรณ์: ผู้ประสบภัยปลอดภัยแล้ว';
         if (noteDesc) noteDesc.innerText = 'ส่งมอบเสบียงฉุกเฉินและอพยพผู้ป่วยติดเตียงไปยังศูนย์พักพิงวัดไร่ขิงเรียบร้อย';
+      }
+
+      if (window.lucide && lucide.createIcons) {
+        lucide.createIcons();
       }
     }
 
@@ -5178,57 +5355,71 @@ layers: {
       }
 
       let borderCol = '#ef4444';
-      let statusBadge = '<span class="pm-badge pm-badge-danger">🔴 รอรับเรื่อง (Pending)</span>';
+      let statusBadge = '<span class="pm-badge pm-badge-danger"><span class="pipeline-badge-dot dot-danger"></span>รอรับเรื่อง (Pending)</span>';
       let actionButtons = `
-        <button class="pm-btn-primary" style="height: 34px; padding: 0 12px; font-size: 12.5px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);" onclick="acceptRescueCase('${ticket.id}')">
-          <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-          <span>🚤 รับเคสช่วยเหลือ (Accept)</span>
+        <button class="pm-btn-primary" style="height: 36px; padding: 0 12px; font-size: 12.5px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="acceptRescueCase('${ticket.id}')">
+          <i data-lucide="navigation" style="width: 14px; height: 14px;"></i>
+          <span>รับเคสช่วยเหลือ (Accept)</span>
         </button>
       `;
 
       if (ticket.status === 'dispatched') {
         borderCol = '#f59e0b';
-        statusBadge = '<span class="pm-badge pm-badge-warning">🟡 กำลังเดินทาง (Dispatched)</span>';
+        statusBadge = '<span class="pm-badge pm-badge-warning"><span class="pipeline-badge-dot dot-warning"></span>กำลังเดินทาง (Dispatched)</span>';
         actionButtons = `
-          <button class="pm-btn-primary" style="height: 34px; padding: 0 12px; font-size: 12.5px; background: linear-gradient(135deg, #059669 0%, #10b981 100%);" onclick="completeRescueCase('${ticket.id}')">
-            <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span>✅ ช่วยเหลือสำเร็จ (Complete)</span>
+          <button class="pm-btn-primary" style="height: 36px; padding: 0 12px; font-size: 12.5px; background: linear-gradient(135deg, #059669 0%, #10b981 100%); display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="completeRescueCase('${ticket.id}')">
+            <i data-lucide="check-check" style="width: 14px; height: 14px;"></i>
+            <span>ช่วยเหลือสำเร็จ (Complete)</span>
           </button>
         `;
       } else if (ticket.status === 'resolved') {
         borderCol = '#10b981';
-        statusBadge = '<span class="pm-badge pm-badge-success">🟢 ช่วยเหลือสำเร็จ (Resolved)</span>';
+        statusBadge = '<span class="pm-badge pm-badge-success"><span class="pipeline-badge-dot dot-success"></span>ช่วยเหลือสำเร็จ (Resolved)</span>';
         actionButtons = `
-          <button class="pm-btn-secondary" style="height: 34px; padding: 0 10px; font-size: 12px;" onclick="resetSOSDemoState()">
-            <span>🔄 จำลองเคสใหม่</span>
+          <button class="pm-btn-secondary" style="height: 36px; padding: 0 12px; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="resetSOSDemoState()">
+            <i data-lucide="rotate-ccw" style="width: 13px; height: 13px;"></i>
+            <span>จำลองเคสใหม่</span>
           </button>
         `;
       }
 
       container.innerHTML = `
-        <div class="inventory-item" style="border-left: 3.5px solid ${borderCol}; padding: 12px; background: rgba(255, 255, 255, 0.9); flex-direction: column; align-items: stretch; gap: 8px;">
+        <div class="inventory-item" style="border-left: 3.5px solid ${borderCol}; padding: 14px; background: #ffffff; border-radius: var(--pm-radius-sm); border: 1px solid var(--pm-card-border); border-left-width: 3.5px; border-left-color: ${borderCol}; flex-direction: column; align-items: stretch; gap: 10px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);">
           <div style="display: flex; align-items: center; justify-content: space-between;">
-            <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
               <span style="font-weight: 700; color: ${borderCol}; font-size: 13.5px;">[วิกฤต] ${ticket.id}: ${ticket.name}</span>
-              <span style="font-size: 11.5px; color: var(--pm-text-secondary); margin-left: 6px;">📞 ${ticket.phone}</span>
+              <span style="font-size: 11.5px; color: var(--pm-text-secondary); display: inline-flex; align-items: center; gap: 4px;">
+                <i data-lucide="phone" style="width: 12px; height: 12px;"></i>
+                ${ticket.phone}
+              </span>
             </div>
             ${statusBadge}
           </div>
-          <div style="font-size: 12px; color: var(--pm-text-secondary);">
-            📍 ${ticket.location} • <strong>ต้องการ:</strong> ${ticket.needs}
+          <div style="font-size: 12.5px; color: var(--pm-text-secondary); line-height: 1.4;">
+            <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 2px;">
+              <i data-lucide="map-pin" style="width: 13px; height: 13px; color: var(--pm-primary);"></i>
+              <span>${ticket.location}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 5px; color: #b91c1c; font-weight: 500;">
+              <i data-lucide="alert-circle" style="width: 13px; height: 13px;"></i>
+              <span>ต้องการ: ${ticket.needs}</span>
+            </div>
           </div>
-          <div style="font-size: 11.5px; color: #475569; background: #f8fafc; padding: 6px 8px; border-radius: 6px;">
-            💬 "${ticket.notes}"
+          <div style="font-size: 12px; color: #475569; background: #f8fafc; padding: 8px 10px; border-radius: 6px; border: 1px solid #e2e8f0; display: flex; align-items: flex-start; gap: 6px;">
+            <i data-lucide="message-square" style="width: 13px; height: 13px; margin-top: 2px; color: var(--pm-text-secondary); flex-shrink: 0;"></i>
+            <span>"${ticket.notes}"</span>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
-            <div style="display: flex; gap: 6px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px; gap: 8px;">
+            <div style="display: flex; gap: 8px;">
               ${actionButtons}
-              <button class="pm-btn-secondary" style="height: 34px; padding: 0 10px; font-size: 12px;" onclick="viewSOSTicketOnMap()">
-                <span>🗺️ แผนที่</span>
+              <button class="pm-btn-secondary" style="height: 36px; padding: 0 12px; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="viewSOSTicketOnMap()">
+                <i data-lucide="map" style="width: 13px; height: 13px;"></i>
+                <span>แผนที่</span>
               </button>
             </div>
-            <button class="pm-btn-secondary" style="height: 34px; padding: 0 10px; font-size: 12px;" onclick="openPreTripChecklist()">
-              <span>📋 เช็กรถ</span>
+            <button class="pm-btn-secondary" style="height: 36px; padding: 0 12px; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;" onclick="openPreTripChecklist()">
+              <i data-lucide="clipboard-check" style="width: 13px; height: 13px;"></i>
+              <span>เช็กรถ</span>
             </button>
           </div>
         </div>
@@ -5236,6 +5427,10 @@ layers: {
 
       if (badgeCount) {
         badgeCount.innerText = ticket.status === 'resolved' ? '0 เคสค้าง' : '1 เคสเร่งด่วน';
+      }
+
+      if (window.lucide && lucide.createIcons) {
+        lucide.createIcons();
       }
     }
 
@@ -5251,7 +5446,7 @@ layers: {
       renderRescueDashboard();
       renderResidentSOSPipeline();
 
-      showToast('🚤 รับเคสช่วยเหลือสำเร็จ! อัปเดตสถานะเป็น: กำลังเดินทาง (Dispatched) และเปลี่ยนหมุดเป็นสีเหลือง');
+      showToast('รับเคสช่วยเหลือสำเร็จ! อัปเดตสถานะเป็น: กำลังเดินทาง (Dispatched)');
     }
 
     function completeRescueCase(ticketId) {
@@ -5266,7 +5461,7 @@ layers: {
       renderRescueDashboard();
       renderResidentSOSPipeline();
 
-      showToast('🎉 ปฏิบัติการสำเร็จ! ส่งมอบเสบียงและอพยพผู้ป่วยเรียบร้อย (Resolved)');
+      showToast('ปฏิบัติการสำเร็จ! ส่งมอบเสบียงและอพยพผู้ป่วยเรียบร้อย (Resolved)');
     }
 
     function resetSOSDemoState() {
@@ -5278,12 +5473,14 @@ layers: {
       renderSOSMarkerOnMap(appState.activeSOSTicket);
       renderRescueDashboard();
       renderResidentSOSPipeline();
-      showToast('🔄 รีเซ็ตสถานะตั๋วฉุกเฉินเป็น: รอรับเรื่อง (Pending)');
+      showToast('รีเซ็ตสถานะตั๋วฉุกเฉินเป็น: รอรับเรื่อง (Pending)');
     }
 
     function cancelOrResetSOSDemo() {
       resetSOSDemoState();
     }
+
+    
 
 
     // AI SEMANTIC SUPPLY SEARCH SYSTEM (FEATURE 2: TRACK 2 NLP)
@@ -5399,7 +5596,12 @@ layers: {
   </script>
 
   <!-- Google Maps JavaScript API (API Key injected from .env) -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxiU9TF7fnwTUEbrAi2W1vOpN-Udjg670&callback=initMap&libraries=geometry" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxiU9TF7fnwTUEbrAi2W1vOpN-Udjg670&callback=initMap&libraries=geometry" async defer>
+    // Initialize Lucide Icons
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+      lucide.createIcons();
+    }
+  </script>
 
 </body>
 </html>
