@@ -212,7 +212,48 @@ Dynamic Clearance Routing Engine:
         *   ปุ่มอัปโหลดรูปภาพหลักฐาน
         *   ระบบจับพิกัด GPS อัตโนมัติ
 
-### 3.4 API Integration Points (Track 5)
+### 3.4 Rapid SOS Rescue Request & Map Sync (ระบบขอความช่วยเหลือฉุกเฉินและการซิงก์หมุดแผนที่)
+*   **Tracking ID:** `P0-13`
+*   **Description:** ระบบส่งสัญญาณขอความช่วยเหลือเร่งด่วนสำหรับผู้ประสบภัยในพื้นที่น้ำท่วมวิกฤต พร้อมเชื่อมโยงพิกัด GPS และรายละเอียดความต้องการเข้าสู่ Google Maps ทันที
+*   **UI Components:**
+    *   `SOS Trigger Button`: ปุ่มสีแดงเด่นขนาดใหญ่ (`.sos-trigger-btn`) พร้อมเอฟเฟกต์ไฟกระพริบเตือนภัย (`animation: pulseAlert`) ติดตั้งอยู่บนหน้าแรกของประชาชน
+    *   `SOS Emergency Modal`: หน้าต่าง Glassmorphism (`#modal-sos-request`) สำหรับระบุข้อมูล:
+        *   ชื่อผู้ขอความช่วยเหลือ และเบอร์โทรศัพท์ฉุกเฉิน
+        *   หมวดหมู่ความช่วยเหลือเร่งด่วน: ผู้ป่วยติดเตียง/ผู้สูงอายุ, น้ำท่วมสูงต้องการเรือท้องแบน/เจ็ตสกี, แผ่นรองซับผู้ใหญ่, เสบียงอาหารและน้ำดื่ม
+        *   พิกัดและจุดสังเกตเฉพาะจุด (เช่น ซอยไร่ขิง 26 จุดติดเกาะน้ำลึก 35 ซม.)
+        *   กล่องข้อความระบุสถานการณ์เพิ่มเติม
+    *   `Flashing SOS Map Marker`: หมุดแผนที่แบบ SVG Dynamic Marker พร้อมวงแหวนกระพริบ (Pulsing Radius Aura):
+        *   สถานะรอรับเรื่อง (Pending): หมุดสีแดงสด (`#ef4444`) พร้อมแอนิเมชันกระพริบเรียกร้องความสนใจ
+        *   สถานะกำลังเดินทาง (Dispatched): หมุดสีเหลืองอำพัน (`#f59e0b`) เมื่อทีมกู้ภัยกดรับเรื่อง
+        *   สถานะช่วยเหลือสำเร็จ (Resolved): หมุดสีเขียว (`#10b981`) ยืนยันความปลอดภัย
+    *   `SOS InfoWindow Popup`: หน้าต่างแสดงรายละเอียดตั๋วฉุกเฉิน ข้อมูลติดต่อ และความต้องการสินค้า เมื่อคลิกที่หมุดบนแผนที่
+
+### 3.5 CI/CD Style Action Status Pipeline (ไพป์ไลน์ติดตามสถานะการกู้ภัยแบบ CI/CD)
+*   **Tracking ID:** `P0-14`
+*   **Description:** ระบบแสดงความคืบหน้าของภารกิจช่วยเหลือในรูปแบบ Action Pipeline จำลองสถาปัตยกรรม CI/CD (คล้าย GitHub Actions / GitLab CI) เพื่อให้ผู้ประสบภัยทราบขั้นตอนการทำงานที่โปร่งใสแบบเรียลไทม์ และให้ศูนย์กู้ภัยสั่งการผ่านสถานะตามลำดับขั้น
+*   **Pipeline Stages & Transitions:**
+
+```
+CI/CD Rescue Action Status Pipeline:
+┌─────────────────────────┐      ┌─────────────────────────┐      ┌─────────────────────────┐
+│ Stage 1: Pending        │ ──►  │ Stage 2: Dispatched     │ ──►  │ Stage 3: Resolved       │
+│ 🔴 รอรับเรื่อง           │      │ 🟡 กำลังเดินทาง          │      │ 🟢 ช่วยเหลือสำเร็จ       │
+│ • Broadcast LoRa Mesh   │      │ • หน่วย 03 รับเคส        │      │ • อพยพถึงศูนย์พักพิง    │
+│ • รหัสตั๋ว #SOS-NKP-881 │      │ • เรือท้องแบนลุยน้ำ 35cm │      │ • ส่งมอบแผ่นรองซับสำเร็จ│
+└─────────────────────────┘      └─────────────────────────┘      └─────────────────────────┘
+```
+
+*   **Resident View (ฝั่งประชาชน):**
+    *   แสดงการ์ด `#resident-sos-pipeline-card` อัปเดต 3 สเตจแบบเรียลไทม์ พร้อมเส้นเชื่อมความคืบหน้า (Connector Line)
+    *   กล่องข้อความสถานะสดจากศูนย์สั่งการ (Operator Live Update Note)
+    *   ปุ่มกด `"ดูหมุด SOS บนแผนที่"` นำทางไปยังหมุดตนเองทันที
+*   **Rescue Command View (ฝั่งทีมกู้ภัย):**
+    *   แสดงคิวคำขอฉุกเฉินที่กำลังรอการจัดการ (`#rescue-sos-queue-container`)
+    *   ปุ่ม Action สั่งการ:
+        *   `🚤 รับเคสช่วยเหลือ (Accept Rescue)`: เลื่อนสถานะตั๋วสู่ Stage 2 ทันที พร้อมอัปเดตสีหมุดบนแผนที่เป็นสีเหลือง และซิงก์ข้อมูลกลับไปยังหน้าจอประชาชน
+        *   `✅ บันทึกช่วยเหลือสำเร็จ (Mark Completed)`: สิ้นสุดภารกิจ เลื่อนสู่ Stage 3 หมุดเปลี่ยนเป็นสีเขียว พร้อมบันทึกหลักฐานความช่วยเหลือ
+
+### 3.6 API Integration Points (Track 5)
 
 | API Service | หน้าที่และการทำงานในระบบ PromptMesh |
 |---|---|
@@ -221,7 +262,7 @@ Dynamic Clearance Routing Engine:
 | **Custom Dynamic Routing Engine (OSRM / GraphHopper)** | นำโครงข่ายถนนจาก OpenStreetMap มาผสานกับชั้นข้อมูลน้ำท่วมแบบ Real-time เพื่อตัด Edge ที่มีน้ำท่วมเกิน Clearance ทิ้ง |
 | **Google Roads API** | Snap-to-Road ปรับแต่งพิกัด GPS ผู้ใช้ให้แนบชิดกับเส้นทางที่ถูกต้องขณะฝนตกหนัก |
 
-### 3.5 Edge Cases & Error Handling (Track 5)
+### 3.7 Edge Cases & Error Handling (Track 5)
 
 ```
 ┌───────────────────────────────────────┬────────────────────────────────────────────────────────┐
@@ -245,7 +286,7 @@ Dynamic Clearance Routing Engine:
 └───────────────────────────────────────┴────────────────────────────────────────────────────────┘
 ```
 
-### 3.6 Offline-First Capabilities (Track 5)
+### 3.8 Offline-First Capabilities (Track 5)
 *   **Offline Routing Graph Cache:** ดาวน์โหลดตารางโครงข่ายถนนความละเอียดสูงของจังหวัดนครปฐมในรูปแบบ GeoJSON Topology (~25 MB) ลงใน IndexedDB
 *   **Client-Side Dijkstra / A\* Pathfinding:** เมื่อเครือข่ายมือถือขาดหาย แอปสามารถรันอัลกอริทึม A* เพื่อหาเส้นทางที่ปลอดภัยได้บน JavaScript Client โดยใช้ข้อมูลระดับน้ำล่าสุดก่อนสัญญาณดับ
 *   **Audio Chime Guidance:** ไฟล์เสียงแนะนำทิศทาง (เช่น *"อีก 200 เมตรเลี้ยวซ้ายเข้าซอยปลอดภัย"*) ถูก Pre-cache ในเครื่อง เพื่อให้อ่านออกเสียงได้แม้ไม่มีอินเทอร์เน็ต
@@ -310,14 +351,40 @@ Track 2 Voucher Injection & Redemption Flow:
     *   `Restock Recommendation Card`: การ์ดข้อความแนะนำ เช่น *"AI วิเคราะห์: ซอย 1-4 มีบ้านเรือนเสียหายจากโคลน แนะนำสต็อก อุปกรณ์ทำความสะอาดเพิ่ม 50% และปูนซีเมนต์เพิ่ม 30%"*
     *   `Order from Supplier Button`: ปุ่มเชื่อมโยงคำสั่งซื้อไปยังผู้ค้าส่งท้องถิ่นหรือแพลตฟอร์ม Wholesale
 
-### 4.5 Donor & Gov Fund Injection Portal (พอร์ทัลอัดฉีดงบประมาณ)
+### 4.5 SME Emergency Inventory Management & CSV Stock Export (ระบบจัดการคลังเสบียงฉุกเฉินร้านค้าและการส่งออกข้อมูล CSV)
+*   **Tracking ID:** `P1-06`
+*   **Description:** เครื่องมือสำหรับร้านค้า SME โชห่วยชุมชน เพื่อตรวจนับ ปรับยอดสต็อกสินค้าบรรเทาทุกข์ 4 รายการหลัก และส่งออกรายงานสต็อกเป็นไฟล์ CSV มาตรฐานสากลสำหรับประสานงานกับศูนย์บรรเทาทุกข์และ อปท.
+*   **UI Components:**
+    *   `Inventory Management Card`: แผงบริหารสต็อกเสบียงฉุกเฉิน (`.inventory-manage-card`) ภายในหน้าต่าง Store Sales Dashboard
+    *   `Interactive +/- Counters`: ปุ่มกดเพิ่ม-ลดจำนวนสินค้าแบบ Real-time พร้อมแสดงหน่วยนับและเกณฑ์ความปลอดภัยขั้นต่ำ (Safety Stock Threshold):
+        1. *น้ำดื่มสะอาด 1.5 ลิตร (แพ็ค 6)* (SKU: `SKU-WTR-01`)
+        2. *ข้าวสารหอมมะลิ 5 กก.* (SKU: `SKU-RCE-02`)
+        3. *ชุดยาสามัญและปฐมพยาบาล* (SKU: `SKU-MED-03`)
+        4. *แผ่นรองซับผู้ใหญ่ ขนาด L* (SKU: `SKU-PAD-04`)
+    *   `Instant CSV Exporter Button`: ปุ่มกด `"📥 Export Stock (.CSV)"` (`#btn-export-merchant-csv`)
+*   **Data Export Specifications:**
+    *   **Encoding:** รองรับ `UTF-8 with BOM (﻿)` เพื่อให้เปิดอ่านภาษาไทยได้อย่างถูกต้อง 100% บนโปรแกรม Microsoft Excel, Google Sheets, และ Apple Numbers บนระบบปฏิบัติการ Windows และ macOS
+    *   **Format:** มาตรฐาน RFC 4180 Comma-Separated Values (CSV)
+    *   **Schema:**
+        | Field | Header Name | Type | Example |
+        |---|---|---|---|
+        | `sku` | รหัสสินค้า (SKU) | String | `SKU-PAD-04` |
+        | `name` | ชื่อรายการเสบียง | String | `แผ่นรองซับผู้ใหญ่ (ขนาด L)` |
+        | `count` | จำนวนคงเหลือ | Integer | `15` |
+        | `unit` | หน่วยนับ | String | `แพ็ค` |
+        | `threshold` | เกณฑ์ปลอดภัยขั้นต่ำ | Integer | `5` |
+        | `status` | สถานะความพร้อม | String | `พร้อมแจกจ่าย` / `สต็อกใกล้หมด` |
+        | `updated_at` | เวลาอัปเดตล่าสุด | Timestamp | `28 ต.ค. 2026, 22:30` |
+    *   **Client-Side Generation:** ใช้ HTML5 `Blob` API ร่วมกับ `URL.createObjectURL` ดาวน์โหลดไฟล์ `PromptMesh_Stock_Report.csv` ตรงจาก Client โดยไม่ต้องพึ่งพาเซิร์ฟเวอร์ภายนอก (100% Offline-Capable)
+
+### 4.6 Donor & Gov Fund Injection Portal (พอร์ทัลอัดฉีดงบประมาณ)
 *   **Tracking ID:** `P1-01`
 *   **Description:** หน้าต่างสำหรับหน่วยงาน อปท., ปภ., หรือมูลนิธิผู้บริจาค เพื่อโอนเงินตรงเข้าสู่งบ E-Voucher ประจำตำบล
 *   **UI Components:**
     *   `Inject Funds Button`: ฟอร์มเลือกพื้นที่เป้าหมาย (ระดับอำเภอ/ตำบล/ซอย) และระบุวัตถุประสงค์ของคูปอง
     *   `Live Impact Dashboard`: แผนภูมิแสดงจำนวนร้านค้า SME ที่ได้รับการกระตุ้นยอดขาย และจำนวนครัวเรือนที่ได้รับเสบียงแล้วแบบ Real-time
 
-### 4.6 API Integration Points (Track 2)
+### 4.7 API Integration Points (Track 2)
 
 | ผู้ให้บริการ API | ฟังก์ชันการเชื่อมต่อและจุดประสงค์ |
 |---|---|
@@ -326,7 +393,7 @@ Track 2 Voucher Injection & Redemption Flow:
 | **กรมการปกครอง (DOPA Citizen Auth API)** | ตรวจสอบสถานะบัตรประชาชนและภูมิลำเนา (เชื่อมผ่าน Krungthai KYC Rail) |
 | **อปท. Smart Local Welfare DB API** | ดึงรายชื่อผู้มีสิทธิ์รับสวัสดิการเบี้ยผู้สูงอายุและงบอุดหนุนภัยพิบัติของเทศบาล |
 
-### 4.7 Edge Cases & Error Handling (Track 2)
+### 4.8 Edge Cases & Error Handling (Track 2)
 
 ```
 ┌───────────────────────────────────────┬────────────────────────────────────────────────────────┐
@@ -349,7 +416,7 @@ Track 2 Voucher Injection & Redemption Flow:
 └───────────────────────────────────────┴────────────────────────────────────────────────────────┘
 ```
 
-### 4.8 Offline-First Capabilities (Track 2)
+### 4.9 Offline-First Capabilities (Track 2)
 *   **Cryptographic Offline Vouchers:** คูปองช่วยเหลือฉุกเฉินจะถูกออกเป็นดิจิทัลโทเคนที่เข้ารหัสด้วยคีย์สาธารณะ (Asymmetric ECDSA Key) เก็บไว้ใน IndexedDB ของประชาชนตั้งแต่ก่อนสัญญาณดับ
 *   **Store-and-Forward Merchant Ledger:** เครื่องของร้านค้าสามารถสแกนรับรองโทเคนแบบออฟไลน์ได้ โดยเครื่องจะตรวจสอบลายเซ็นดิจิทัลในเครื่องโดยไม่ต้องพึ่งเซิร์ฟเวอร์ และจัดเก็บประวัติธุรกรรมไว้ในฐานข้อมูลเข้ารหัส เมื่อสัญญาณอินเทอร์เน็ตกลับมา แอปจะซิงก์ข้อมูลขึ้นระบบ Krungthai Settlement API อัตโนมัติ
 *   **USSD Fallback Redemption:** ในกรณีที่ไม่มีสมาร์ทโฟนหรือไม่มีสัญญาณ 4G ผู้สูงอายุสามารถกดรหัส USSD เช่น `*484*VOUCHER_CODE*STORE_ID#` เพื่อรับข้อความยืนยันการแลกเสบียงทาง SMS

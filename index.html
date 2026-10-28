@@ -2361,6 +2361,298 @@
       margin-top: 18px;
     }
 
+  
+    /* ==========================================================================
+       E2E INTERACTIVE WORKFLOW STYLES (SME STOCK, SOS FORM, CI/CD PIPELINE)
+       ========================================================================== */
+    /* SME Inventory Counter Styles */
+    .inventory-manage-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--pm-radius-md);
+      border: 1px solid var(--pm-card-border);
+      padding: 16px;
+      margin-top: 14px;
+      box-shadow: var(--pm-shadow-sm);
+    }
+
+    .stock-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .stock-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: var(--pm-radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .stock-item-row:hover {
+      border-color: rgba(37, 99, 235, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .stock-item-info {
+      flex: 1;
+      min-width: 0;
+      padding-right: 8px;
+    }
+
+    .stock-item-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stock-item-sku {
+      font-size: 11px;
+      color: var(--pm-text-secondary);
+      margin-top: 2px;
+    }
+
+    .stock-counter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .stock-ctrl-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: var(--pm-text-main);
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .stock-ctrl-btn:hover {
+      background: #e2e8f0;
+      border-color: #94a3b8;
+    }
+
+    .stock-ctrl-btn:active {
+      transform: scale(0.92);
+      background: #cbd5e1;
+    }
+
+    .stock-count-val {
+      min-width: 32px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--pm-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stock-unit-label {
+      font-size: 11.5px;
+      color: var(--pm-text-secondary);
+      width: 28px;
+    }
+
+    /* SOS Resident Banner & Pulse */
+    .sos-trigger-btn {
+      position: relative;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+      color: #ffffff !important;
+      border: none !important;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      margin-top: 10px;
+      width: 100%;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    .sos-trigger-btn:hover {
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.45) !important;
+      transform: translateY(-1.5px);
+    }
+
+    /* CI/CD Pipeline Container & Nodes */
+    .cicd-pipeline-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 16px 0 12px;
+      padding: 12px 8px;
+      background: rgba(248, 250, 252, 0.85);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: var(--pm-radius-sm);
+      position: relative;
+    }
+
+    .cicd-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      z-index: 2;
+    }
+
+    .cicd-node-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .cicd-node-icon .svg-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .cicd-node-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      transition: color 0.3s ease;
+    }
+
+    .cicd-node-sub {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .cicd-line {
+      height: 3px;
+      flex: 0 0 24px;
+      background: #e2e8f0;
+      margin-top: -18px;
+      z-index: 1;
+      transition: background 0.3s ease;
+    }
+
+    /* Pipeline Node Active/Passed States */
+    .cicd-node.state-pending .cicd-node-icon {
+      background: #fee2e2;
+      color: #ef4444;
+      border: 2px solid #ef4444;
+      animation: pulseAlert 1.8s infinite;
+    }
+    .cicd-node.state-pending .cicd-node-title {
+      color: #b91c1c;
+      font-weight: 700;
+    }
+
+    .cicd-node.state-dispatched .cicd-node-icon {
+      background: #fef3c7;
+      color: #d97706;
+      border: 2px solid #f59e0b;
+      animation: pulseAlert 1.8s infinite;
+    }
+    .cicd-node.state-dispatched .cicd-node-title {
+      color: #b45309;
+      font-weight: 700;
+    }
+
+    .cicd-node.state-passed .cicd-node-icon {
+      background: #dcfce7;
+      color: #15803d;
+      border: 2px solid #16a34a;
+    }
+    .cicd-node.state-passed .cicd-node-title {
+      color: #15803d;
+    }
+
+    .cicd-line.line-passed {
+      background: #16a34a;
+    }
+
+    .cicd-line.line-active {
+      background: linear-gradient(90deg, #16a34a, #f59e0b);
+    }
+
+    .cicd-status-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--pm-radius-sm);
+      padding: 10px 12px;
+      margin-top: 8px;
+    }
+
+    .live-dot-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #ef4444;
+      box-shadow: 0 0 0 rgba(239, 68, 68, 0.4);
+      animation: pulseAlert 1.5s infinite;
+    }
+
+    /* SOS Form Modal Elements */
+    .sos-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sos-form-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+    }
+
+    .sos-checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: var(--pm-text-main);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .sos-checkbox-item:hover {
+      background: #f1f5f9;
+    }
+
+    .sos-checkbox-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #ef4444;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
@@ -2653,6 +2945,89 @@
                 <svg class="svg-icon" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
                 <span>สแกน QR รับเสบียง</span>
               </button>
+
+              <!-- SOS Rescue Request Trigger Button -->
+              <button class="pm-btn-primary sos-trigger-btn" id="btn-open-sos-modal" onclick="openSOSModal()">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>🚨 SOS ขอความช่วยเหลือด่วน (Emergency Rescue)</span>
+              </button>
+            </article>
+
+            <!-- 2A-2. Resident SOS CI/CD Action Status Pipeline Card -->
+            <article class="role-dash-card" id="resident-sos-pipeline-card" style="display: none; margin-top: 14px;">
+              <div class="role-dash-header">
+                <div class="role-dash-title-wrap">
+                  <div class="role-icon-box" id="sos-pipeline-status-icon" style="background-color: #fee2e2; color: #ef4444; width: 38px; height: 38px;">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  </div>
+                  <div>
+                    <div class="role-dash-title" style="display: flex; align-items: center; gap: 6px;">
+                      <span>สถานะตั๋วช่วยเหลือฉุกเฉิน (SOS Pipeline)</span>
+                      <span class="live-dot-pulse"></span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--pm-text-secondary);" id="sos-ticket-id-display">ตั๋ว #SOS-NKP-881 • จุดติดเกาะซอย 26</div>
+                  </div>
+                </div>
+                <span class="pm-badge pm-badge-danger" id="sos-pipeline-badge">🔴 รอรับเรื่อง</span>
+              </div>
+
+              <!-- CI/CD Visual Pipeline Steps -->
+              <div class="cicd-pipeline-flow">
+                <!-- Step 1: Pending -->
+                <div class="cicd-node state-pending" id="cicd-step-1">
+                  <div class="cicd-node-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="cicd-node-title">1. รอรับเรื่อง</div>
+                  <div class="cicd-node-sub" id="cicd-time-1">22:30 น. (LoRa)</div>
+                </div>
+
+                <!-- Connector 1-2 -->
+                <div class="cicd-line" id="cicd-line-1"></div>
+
+                <!-- Step 2: Dispatched -->
+                <div class="cicd-node" id="cicd-step-2">
+                  <div class="cicd-node-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                  </div>
+                  <div class="cicd-node-title">2. กำลังเดินทาง</div>
+                  <div class="cicd-node-sub" id="cicd-time-2">รอรับเรื่อง</div>
+                </div>
+
+                <!-- Connector 2-3 -->
+                <div class="cicd-line" id="cicd-line-2"></div>
+
+                <!-- Step 3: Resolved -->
+                <div class="cicd-node" id="cicd-step-3">
+                  <div class="cicd-node-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  </div>
+                  <div class="cicd-node-title">3. ปลอดภัยสำเร็จ</div>
+                  <div class="cicd-node-sub" id="cicd-time-3">เสร็จสิ้น</div>
+                </div>
+              </div>
+
+              <!-- Operator Live Status Box -->
+              <div class="cicd-status-box" id="sos-operator-note-box">
+                <div style="font-weight: 600; font-size: 12.5px; color: var(--pm-text-main); display: flex; align-items: center; gap: 6px;">
+                  <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--pm-primary);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  <span id="sos-operator-note-title">สถานะสดจากศูนย์สั่งการกู้ภัย:</span>
+                </div>
+                <div style="font-size: 12px; color: var(--pm-text-secondary); margin-top: 3px;" id="sos-operator-note-desc">
+                  ส่งสัญญาณฉุกเฉินผ่าน LoRa Mesh เรียบร้อยแล้ว กำลังรอหน่วยเคลื่อนที่เร็วกดรับเคส
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div style="display: flex; gap: 8px; margin-top: 12px;">
+                <button class="pm-btn-primary" style="flex: 1; height: 38px; font-size: 12.5px;" onclick="viewSOSTicketOnMap()">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  <span>ดูหมุด SOS บนแผนที่</span>
+                </button>
+                <button class="pm-btn-secondary" style="height: 38px; padding: 0 12px; font-size: 12px;" onclick="openSOSModal()">
+                  <span>แก้ไขข้อมูล / รายละเอียด</span>
+                </button>
+              </div>
             </article>
 
             <!-- 2B. SME Merchant Store Sales Dashboard Mockup -->
@@ -2695,22 +3070,90 @@
                 </button>
               </div>
 
-              <!-- Live Emergency Inventory Summary -->
-              <div>
-                <div style="font-size: 13px; font-weight: 600; color: var(--pm-text-main); margin-bottom: 8px;">สถานะคลังเสบียงฉุกเฉินประจำร้าน:</div>
-                <div class="inventory-list">
-                  <div class="inventory-item">
-                    <span class="inventory-item-name">น้ำดื่มสะอาด 1.5 ลิตร</span>
-                    <span class="pm-badge pm-badge-primary">คงเหลือ 45 แพ็ค</span>
+              <!-- SME Emergency Inventory Management Card & Instant CSV Export -->
+              <div class="inventory-manage-card">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 30px; height: 30px; border-radius: 8px; background: #ecfdf5; color: #10b981; display: flex; align-items: center; justify-content: center;">
+                      <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                    </div>
+                    <div>
+                      <div style="font-size: 13.5px; font-weight: 600; color: var(--pm-text-main);">ระบบจัดการสต็อกเสบียงชุมชน (Live Stock)</div>
+                      <div style="font-size: 11px; color: var(--pm-text-secondary);">จัดการสินค้าบรรเทาทุกข์ ปรับยอด และส่งออกข้อมูล</div>
+                    </div>
                   </div>
-                  <div class="inventory-item">
-                    <span class="inventory-item-name">แผ่นรองซับผู้ใหญ่ (ขนาด L)</span>
-                    <span class="pm-badge pm-badge-warning" style="background-color: #fffbeb; color: #b45309;">คงเหลือ 15 แพ็ค (ใกล้หมด)</span>
+                  <span class="pm-badge pm-badge-success" id="merchant-stock-status-badge">พร้อมแจกจ่าย</span>
+                </div>
+
+                <!-- Stock Items List with +/- Counters -->
+                <div class="stock-item-list">
+                  <!-- 1. Water -->
+                  <div class="stock-item-row" id="stock-row-water">
+                    <div class="stock-item-info">
+                      <div class="stock-item-name">💧 น้ำดื่มสะอาด 1.5 ลิตร (แพ็ค 6)</div>
+                      <div class="stock-item-sku">SKU-WTR-01 • เกณฑ์ขั้นต่ำ: 10 แพ็ค</div>
+                    </div>
+                    <div class="stock-counter-group">
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('water', -1)" title="ลดจำนวน">-</button>
+                      <span class="stock-count-val" id="stock-val-water">45</span>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('water', 1)" title="เพิ่มจำนวน">+</button>
+                      <span class="stock-unit-label">แพ็ค</span>
+                    </div>
                   </div>
-                  <div class="inventory-item">
-                    <span class="inventory-item-name">ข้าวสาร & อาหารแห้ง</span>
-                    <span class="pm-badge pm-badge-success">คงเหลือ 80 ชุด</span>
+
+                  <!-- 2. Rice -->
+                  <div class="stock-item-row" id="stock-row-rice">
+                    <div class="stock-item-info">
+                      <div class="stock-item-name">🌾 ข้าวสารหอมมะลิ (5 กิโลกรัม)</div>
+                      <div class="stock-item-sku">SKU-RCE-02 • เกณฑ์ขั้นต่ำ: 5 ถุง</div>
+                    </div>
+                    <div class="stock-counter-group">
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('rice', -1)" title="ลดจำนวน">-</button>
+                      <span class="stock-count-val" id="stock-val-rice">20</span>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('rice', 1)" title="เพิ่มจำนวน">+</button>
+                      <span class="stock-unit-label">ถุง</span>
+                    </div>
                   </div>
+
+                  <!-- 3. Meds -->
+                  <div class="stock-item-row" id="stock-row-meds">
+                    <div class="stock-item-info">
+                      <div class="stock-item-name">🩹 ยาสามัญและชุดปฐมพยาบาล</div>
+                      <div class="stock-item-sku">SKU-MED-03 • เกณฑ์ขั้นต่ำ: 5 ชุด</div>
+                    </div>
+                    <div class="stock-counter-group">
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('meds', -1)" title="ลดจำนวน">-</button>
+                      <span class="stock-count-val" id="stock-val-meds">18</span>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('meds', 1)" title="เพิ่มจำนวน">+</button>
+                      <span class="stock-unit-label">ชุด</span>
+                    </div>
+                  </div>
+
+                  <!-- 4. Pads -->
+                  <div class="stock-item-row" id="stock-row-pads">
+                    <div class="stock-item-info">
+                      <div class="stock-item-name">🧷 แผ่นรองซับผู้ใหญ่ (ขนาด L)</div>
+                      <div class="stock-item-sku">SKU-PAD-04 • เกณฑ์ขั้นต่ำ: 5 แพ็ค</div>
+                    </div>
+                    <div class="stock-counter-group">
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('pads', -1)" title="ลดจำนวน">-</button>
+                      <span class="stock-count-val" id="stock-val-pads">15</span>
+                      <button class="stock-ctrl-btn" onclick="adjustMerchantStock('pads', 1)" title="เพิ่มจำนวน">+</button>
+                      <span class="stock-unit-label">แพ็ค</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Primary Export Button (Blob & URL.createObjectURL) -->
+                <div style="display: flex; gap: 8px; margin-top: 12px;">
+                  <button class="pm-btn-primary" id="btn-export-merchant-csv" onclick="exportMerchantStockCSV()" style="flex: 1; height: 42px; font-size: 13.5px; background: linear-gradient(135deg, #059669 0%, #10b981 100%); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>📥 Export Stock (.CSV)</span>
+                  </button>
+                  <button class="pm-btn-secondary" style="height: 42px; padding: 0 14px; font-size: 12.5px;" onclick="syncStockWithMesh()">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    <span>ซิงก์ Mesh</span>
+                  </button>
                 </div>
               </div>
 
@@ -2759,26 +3202,16 @@
                 </div>
               </div>
 
-              <!-- Priority Incident Queue -->
+              <!-- Dynamic Priority Incident Queue & CI/CD Actions -->
               <div>
-                <div style="font-size: 13px; font-weight: 600; color: var(--pm-text-main); margin-bottom: 8px;">คิวภารกิจช่วยเหลือฉุกเฉิน (Priority Queue):</div>
-                <div class="inventory-list">
-                  <div class="inventory-item" style="border-left: 3px solid var(--pm-danger); padding-left: 10px;">
-                    <div>
-                      <div style="font-weight: 600; color: var(--pm-danger);">[วิกฤตสูงสุด] Case #R-104: คุณยายติดเตียง</div>
-                      <div style="font-size: 11.5px; color: var(--pm-text-secondary);">ซอยไร่ขิง 26 (น้ำลึก 35 ซม.) • ต้องการเรือ + แผ่นรองซับ</div>
-                    </div>
-                    <button class="pm-btn-primary" style="height: 32px; padding: 0 10px; font-size: 12px;" onclick="switchView('view-map'); openPreTripChecklist();">
-                      นำทางช่วยเหลือ
-                    </button>
-                  </div>
-                  <div class="inventory-item" style="border-left: 3px solid var(--pm-warning); padding-left: 10px;">
-                    <div>
-                      <div style="font-weight: 600; color: var(--pm-warning);">Case #R-102: ครอบครัว 4 ราย ขออพยพ</div>
-                      <div style="font-size: 11.5px; color: var(--pm-text-secondary);">ปลายทางวัดไร่ขิง (น้ำลึก 20 ซม.) • จัดสรรรถกระบะ 4WD</div>
-                    </div>
-                    <span class="pm-badge pm-badge-warning">รับเรื่องแล้ว</span>
-                  </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <div style="font-size: 13.5px; font-weight: 600; color: var(--pm-text-main);">คิวภารกิจช่วยเหลือฉุกเฉิน (Active SOS Queue):</div>
+                  <span class="pm-badge pm-badge-danger" id="rescue-queue-count-badge">1 เคสวิกฤต</span>
+                </div>
+
+                <!-- Dynamic Container for Active SOS Tickets -->
+                <div id="rescue-sos-queue-container" style="display: flex; flex-direction: column; gap: 10px;">
+                  <!-- Dynamically rendered by renderRescueDashboard() -->
                 </div>
               </div>
 
@@ -3154,7 +3587,82 @@
     <!-- ======================================================================
          MODAL 1: AI ASSISTANT MODAL (Glassmorphic Analysis Window)
          ====================================================================== -->
-        <!-- ======================================================================
+        <!-- ==========================================================================
+         FEATURE: RAPID SOS RESCUE REQUEST MODAL (TRACK 5)
+         ========================================================================== -->
+    <div class="modal-backdrop" id="modal-sos-request">
+      <div class="modal-sheet" style="max-width: 480px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <div class="modal-icon-badge" style="background-color: #fee2e2; color: #ef4444;">
+              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 600; color: var(--pm-text-main);">ขอความช่วยเหลือด่วน (SOS Request)</div>
+              <div style="font-size: 12px; color: var(--pm-text-secondary); font-weight: 400;">Track 5: Rapid Crisis Rescue Dispatch System</div>
+            </div>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-sos-request')">
+            <svg class="svg-icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="sos-form-group">
+              <label class="sos-form-label">ชื่อผู้ขอรับความช่วยเหลือ / ผู้ติดต่อ:</label>
+              <input type="text" class="pm-input" id="sos-input-name" value="คุณสมศักดิ์ รักสงบ" placeholder="ระบุชื่อ-นามสกุล">
+            </div>
+
+            <div class="sos-form-group">
+              <label class="sos-form-label">เบอร์โทรศัพท์ฉุกเฉิน (เชื่อมต่อ LoRa SMS Gateway):</label>
+              <input type="tel" class="pm-input" id="sos-input-phone" value="081-998-7654" placeholder="08x-xxx-xxxx">
+            </div>
+
+            <div class="sos-form-group">
+              <label class="sos-form-label">ประเภทความช่วยเหลือเร่งด่วน:</label>
+              <div style="display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 4px;">
+                <label class="sos-checkbox-item">
+                  <input type="checkbox" id="sos-req-bedridden" checked>
+                  <span>👵 มีผู้ป่วยติดเตียง / ผู้สูงอายุช่วยเหลือตนเองไม่ได้</span>
+                </label>
+                <label class="sos-checkbox-item">
+                  <input type="checkbox" id="sos-req-boat" checked>
+                  <span>🚤 น้ำท่วมสูงเกิน 30 ซม. ต้องการเรือท้องแบน/เจ็ตสกีอพยพ</span>
+                </label>
+                <label class="sos-checkbox-item">
+                  <input type="checkbox" id="sos-req-pads" checked>
+                  <span>🧷 ขาดแคลนผ้าอ้อม / แผ่นรองซับผู้ใหญ่เร่งด่วน</span>
+                </label>
+                <label class="sos-checkbox-item">
+                  <input type="checkbox" id="sos-req-food">
+                  <span>🍱 ต้องการเสบียงอาหารปรุงสุก และน้ำดื่มสะอาด</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sos-form-group">
+              <label class="sos-form-label">พิกัด / จุดสังเกตของบ้าน:</label>
+              <input type="text" class="pm-input" id="sos-input-location" value="บ้านเลขที่ 45 ซอยไร่ขิง 26 (จุดติดเกาะน้ำลึก 35 ซม.)">
+            </div>
+
+            <div class="sos-form-group">
+              <label class="sos-form-label">รายละเอียดเพิ่มเติม:</label>
+              <textarea class="pm-input" id="sos-input-notes" style="height: 60px; resize: none;">ไฟฟ้าดับมาแล้ว 6 ชม. ระดับน้ำในบ้านเริ่มเอ่อท่วมเตียงคนไข้ ต้องการเรือกู้ภัยด่วนครับ</textarea>
+            </div>
+
+            <div style="margin-top: 8px;">
+              <button class="pm-btn-primary" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); width: 100%; height: 46px; font-size: 14px; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);" onclick="submitSOSRequest()">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>🚨 ยืนยันส่งสัญญาณฉุกเฉิน (Broadcast SOS)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
          FEATURE 3: VEHICLE EVACUATION READINESS CHECKLIST MODAL (#modal-pre-trip-checklist)
          ====================================================================== -->
     <div class="modal-backdrop" id="modal-pre-trip-checklist">
@@ -3470,7 +3978,27 @@
       voucherBalance: 1500,
       merchantRevenue: 18450,
       govDisbursed: 1840000,
-      layers: {
+            merchantStock: {
+        water: { sku: 'SKU-WTR-01', name: 'น้ำดื่มสะอาด 1.5 ลิตร (แพ็ค 6)', count: 45, unit: 'แพ็ค', min: 10 },
+        rice: { sku: 'SKU-RCE-02', name: 'ข้าวสารหอมมะลิ (5 กิโลกรัม)', count: 20, unit: 'ถุง', min: 5 },
+        meds: { sku: 'SKU-MED-03', name: 'ยาสามัญและชุดปฐมพยาบาล', count: 18, unit: 'ชุด', min: 5 },
+        pads: { sku: 'SKU-PAD-04', name: 'แผ่นรองซับผู้ใหญ่ (ขนาด L)', count: 15, unit: 'แพ็ค', min: 5 }
+      },
+      activeSOSTicket: {
+        id: 'SOS-NKP-881',
+        name: 'คุณสมศักดิ์ รักสงบ',
+        phone: '081-998-7654',
+        needs: '👵 ผู้ป่วยติดเตียง, 🚤 ต้องการเรือท้องแบน, 🧷 แผ่นรองซับ',
+        location: 'บ้านเลขที่ 45 ซอยไร่ขิง 26 (จุดติดเกาะน้ำลึก 35 ซม.)',
+        notes: 'ไฟฟ้าดับมาแล้ว 6 ชม. ระดับน้ำเริ่มท่วมเตียงคนไข้ ต้องการกู้ภัยด่วนครับ',
+        coords: { lat: 13.7345, lng: 100.2778 },
+        status: 'pending',
+        createdAt: '22:30 น. (LoRa Mesh)',
+        dispatchedAt: null,
+        resolvedAt: null,
+        unit: 'ทีมกู้ภัยร่วมกตัญญู (หน่วยเร็ว 03)'
+      },
+layers: {
         water: true,
         rain: true,
         stores: true
@@ -3554,6 +4082,8 @@
     let destMarker = null;
     let storeMarkers = [];
     let activeInfoWindow = null;
+    let sosMarker = null;
+
 
     // DOM Elements
     const views = {
@@ -3781,6 +4311,8 @@
       // Initialize Animated Safe Route (Bypasses Directions API for Hackathon Reliability)
       // ------------------------------------------------------------------------
       calculateSafeRoute({ silent: true });
+      if (appState.activeSOSTicket) renderSOSMarkerOnMap(appState.activeSOSTicket);
+
     }
 
     // --------------------------------------------------------------------------
@@ -4318,6 +4850,18 @@
         showToast('เข้าสู่ระบบในบทบาท: อปท. & ผู้บริหารกองทุน (Fund Injection Portal)');
       }
 
+      
+      // Dynamic Role Renders (E2E Synchronized State)
+      if (role === 'resident') {
+        const pipelineCard = document.getElementById('resident-sos-pipeline-card');
+        if (pipelineCard) pipelineCard.style.display = appState.activeSOSTicket ? 'block' : 'none';
+        renderResidentSOSPipeline();
+      } else if (role === 'rescue') {
+        renderRescueDashboard();
+      } else if (role === 'merchant') {
+        renderMerchantStockUI();
+      }
+
       switchView('view-home');
     }
 
@@ -4330,6 +4874,418 @@
     }
 
     // ==========================================================================
+        // ==========================================================================
+    // E2E FEATURE: SME INVENTORY MANAGEMENT & CSV EXPORT (TRACK 2)
+    // ==========================================================================
+    function adjustMerchantStock(itemKey, delta) {
+      if (!appState.merchantStock || !appState.merchantStock[itemKey]) return;
+      const item = appState.merchantStock[itemKey];
+      item.count = Math.max(0, item.count + delta);
+      
+      const valEl = document.getElementById(`stock-val-${itemKey}`);
+      if (valEl) valEl.innerText = item.count;
+      
+      // Update badge if critical
+      const badgeEl = document.getElementById('merchant-stock-status-badge');
+      if (badgeEl) {
+        let isLow = Object.values(appState.merchantStock).some(i => i.count <= i.min);
+        if (isLow) {
+          badgeEl.className = 'pm-badge pm-badge-warning';
+          badgeEl.innerText = 'สต็อกบางรายการต่ำ';
+        } else {
+          badgeEl.className = 'pm-badge pm-badge-success';
+          badgeEl.innerText = 'พร้อมแจกจ่าย';
+        }
+      }
+      
+      showToast(`อัปเดต ${item.name}: ${item.count} ${item.unit}`);
+    }
+
+    function renderMerchantStockUI() {
+      if (!appState.merchantStock) return;
+      Object.keys(appState.merchantStock).forEach(k => {
+        const item = appState.merchantStock[k];
+        const valEl = document.getElementById(`stock-val-${k}`);
+        if (valEl) valEl.innerText = item.count;
+      });
+    }
+
+    function exportMerchantStockCSV() {
+      if (!appState.merchantStock) return;
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      
+      // CSV Header with UTF-8 BOM (﻿) for perfect Thai display in Excel
+      let csvContent = '\uFEFF';
+      csvContent += 'รหัสสินค้า (SKU),ชื่อรายการเสบียง,จำนวนคงเหลือ,หน่วยนับ,เกณฑ์ปลอดภัยขั้นต่ำ,สถานะความพร้อม,เวลาอัปเดตล่าสุด\r\n';
+      
+      Object.values(appState.merchantStock).forEach(item => {
+        const status = item.count > item.min ? 'พร้อมแจกจ่าย' : (item.count > 0 ? 'สต็อกใกล้หมด' : 'สินค้าหมด');
+        csvContent += `"${item.sku}","${item.name}",${item.count},"${item.unit}",${item.min},"${status}","${dateStr}"\r\n`;
+      });
+      
+      // Total summary row
+      const totalUnits = Object.values(appState.merchantStock).reduce((acc, i) => acc + i.count, 0);
+      csvContent += `"TOTAL","รวมเสบียงคงคลังร้านค้า",${totalUnits},"หน่วย","--","พร้อมสนับสนุนชุมชน","${dateStr}"\r\n`;
+
+      // Create Blob and trigger download
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const downloadUrl = URL.createObjectURL(blob);
+      const tempLink = document.createElement('a');
+      tempLink.href = downloadUrl;
+      tempLink.setAttribute('download', 'PromptMesh_Stock_Report.csv');
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      URL.revokeObjectURL(downloadUrl);
+
+      showToast('📥 ดาวน์โหลด PromptMesh_Stock_Report.csv สำเร็จแล้ว!');
+    }
+
+    function syncStockWithMesh() {
+      showToast('กำลังบรอดแคสต์ข้อมูลสต็อก 4 รายการ ไปยัง LoRa Mesh โหนดใกล้เคียง...');
+      setTimeout(() => {
+        showToast('📡 ซิงก์สต็อกเสบียงกับศูนย์กู้ภัยและ อปท. สำเร็จ (0.8s)');
+      }, 900);
+    }
+
+    // ==========================================================================
+    // E2E FEATURE: RAPID SOS RESCUE REQUEST & MAP MARKER SYNC (TRACK 5)
+    // ==========================================================================
+    function openSOSModal() {
+      openModal('modal-sos-request');
+    }
+
+    function submitSOSRequest() {
+      const name = document.getElementById('sos-input-name')?.value || 'คุณสมศักดิ์ รักสงบ';
+      const phone = document.getElementById('sos-input-phone')?.value || '081-998-7654';
+      const location = document.getElementById('sos-input-location')?.value || 'ซอยไร่ขิง 26 (ติดเกาะน้ำลึก 35 ซม.)';
+      const notes = document.getElementById('sos-input-notes')?.value || 'ต้องการเรืออพยพด่วน';
+      
+      const needs = [];
+      if (document.getElementById('sos-req-bedridden')?.checked) needs.push('👵 ผู้ป่วยติดเตียง');
+      if (document.getElementById('sos-req-boat')?.checked) needs.push('🚤 ต้องการเรือท้องแบน');
+      if (document.getElementById('sos-req-pads')?.checked) needs.push('🧷 แผ่นรองซับผู้ใหญ่');
+      if (document.getElementById('sos-req-food')?.checked) needs.push('🍱 เสบียงอาหาร/น้ำดื่ม');
+
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} น.`;
+
+      appState.activeSOSTicket = {
+        id: 'SOS-NKP-881',
+        name: name,
+        phone: phone,
+        needs: needs.join(', ') || 'ขอความช่วยเหลือฉุกเฉิน',
+        location: location,
+        notes: notes,
+        coords: { lat: 13.7345, lng: 100.2778 },
+        status: 'pending',
+        createdAt: `${timeStr} (LoRa Mesh)`,
+        dispatchedAt: null,
+        resolvedAt: null,
+        unit: 'ทีมกู้ภัยร่วมกตัญญู (หน่วยเร็ว 03)'
+      };
+
+      closeModal('modal-sos-request');
+      renderSOSMarkerOnMap(appState.activeSOSTicket);
+      renderResidentSOSPipeline();
+      renderRescueDashboard();
+
+      const pipelineCard = document.getElementById('resident-sos-pipeline-card');
+      if (pipelineCard) pipelineCard.style.display = 'block';
+
+      showToast('🚨 ส่งสัญญาณ SOS ฉุกเฉินแล้ว! ตั๋ว #SOS-NKP-881 กระจายผ่าน LoRa Mesh');
+    }
+
+    // Google Maps Flashing SOS Marker
+    function renderSOSMarkerOnMap(ticket) {
+      if (typeof google === 'undefined' || !google.maps || !map || !ticket) return;
+
+      if (!sosMarker) {
+        sosMarker = new google.maps.Marker({
+          position: ticket.coords,
+          map: map,
+          title: `SOS: ${ticket.name}`
+        });
+
+        const sosInfoWindow = new google.maps.InfoWindow();
+        sosMarker.addListener('click', () => {
+          let badgeColor = ticket.status === 'pending' ? '#ef4444' : (ticket.status === 'dispatched' ? '#f59e0b' : '#10b981');
+          let statusText = ticket.status === 'pending' ? '🔴 รอรับเรื่อง (Pending)' : (ticket.status === 'dispatched' ? '🟡 กำลังเดินทาง (Dispatched)' : '🟢 ช่วยเหลือสำเร็จ (Resolved)');
+          
+          sosInfoWindow.setContent(`
+            <div style="font-family: 'Kanit', sans-serif; font-size: 13px; line-height: 1.5; color: #0f172a; max-width: 240px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                <strong style="color: ${badgeColor}; font-size: 14px;">${ticket.id}</strong>
+                <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; background: ${badgeColor}20; color: ${badgeColor}; font-weight: 600;">${statusText}</span>
+              </div>
+              <div style="font-weight: 600; color: #1e293b;">${ticket.name} (${ticket.phone})</div>
+              <div style="color: #64748b; font-size: 12px; margin-top: 2px;">📍 ${ticket.location}</div>
+              <div style="color: #b91c1c; font-size: 12px; margin-top: 4px; background: #fef2f2; padding: 4px 6px; border-radius: 4px;">
+                <strong>ความต้องการ:</strong> ${ticket.needs}
+              </div>
+              <div style="color: #64748b; font-size: 11.5px; margin-top: 4px;">"${ticket.notes}"</div>
+            </div>
+          `);
+          sosInfoWindow.open(map, sosMarker);
+        });
+      }
+
+      // Update Marker SVG based on status
+      let fillColor = '#ef4444'; // Pending: Red
+      let pulseColor = 'rgba(239, 68, 68, 0.35)';
+      let iconInner = '<path d="M24 12V22M24 26V27" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>';
+
+      if (ticket.status === 'dispatched') {
+        fillColor = '#f59e0b'; // Dispatched: Yellow/Amber
+        pulseColor = 'rgba(245, 158, 11, 0.35)';
+        iconInner = '<path d="M16 20L22 26L32 14" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+      } else if (ticket.status === 'resolved') {
+        fillColor = '#10b981'; // Resolved: Green
+        pulseColor = 'rgba(16, 185, 129, 0.35)';
+        iconInner = '<path d="M16 20L22 26L32 14" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+      }
+
+      const svgMarker = {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="56" viewBox="0 0 48 56">
+            <circle cx="24" cy="22" r="20" fill="${pulseColor}">
+              <animate attributeName="r" values="16;22;16" dur="1.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+            <path d="M24 2C13 2 4 11 4 22C4 36 24 54 24 54C24 54 44 36 44 22C44 11 35 2 24 2Z" fill="${fillColor}" />
+            <circle cx="24" cy="20" r="13" fill="${fillColor}" stroke="#ffffff" stroke-width="2"/>
+            ${iconInner}
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(46, 54),
+        anchor: new google.maps.Point(23, 54)
+      };
+
+      sosMarker.setIcon(svgMarker);
+      sosMarker.setPosition(ticket.coords);
+    }
+
+    function viewSOSTicketOnMap() {
+      switchView('view-map');
+      if (typeof map !== 'undefined' && map && appState.activeSOSTicket) {
+        setTimeout(() => {
+          map.panTo(appState.activeSOSTicket.coords);
+          map.setZoom(15);
+          if (sosMarker) {
+            google.maps.event.trigger(sosMarker, 'click');
+          }
+        }, 200);
+      }
+    }
+
+    // ==========================================================================
+    // E2E FEATURE: CI/CD STYLE ACTION STATUS PIPELINE & RESCUE QUEUE
+    // ==========================================================================
+    function renderResidentSOSPipeline() {
+      const ticket = appState.activeSOSTicket;
+      const card = document.getElementById('resident-sos-pipeline-card');
+      if (!card) return;
+      if (!ticket) {
+        card.style.display = 'none';
+        return;
+      }
+      card.style.display = 'block';
+
+      const badge = document.getElementById('sos-pipeline-badge');
+      const step1 = document.getElementById('cicd-step-1');
+      const step2 = document.getElementById('cicd-step-2');
+      const step3 = document.getElementById('cicd-step-3');
+      const line1 = document.getElementById('cicd-line-1');
+      const line2 = document.getElementById('cicd-line-2');
+      const time1 = document.getElementById('cicd-time-1');
+      const time2 = document.getElementById('cicd-time-2');
+      const time3 = document.getElementById('cicd-time-3');
+      const noteTitle = document.getElementById('sos-operator-note-title');
+      const noteDesc = document.getElementById('sos-operator-note-desc');
+      const iconBox = document.getElementById('sos-pipeline-status-icon');
+
+      if (ticket.status === 'pending') {
+        if (badge) {
+          badge.className = 'pm-badge pm-badge-danger';
+          badge.innerText = '🔴 รอรับเรื่อง (Pending)';
+        }
+        if (iconBox) {
+          iconBox.style.backgroundColor = '#fee2e2';
+          iconBox.style.color = '#ef4444';
+        }
+        if (step1) step1.className = 'cicd-node state-pending';
+        if (step2) step2.className = 'cicd-node';
+        if (step3) step3.className = 'cicd-node';
+        if (line1) line1.className = 'cicd-line';
+        if (line2) line2.className = 'cicd-line';
+        if (time1) time1.innerText = ticket.createdAt;
+        if (time2) time2.innerText = 'รอทีมกู้ภัยกดรับ';
+        if (time3) time3.innerText = 'รอความช่วยเหลือ';
+        if (noteTitle) noteTitle.innerText = 'สถานะสด: กำลังรอการตอบรับจากทีมกู้ภัย';
+        if (noteDesc) noteDesc.innerText = 'ส่งพิกัดฉุกเฉินผ่าน LoRa Mesh แล้ว ทีมกู้ภัยร่วมกตัญญูกำลังจัดสรรพาหนะที่เหมาะสม';
+      } else if (ticket.status === 'dispatched') {
+        if (badge) {
+          badge.className = 'pm-badge pm-badge-warning';
+          badge.innerText = '🟡 กำลังเดินทาง (Dispatched)';
+        }
+        if (iconBox) {
+          iconBox.style.backgroundColor = '#fef3c7';
+          iconBox.style.color = '#f59e0b';
+        }
+        if (step1) step1.className = 'cicd-node state-passed';
+        if (step2) step2.className = 'cicd-node state-dispatched';
+        if (step3) step3.className = 'cicd-node';
+        if (line1) line1.className = 'cicd-line line-passed';
+        if (line2) line2.className = 'cicd-line';
+        if (time1) time1.innerText = 'ผ่านแล้ว';
+        if (time2) time2.innerText = ticket.dispatchedAt || 'กำลังเดินทาง';
+        if (time3) time3.innerText = 'กำลังเข้าพื้นที่';
+        if (noteTitle) noteTitle.innerText = 'สถานะสด: ทีมกู้ภัยกำลังเดินทางเข้าช่วยเหลือ!';
+        if (noteDesc) noteDesc.innerText = `หน่วยเคลื่อนที่เร็ว 03 รับเคสแล้ว นำเรือท้องแบนและเสบียงมุ่งหน้าไปยัง ${ticket.location}`;
+      } else if (ticket.status === 'resolved') {
+        if (badge) {
+          badge.className = 'pm-badge pm-badge-success';
+          badge.innerText = '🟢 ช่วยเหลือสำเร็จ (Resolved)';
+        }
+        if (iconBox) {
+          iconBox.style.backgroundColor = '#ecfdf5';
+          iconBox.style.color = '#10b981';
+        }
+        if (step1) step1.className = 'cicd-node state-passed';
+        if (step2) step2.className = 'cicd-node state-passed';
+        if (step3) step3.className = 'cicd-node state-passed';
+        if (line1) line1.className = 'cicd-line line-passed';
+        if (line2) line2.className = 'cicd-line line-passed';
+        if (time1) time1.innerText = 'ผ่านแล้ว';
+        if (time2) time2.innerText = 'สำเร็จ';
+        if (time3) time3.innerText = ticket.resolvedAt || 'ปลอดภัยแล้ว';
+        if (noteTitle) noteTitle.innerText = 'ภารกิจสำเร็จสมบูรณ์: ผู้ประสบภัยปลอดภัยแล้ว 🎉';
+        if (noteDesc) noteDesc.innerText = 'ส่งมอบเสบียงฉุกเฉินและอพยพผู้ป่วยติดเตียงไปยังศูนย์พักพิงวัดไร่ขิงเรียบร้อย';
+      }
+    }
+
+    function renderRescueDashboard() {
+      const container = document.getElementById('rescue-sos-queue-container');
+      const badgeCount = document.getElementById('rescue-queue-count-badge');
+      if (!container) return;
+
+      const ticket = appState.activeSOSTicket;
+      if (!ticket) {
+        container.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--pm-text-secondary); font-size: 13px;">ไม่มีเคสขอความช่วยเหลือค้างในระบบ</div>';
+        if (badgeCount) badgeCount.innerText = '0 เคส';
+        return;
+      }
+
+      let borderCol = '#ef4444';
+      let statusBadge = '<span class="pm-badge pm-badge-danger">🔴 รอรับเรื่อง (Pending)</span>';
+      let actionButtons = `
+        <button class="pm-btn-primary" style="height: 34px; padding: 0 12px; font-size: 12.5px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);" onclick="acceptRescueCase('${ticket.id}')">
+          <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          <span>🚤 รับเคสช่วยเหลือ (Accept)</span>
+        </button>
+      `;
+
+      if (ticket.status === 'dispatched') {
+        borderCol = '#f59e0b';
+        statusBadge = '<span class="pm-badge pm-badge-warning">🟡 กำลังเดินทาง (Dispatched)</span>';
+        actionButtons = `
+          <button class="pm-btn-primary" style="height: 34px; padding: 0 12px; font-size: 12.5px; background: linear-gradient(135deg, #059669 0%, #10b981 100%);" onclick="completeRescueCase('${ticket.id}')">
+            <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>✅ ช่วยเหลือสำเร็จ (Complete)</span>
+          </button>
+        `;
+      } else if (ticket.status === 'resolved') {
+        borderCol = '#10b981';
+        statusBadge = '<span class="pm-badge pm-badge-success">🟢 ช่วยเหลือสำเร็จ (Resolved)</span>';
+        actionButtons = `
+          <button class="pm-btn-secondary" style="height: 34px; padding: 0 10px; font-size: 12px;" onclick="resetSOSDemoState()">
+            <span>🔄 จำลองเคสใหม่</span>
+          </button>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="inventory-item" style="border-left: 3.5px solid ${borderCol}; padding: 12px; background: rgba(255, 255, 255, 0.9); flex-direction: column; align-items: stretch; gap: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <span style="font-weight: 700; color: ${borderCol}; font-size: 13.5px;">[วิกฤต] ${ticket.id}: ${ticket.name}</span>
+              <span style="font-size: 11.5px; color: var(--pm-text-secondary); margin-left: 6px;">📞 ${ticket.phone}</span>
+            </div>
+            ${statusBadge}
+          </div>
+          <div style="font-size: 12px; color: var(--pm-text-secondary);">
+            📍 ${ticket.location} • <strong>ต้องการ:</strong> ${ticket.needs}
+          </div>
+          <div style="font-size: 11.5px; color: #475569; background: #f8fafc; padding: 6px 8px; border-radius: 6px;">
+            💬 "${ticket.notes}"
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+            <div style="display: flex; gap: 6px;">
+              ${actionButtons}
+              <button class="pm-btn-secondary" style="height: 34px; padding: 0 10px; font-size: 12px;" onclick="viewSOSTicketOnMap()">
+                <span>🗺️ แผนที่</span>
+              </button>
+            </div>
+            <button class="pm-btn-secondary" style="height: 34px; padding: 0 10px; font-size: 12px;" onclick="openPreTripChecklist()">
+              <span>📋 เช็กรถ</span>
+            </button>
+          </div>
+        </div>
+      `;
+
+      if (badgeCount) {
+        badgeCount.innerText = ticket.status === 'resolved' ? '0 เคสค้าง' : '1 เคสเร่งด่วน';
+      }
+    }
+
+    function acceptRescueCase(ticketId) {
+      if (!appState.activeSOSTicket) return;
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} น.`;
+      
+      appState.activeSOSTicket.status = 'dispatched';
+      appState.activeSOSTicket.dispatchedAt = `${timeStr} (เรือเร็ว 03)`;
+
+      renderSOSMarkerOnMap(appState.activeSOSTicket);
+      renderRescueDashboard();
+      renderResidentSOSPipeline();
+
+      showToast('🚤 รับเคสช่วยเหลือสำเร็จ! อัปเดตสถานะเป็น: กำลังเดินทาง (Dispatched) และเปลี่ยนหมุดเป็นสีเหลือง');
+    }
+
+    function completeRescueCase(ticketId) {
+      if (!appState.activeSOSTicket) return;
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} น.`;
+      
+      appState.activeSOSTicket.status = 'resolved';
+      appState.activeSOSTicket.resolvedAt = `${timeStr} (ปลอดภัยแล้ว)`;
+
+      renderSOSMarkerOnMap(appState.activeSOSTicket);
+      renderRescueDashboard();
+      renderResidentSOSPipeline();
+
+      showToast('🎉 ปฏิบัติการสำเร็จ! ส่งมอบเสบียงและอพยพผู้ป่วยเรียบร้อย (Resolved)');
+    }
+
+    function resetSOSDemoState() {
+      if (appState.activeSOSTicket) {
+        appState.activeSOSTicket.status = 'pending';
+        appState.activeSOSTicket.dispatchedAt = null;
+        appState.activeSOSTicket.resolvedAt = null;
+      }
+      renderSOSMarkerOnMap(appState.activeSOSTicket);
+      renderRescueDashboard();
+      renderResidentSOSPipeline();
+      showToast('🔄 รีเซ็ตสถานะตั๋วฉุกเฉินเป็น: รอรับเรื่อง (Pending)');
+    }
+
+    function cancelOrResetSOSDemo() {
+      resetSOSDemoState();
+    }
+
+
     // AI SEMANTIC SUPPLY SEARCH SYSTEM (FEATURE 2: TRACK 2 NLP)
     // ==========================================================================
     function performAISupplySearch(userQuery) {
