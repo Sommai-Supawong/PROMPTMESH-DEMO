@@ -1,0 +1,903 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --blue: #2563eb;
+  --blue-dark: #1e40af;
+  --blue-light: #eff6ff;
+  --red: #ef4444;
+  --red-light: #fef2f2;
+  --green: #22c55e;
+  --green-light: #f0fdf4;
+  --green-dark: #166534;
+  --amber: #f59e0b;
+  --amber-light: #fefce8;
+  --purple: #a855f7;
+  --purple-light: #faf5ff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-700: #334155;
+  --gray-900: #0f172a;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Kanit', system-ui, sans-serif;
+  background: var(--gray-100);
+  color: var(--gray-900);
+  padding: 24px;
+  line-height: 1.5;
+}
+
+/* Slide container */
+.slide {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px 44px;
+  margin-bottom: 24px;
+  border: 1px solid var(--gray-200);
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-number {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray-400);
+  letter-spacing: 0.02em;
+}
+
+/* SLIDE 1 — TITLE */
+.slide-title {
+  background: linear-gradient(135deg, var(--gray-900) 0%, var(--blue-dark) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 60px 44px;
+}
+
+.slide-title .project-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: rgba(255,255,255,0.8);
+}
+
+.slide-title h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.slide-title .subtitle {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 28px;
+}
+
+.slide-title .meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+}
+
+.slide-title .slide-number { color: rgba(255,255,255,0.4); }
+
+/* Section headers */
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h2 .h2-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin: 16px 0 10px 0;
+}
+
+p, li {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-700);
+  line-height: 1.65;
+}
+
+.source-tag {
+  font-size: 10px;
+  color: var(--gray-400);
+  font-weight: 300;
+}
+
+/* Stat cards */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.stat-card {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.stat-card .stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.stat-card .stat-label {
+  font-size: 11px;
+  color: var(--gray-500);
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+.stat-card.danger .stat-value { color: var(--red); }
+.stat-card.success .stat-value { color: var(--green-dark); }
+
+/* Highlight box */
+.highlight-box {
+  background: var(--blue-light);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 12px 12px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.highlight-box p {
+  font-size: 14px;
+  color: var(--blue-dark);
+}
+
+.alert-box {
+  background: var(--red-light);
+  border-left: 4px solid var(--red);
+  border-radius: 0 12px 12px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.alert-box p {
+  font-size: 14px;
+  color: #991b1b;
+}
+
+.success-box {
+  background: var(--green-light);
+  border-left: 4px solid var(--green);
+  border-radius: 0 12px 12px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.success-box p {
+  font-size: 14px;
+  color: var(--green-dark);
+}
+
+/* Track cards */
+.track-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.track-card {
+  border-radius: 16px;
+  padding: 22px 18px;
+  border: 1px solid var(--gray-200);
+}
+
+.track-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.track-card .track-subtitle {
+  font-size: 11px;
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.track-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.track-card li {
+  font-size: 12px;
+  padding: 3px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.track-card li::before {
+  content: '→';
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+
+.track-6 { background: #fef2f2; border-color: #fecaca; }
+.track-6 h4 { color: #991b1b; }
+.track-6 .track-subtitle { color: #b91c1c; }
+
+.track-5 { background: var(--blue-light); border-color: #bfdbfe; }
+.track-5 h4 { color: var(--blue-dark); }
+.track-5 .track-subtitle { color: #2563eb; }
+
+.track-2 { background: var(--green-light); border-color: #bbf7d0; }
+.track-2 h4 { color: var(--green-dark); }
+.track-2 .track-subtitle { color: #16a34a; }
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+th {
+  text-align: left;
+  color: var(--gray-500);
+  font-weight: 500;
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--gray-200);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+td {
+  padding: 10px 12px;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-100);
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.badge-go { background: #dcfce7; color: #166534; }
+.badge-conditional { background: #fef9c3; color: #854d0e; }
+.badge-risk-high { background: #fef2f2; color: #991b1b; }
+.badge-risk-med { background: #fefce8; color: #854d0e; }
+.badge-risk-low { background: #f0fdf4; color: #166534; }
+.badge-confirmed { background: #dcfce7; color: #166534; }
+.badge-accepted { background: #e0f2fe; color: #075985; }
+.badge-p0 { background: var(--blue-light); color: var(--blue-dark); }
+.badge-p1 { background: var(--purple-light); color: #6b21a8; }
+
+/* Pipeline visual */
+.pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 20px 0;
+}
+
+.pipeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 14px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.pipeline-arrow {
+  font-size: 24px;
+  color: var(--gray-400);
+  padding: 0 4px;
+}
+
+.pipeline-step .step-num {
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.pipeline-step h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.pipeline-step p {
+  font-size: 11px;
+  font-weight: 300;
+}
+
+/* Phase timeline */
+.timeline-bar {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 0.8fr 0.8fr;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.phase-block {
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--gray-200);
+}
+
+.phase-block h4 {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.phase-block p {
+  font-size: 11px;
+  color: var(--gray-500);
+  font-weight: 300;
+}
+
+.phase-0 { background: #faf5ff; border-color: #e9d5ff; }
+.phase-0 h4 { color: #6b21a8; }
+.phase-1 { background: var(--blue-light); border-color: #bfdbfe; }
+.phase-1 h4 { color: var(--blue-dark); }
+.phase-2 { background: var(--amber-light); border-color: #fde68a; }
+.phase-2 h4 { color: #92400e; }
+.phase-3 { background: var(--green-light); border-color: #bbf7d0; }
+.phase-3 h4 { color: var(--green-dark); }
+
+/* Verdict block */
+.verdict-block {
+  text-align: center;
+  padding: 32px 20px;
+  background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+  border-radius: 16px;
+  border: 2px solid #86efac;
+  margin: 16px 0;
+}
+
+.verdict-block .verdict-label {
+  font-size: 13px;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.verdict-block .verdict-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.verdict-block .verdict-confidence {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray-500);
+  margin-top: 4px;
+}
+
+/* Two-column */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+/* List clean */
+ul.clean {
+  list-style: none;
+  padding: 0;
+}
+
+ul.clean li {
+  padding: 6px 0;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+ul.clean li::before {
+  content: '▸';
+  color: var(--blue);
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* Scope counter */
+.scope-counters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.scope-counter {
+  text-align: center;
+  padding: 16px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--gray-200);
+}
+
+.scope-counter .sc-num {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.scope-counter .sc-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray-500);
+  margin-top: 2px;
+}
+
+.sc-must { background: var(--blue-light); }
+.sc-must .sc-num { color: var(--blue); }
+.sc-should { background: var(--purple-light); }
+.sc-should .sc-num { color: #7c3aed; }
+.sc-could { background: var(--amber-light); }
+.sc-could .sc-num { color: #b45309; }
+.sc-wont { background: var(--gray-50); }
+.sc-wont .sc-num { color: var(--gray-500); }
+</style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 1: TITLE ==================== -->
+<div class="slide slide-title">
+  <span class="slide-number">01 / 10</span>
+  <div class="project-badge">🌪️ Resilience Communities · AI for All Thailand</div>
+  <h1>Hyperlocal Disaster-to-Commerce<br>(D2C) Mesh</h1>
+  <div class="subtitle">เตือนภัยตรงจุด → เดินทางปลอดภัย → เสบียงหมุนเวียนด้วยเงินท้องถิ่น</div>
+  <div class="meta-row">
+    <span>Owner: sommai</span>
+    <span>Date: 2026-10-26</span>
+    <span>Pilot: Nakhon Pathom</span>
+    <span>Status: CONDITIONAL GO</span>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 2: PROBLEM ==================== -->
+<div class="slide">
+  <span class="slide-number">02 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--red)">!</span> The Problem</h2>
+
+  <p style="font-size:15px; margin-bottom:16px;">Thailand invests heavily in flood monitoring — TMD radar, HII's 4,000+ telemetry stations, GISTDA satellites, RID canal data — yet the intelligence never reaches the communities that need it most.</p>
+
+  <div class="stat-row">
+    <div class="stat-card danger">
+      <div class="stat-value">72.31%</div>
+      <div class="stat-label">of floods occur WITHOUT prior warning (2021–2024)</div>
+    </div>
+    <div class="stat-card danger">
+      <div class="stat-value">46.17%</div>
+      <div class="stat-label">of at-risk villages LACK warning stations entirely</div>
+    </div>
+    <div class="stat-card danger">
+      <div class="stat-value">60.66%</div>
+      <div class="stat-label">of warning stations are OUTSIDE designated risk zones</div>
+    </div>
+  </div>
+  <p class="source-tag">Source: Thailand State Audit Office via Stage 2 Market Research</p>
+
+  <div class="alert-box">
+    <p><strong>The problem is not a data deficit — it is a last-mile delivery failure.</strong> Existing systems operate in silos: flood data stays in government dashboards, routing apps ignore flood conditions, and relief distribution relies on physical cash that excludes local merchants from the recovery cycle.</p>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 3: SOLUTION ==================== -->
+<div class="slide">
+  <span class="slide-number">03 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--blue)">⚡</span> The Solution: Three-Track Pipeline</h2>
+
+  <div class="pipeline">
+    <div class="pipeline-step track-6" style="border-radius:14px;">
+      <div class="step-num" style="color:#991b1b;">TRACK 6</div>
+      <h4 style="color:#991b1b;">เตือนภัยตรงจุด</h4>
+      <p style="color:#b91c1c;">AI Hyperlocal Prediction</p>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step track-5" style="border-radius:14px;">
+      <div class="step-num" style="color:var(--blue-dark);">TRACK 5</div>
+      <h4 style="color:var(--blue-dark);">เดินทางปลอดภัย</h4>
+      <p style="color:var(--blue);">Vehicle-Aware Routing</p>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step track-2" style="border-radius:14px;">
+      <div class="step-num" style="color:var(--green-dark);">TRACK 2</div>
+      <h4 style="color:var(--green-dark);">เสบียงหมุนเวียน</h4>
+      <p style="color:#16a34a;">E-Voucher Micro-Relief</p>
+    </div>
+  </div>
+
+  <div class="track-grid">
+    <div class="track-card track-6">
+      <h4>Early Warning</h4>
+      <div class="track-subtitle">Resilient Communities</div>
+      <ul>
+        <li>Hyperlocal Hazard Map with water levels + elevation</li>
+        <li>AI 3–6 hour forecaster with Timeline Slider</li>
+        <li>Isolation Alert — zones about to become "islands"</li>
+        <li>Risk Alert Banner to user's soi</li>
+        <li>Subscribe Alert for relatives</li>
+      </ul>
+    </div>
+    <div class="track-card track-5">
+      <h4>Crisis Routing</h4>
+      <div class="track-subtitle">Smart Mobility</div>
+      <ul>
+        <li>Vehicle Selector: Sedan ≤15cm, Pickup ≤40cm, Boat</li>
+        <li>Dynamic Clearance Routing with auto-reroute</li>
+        <li>Crowdsource flood reporting with photo + depth</li>
+        <li>Turn-by-turn flood-aware navigation</li>
+        <li>Mid-route reroute alerts</li>
+      </ul>
+    </div>
+    <div class="track-card track-2">
+      <h4>Decentralized Relief</h4>
+      <div class="track-subtitle">SME & Local Economy</div>
+      <ul>
+        <li>Micro-Relief Station Locator with real-time stock</li>
+        <li>E-Voucher Wallet (receive + redeem via PromptPay QR)</li>
+        <li>SME Recovery Dashboard with AI restock recommendations</li>
+        <li>Donor & Gov Funding Portal with live impact tracking</li>
+        <li>Year-round อปท. welfare mode</li>
+      </ul>
+    </div>
+  </div>
+  <p class="source-tag">Source: Participant SRS / Stage 4 Scope Definition</p>
+</div>
+
+<!-- ==================== SLIDE 4: WHITE SPACE ==================== -->
+<div class="slide">
+  <span class="slide-number">04 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--purple)">◆</span> Why This Wins: White-Space Positioning</h2>
+
+  <div class="highlight-box">
+    <p><strong>No existing platform — Thai or global — integrates early warning, vehicle-aware routing, and economic relief in a single pipeline.</strong> The D2C Mesh is uniquely enabled by Thailand's mature PromptPay infrastructure.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-value">74M</div>
+      <div class="stat-label">PromptPay daily transactions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">40M</div>
+      <div class="stat-label">Krungthai Paotang users</div>
+    </div>
+    <div class="stat-card success">
+      <div class="stat-value">7,800</div>
+      <div class="stat-label">อปท. without digital welfare platforms</div>
+    </div>
+  </div>
+  <p class="source-tag">Source: Stage 2 Market Research</p>
+
+  <h3>Competitive Landscape (Fragmented — No Integrated Player)</h3>
+  <table>
+    <thead>
+      <tr><th>Existing Player</th><th>What They Do</th><th>What They Miss</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>TMD / HII / GISTDA</td><td>National flood monitoring</td><td>No hyperlocal street-level predictions; no public dev API</td></tr>
+      <tr><td>Google Maps / Longdo</td><td>Standard routing</td><td>Zero flood data integration</td></tr>
+      <tr><td>Traditional relief orgs</td><td>Physical cash / in-kind aid</td><td>Bottlenecks; excludes local merchants</td></tr>
+      <tr><td>Khon La Khrueng / Paotang</td><td>Government welfare vouchers</td><td>Not disaster-triggered; no location intelligence</td></tr>
+    </tbody>
+  </table>
+
+  <div class="success-box">
+    <p><strong>D2C Mesh advantage:</strong> We integrate Khon La Khrueng's proven voucher architecture with AI flood intelligence — creating the first disaster-responsive commerce platform.</p>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 5: SCOPE ==================== -->
+<div class="slide">
+  <span class="slide-number">05 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--blue)">☰</span> Scope: MoSCoW Backlog</h2>
+
+  <div class="scope-counters">
+    <div class="scope-counter sc-must">
+      <div class="sc-num">12</div>
+      <div class="sc-label">P0 — MUST HAVE</div>
+    </div>
+    <div class="scope-counter sc-should">
+      <div class="sc-num">6</div>
+      <div class="sc-label">P1 — SHOULD HAVE</div>
+    </div>
+    <div class="scope-counter sc-could">
+      <div class="sc-num">7</div>
+      <div class="sc-label">P2 — COULD HAVE</div>
+    </div>
+    <div class="scope-counter sc-wont">
+      <div class="sc-num">8</div>
+      <div class="sc-label">WON'T HAVE</div>
+    </div>
+  </div>
+
+  <h3>P0 — MUST HAVE (MVP)</h3>
+  <table>
+    <thead><tr><th>ID</th><th>Feature</th><th>Track</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge badge-p0">P0-01</span></td><td>Hyperlocal Hazard Map (Layer Toggle, Location Pin)</td><td>Track 6</td></tr>
+      <tr><td><span class="badge badge-p0">P0-02</span></td><td>AI 3-Hour Forecaster (Timeline Slider, Risk Alert, Subscribe)</td><td>Track 6</td></tr>
+      <tr><td><span class="badge badge-p0">P0-03</span></td><td>Isolation Alert (Highlight Zone, Evacuation Route)</td><td>Track 6</td></tr>
+      <tr><td><span class="badge badge-p0">P0-04</span></td><td>Vehicle-Specific Dispatch (Selector Card, Find Safe Route)</td><td>Track 5</td></tr>
+      <tr><td><span class="badge badge-p0">P0-05</span></td><td>Dynamic Clearance Routing (Report Flood, Reroute Alert)</td><td>Track 5</td></tr>
+      <tr><td><span class="badge badge-p0">P0-06</span></td><td>Micro-Relief Station Locator (Find Supplies, Status Tag)</td><td>Track 2</td></tr>
+      <tr><td><span class="badge badge-p0">P0-07</span></td><td>E-Voucher Wallet (My Vouchers, Scan/Generate QR, History)</td><td>Track 2</td></tr>
+      <tr><td><span class="badge badge-p0">P0-08</span></td><td>Homepage / Dashboard (alerts, voucher balance, Map CTA)</td><td>Nav</td></tr>
+      <tr><td><span class="badge badge-p0">P0-09</span></td><td>Google Maps Base with D2C layers, collapsible UI</td><td>Nav</td></tr>
+      <tr><td><span class="badge badge-p0">P0-10</span></td><td>Push Notification + SMS Alert Gateway</td><td>Track 6</td></tr>
+      <tr><td><span class="badge badge-p0">P0-11</span></td><td>User Role System (4 roles)</td><td>Platform</td></tr>
+      <tr><td><span class="badge badge-p0">P0-12</span></td><td>Krungthai / PromptPay API Integration</td><td>Track 2</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Explicitly Out of Scope</h3>
+  <div class="two-col">
+    <ul class="clean">
+      <li>No proprietary payment gateway (use PromptPay)</li>
+      <li>No physical sensor network (software-first)</li>
+      <li>No direct BOT e-money licensing</li>
+      <li>No blockchain transaction ledger</li>
+    </ul>
+    <ul class="clean">
+      <li>No autonomous vehicle routing</li>
+      <li>No national-scale deployment (pilot only)</li>
+      <li>No native iOS/Android apps (PWA only)</li>
+      <li>No AI gradients or emoji in UI</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 6: FEASIBILITY ==================== -->
+<div class="slide">
+  <span class="slide-number">06 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--amber)">⚖</span> Feasibility Assessment</h2>
+
+  <table>
+    <thead><tr><th>Dimension</th><th>Rating</th><th>Key Finding</th></tr></thead>
+    <tbody>
+      <tr><td>Technical</td><td><span class="badge badge-conditional">CONDITIONAL GO</span></td><td>All three tracks have proven precedents; integration unprecedented</td></tr>
+      <tr><td>Resource</td><td><span class="badge badge-conditional">CONDITIONAL GO</span></td><td>Core skills available; gaps in hydrology + fintech regulatory</td></tr>
+      <tr><td>Timeline</td><td><span class="badge badge-conditional">CONDITIONAL GO</span></td><td>12-month pilot if API agreements begin immediately</td></tr>
+      <tr><td>Budget</td><td><span class="badge badge-conditional">CONDITIONAL GO</span></td><td>฿4.9M–฿9.5M (~$140K–$270K); DEPA/NIA grant-aligned</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Constraint Resolution Strategy</h3>
+  <table>
+    <thead><tr><th>Constraint</th><th>Resolution</th></tr></thead>
+    <tbody>
+      <tr><td>C1: BOT e-money licensing</td><td>Krungthai Bank partnership route — no direct licensing needed</td></tr>
+      <tr><td>C3: No standardized government APIs</td><td>Individual MOUs with TMD, HII, RID, GISTDA via DEPA facilitation</td></tr>
+      <tr><td>C5: Network degradation in floods</td><td>4-layer offline architecture: PWA → SMS → Edge → Mesh/Loudspeaker</td></tr>
+      <tr><td>C6: 41.90% rely on community leaders</td><td>Dual-channel: app + อสม. community coordinator relay</td></tr>
+    </tbody>
+  </table>
+  <p class="source-tag">Source: Stage 3 Feasibility Assessment / Stage 3 Compliance & Platform Agents</p>
+</div>
+
+<!-- ==================== SLIDE 7: SUCCESS CRITERIA ==================== -->
+<div class="slide">
+  <span class="slide-number">07 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--green)">✓</span> Success Criteria (12-Month Pilot)</h2>
+
+  <table>
+    <thead><tr><th>#</th><th>Criterion</th><th>Target</th></tr></thead>
+    <tbody>
+      <tr><td>SC-01</td><td>Flood prediction accuracy (tambon level)</td><td><strong>≥70%</strong> on historical set</td></tr>
+      <tr><td>SC-02</td><td>Alert lead time</td><td><strong>≥2 hours</strong> average</td></tr>
+      <tr><td>SC-03</td><td>Routing safety (zero water-exceeding incidents)</td><td><strong>0 incidents</strong></td></tr>
+      <tr><td>SC-04</td><td>Household enrollment</td><td><strong>≥500</strong> registered</td></tr>
+      <tr><td>SC-05</td><td>Merchant enrollment</td><td><strong>≥50</strong> Micro-Relief Stations</td></tr>
+      <tr><td>SC-06</td><td>E-Voucher transaction success rate</td><td><strong>≥95%</strong></td></tr>
+      <tr><td>SC-07</td><td>Disbursement-to-redemption speed</td><td><strong>≤30 min</strong></td></tr>
+      <tr><td>SC-08</td><td>Non-flood season retention</td><td><strong>≥30% MAU</strong></td></tr>
+      <tr><td>SC-09</td><td>SME revenue impact</td><td><strong>+20%</strong> monthly transactions</td></tr>
+      <tr><td>SC-10</td><td>Offline alert delivery coverage</td><td><strong>≥80%</strong> within 15 min</td></tr>
+      <tr><td>SC-11</td><td>Government data integration</td><td><strong>≥2 agency</strong> MOUs</td></tr>
+      <tr><td>SC-12</td><td>Platform uptime during floods</td><td><strong>≥99.5%</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="source-tag">Source: Stage 4 Scope Definition</p>
+</div>
+
+<!-- ==================== SLIDE 8: TEAM & TIMELINE ==================== -->
+<div class="slide">
+  <span class="slide-number">08 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--gray-700)">●</span> Team & Timeline</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>Core Team (11 FTE)</h3>
+      <table>
+        <tbody>
+          <tr><td>Product Lead</td><td>1</td></tr>
+          <tr><td>AI/ML Engineers</td><td>2</td></tr>
+          <tr><td>GIS / Geospatial Engineer</td><td>1</td></tr>
+          <tr><td>Full-Stack Developers</td><td>2</td></tr>
+          <tr><td>Backend / API Engineer</td><td>1</td></tr>
+          <tr><td>Fintech Integration Engineer</td><td>1</td></tr>
+          <tr><td>UI/UX Designer</td><td>1</td></tr>
+          <tr><td>DevOps / Cloud Engineer</td><td>1</td></tr>
+          <tr><td>QA Engineer</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Extended Team (4 PT)</h3>
+      <table>
+        <tbody>
+          <tr><td>Field Operations Lead</td><td>50–100%</td></tr>
+          <tr><td>Legal / Compliance Advisor</td><td>20%</td></tr>
+          <tr><td>Hydrology Expert</td><td>30%</td></tr>
+          <tr><td>Community Coordinator</td><td>50–100%</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px; font-size:12px; color:var(--gray-500);">Total: 15 people</p>
+      <p class="source-tag">Source: Stage 5 Team Formation</p>
+    </div>
+  </div>
+
+  <h3>12-Month Timeline</h3>
+  <div class="timeline-bar">
+    <div class="phase-block phase-0">
+      <h4>Phase 0: Foundation</h4>
+      <p>M1–3 · MOUs, sandbox, DEM, team ramp</p>
+    </div>
+    <div class="phase-block phase-1">
+      <h4>Phase 1: Build</h4>
+      <p>M4–8 · P0 features, API integrations, beta</p>
+    </div>
+    <div class="phase-block phase-2">
+      <h4>Phase 2: Pilot</h4>
+      <p>M9–10 · Nakhon Pathom launch, live flood test</p>
+    </div>
+    <div class="phase-block phase-3">
+      <h4>Phase 3: Iterate</h4>
+      <p>M11–12 · P1 features, อปท. mode, eval</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 9: RISKS ==================== -->
+<div class="slide">
+  <span class="slide-number">09 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--red)">▲</span> Key Risks & Assumptions</h2>
+
+  <h3>Top Risks</h3>
+  <table>
+    <thead><tr><th>Risk</th><th>Level</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td>R1: Government API access delay</td><td><span class="badge badge-risk-high">HIGH</span></td><td>DEPA/NSTDA intermediary; ThaiWater scrape as fallback</td></tr>
+      <tr><td>R2: Krungthai partnership failure</td><td><span class="badge badge-risk-med">MED</span></td><td>Alternative: GSB or BAAC (government banks)</td></tr>
+      <tr><td>R4: Network failure during floods</td><td><span class="badge badge-risk-high">HIGH</span></td><td>4-layer offline-first architecture + printed QR cards</td></tr>
+      <tr><td>R5: Low adoption (digital literacy)</td><td><span class="badge badge-risk-med">MED</span></td><td>Dual-channel: app + อสม. relay; อปท. welfare builds familiarity</td></tr>
+    </tbody>
+  </table>
+  <p class="source-tag">Source: Stage 3 RAID Log</p>
+
+  <h3>Assumption Gate (All 11 Resolved)</h3>
+  <table>
+    <thead><tr><th>ID</th><th>Assumption</th><th>Resolution</th></tr></thead>
+    <tbody>
+      <tr><td>A1</td><td>Krungthai API supports voucher workflow</td><td><span class="badge badge-confirmed">CONFIRMED</span></td></tr>
+      <tr><td>A2</td><td>Government data ≤15 min frequency</td><td><span class="badge badge-accepted">ACCEPTED</span></td></tr>
+      <tr><td>A3</td><td>GISTDA DEM via university partnership</td><td><span class="badge badge-confirmed">CONFIRMED</span></td></tr>
+      <tr><td>A4</td><td>≥50 SMEs will register</td><td><span class="badge badge-confirmed">CONFIRMED</span></td></tr>
+      <tr><td>A5</td><td>อปท. welfare routing (Smart City sandbox)</td><td><span class="badge badge-accepted">ACCEPTED</span></td></tr>
+      <tr><td>A6</td><td>อสม. network (COVID-19 precedent)</td><td><span class="badge badge-confirmed">CONFIRMED</span></td></tr>
+      <tr><td>A7–A8</td><td>Pre-computed routing + cloud budget</td><td><span class="badge badge-confirmed">CONFIRMED</span></td></tr>
+      <tr><td>A9</td><td>Google Maps pricing (Startups credits)</td><td><span class="badge badge-accepted">ACCEPTED</span></td></tr>
+      <tr><td>A10–A11</td><td>PWA on Android + Kanit font rendering</td><td><span class="badge badge-confirmed">CONFIRMED</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== SLIDE 10: VERDICT ==================== -->
+<div class="slide">
+  <span class="slide-number">10 / 10</span>
+  <h2><span class="h2-badge" style="background:var(--green-dark)">★</span> Go / No-Go Recommendation</h2>
+
+  <div class="verdict-block">
+    <div class="verdict-label">Recommendation</div>
+    <div class="verdict-text">CONDITIONAL GO</div>
+    <div class="verdict-confidence">Confidence Level: 70%</div>
+  </div>
+
+  <h3>Why GO</h3>
+  <ul class="clean">
+    <li><strong>Validated gap:</strong> 72.31% of floods without warning despite ฿billions in monitoring</li>
+    <li><strong>True white space:</strong> No integrated warning-to-commerce platform exists globally</li>
+    <li><strong>Infrastructure ready:</strong> PromptPay (74M daily txns) + Paotang (40M users) = no merchant onboarding barrier</li>
+    <li><strong>Proven components:</strong> Mott MacDonald flood AI, FloodMapp routing, WFP digital vouchers</li>
+    <li><strong>Year-round sustainability:</strong> 7,800 อปท. without digital welfare = continuous revenue</li>
+    <li><strong>All assumptions resolved:</strong> 9 confirmed + 3 accepted with rationale = 0 unconfirmed</li>
+    <li><strong>Full reviewer pass:</strong> Completeness ✅ Consistency ✅ Traceability ✅ Feasibility ✅</li>
+  </ul>
+
+  <h3>Three Conditions for GO</h3>
+  <table>
+    <thead><tr><th>#</th><th>Condition</th><th>Deadline</th><th>Fallback</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Krungthai Bank partnership</td><td>Month 3</td><td>Approach GSB or BAAC</td></tr>
+      <tr><td><strong>2</strong></td><td>≥1 Government data MOU (TMD/HII)</td><td>Month 4</td><td>Crowdsource-only model</td></tr>
+      <tr><td><strong>3</strong></td><td>DEM confirmed for Nakhon Pathom</td><td>Month 2</td><td>Tambon-level predictions</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box" style="margin-top:20px;">
+    <p><strong>Next: Transition to Inception (Phase 2)</strong> — Begin API access negotiations, Krungthai sandbox request, university DEM partnership, DEPA grant application, and core team recruitment immediately.</p>
+  </div>
+
+  <p style="text-align:center; margin-top:20px; font-size:12px; color:var(--gray-400);">
+    Stages completed: Step 0 → Stage 1 → Stage 2 → Stage 3 → Stage 4 → Stage 5 → Stage 6 → Stage 7 → Stage 8a → Stage 8b<br>
+    All stages present · All reviewer checks passed · All assumptions resolved · Initiative brief approved
+  </p>
+</div>
+
+</body>
+</html>

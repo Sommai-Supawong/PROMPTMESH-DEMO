@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PromptMesh - Hyperlocal D2C Mesh</title>
+  
+  <!-- Google Font: Kanit (Complete Typography Scale 300, 400, 500, 600, 700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+    /* ==========================================================================
+       PROMPTMESH DESIGN SYSTEM TOKENS (Strict Soft UI & Apple OS Specification)
+       ========================================================================== */
+    :root {
+      /* Color Palette (Zero Gradients, Pure Solid & Semantic Colors) */
+      --pm-primary: #2563eb;
+      --pm-primary-hover: #1d4ed8;
+      --pm-primary-active: #1e40af;
+      --pm-primary-light: #eff6ff;
+      --pm-primary-subtle: #dbeafe;
+      
+      --pm-bg: #f0f2f5;           /* Soft Gray Apple OS Background */
+      --pm-surface: #ffffff;      /* Clean White Surface */
+      --pm-surface-trans: rgba(255, 255, 255, 0.88); /* Frosted Glass Surface */
+      --pm-border: #e8ecf1;
+      --pm-border-focus: #93c5fd;
+
+      --pm-text-main: #0f172a;      /* Slate 900 */
+      --pm-text-secondary: #475569; /* Slate 600 */
+      --pm-text-muted: #94a3b8;     /* Slate 400 */
+
+      /* Semantic Crisis Colors */
+      --pm-danger: #ef4444;
+      --pm-danger-bg: #fef2f2;
+      --pm-danger-border: #fecaca;
+      --pm-danger-text: #991b1b;
+
+      --pm-warning: #f59e0b;
+      --pm-warning-bg: #fffbeb;
+      --pm-warning-border: #fde68a;
+      --pm-warning-text: #92400e;
+
+      --pm-success: #10b981;
+      --pm-success-bg: #ecfdf5;
+      --pm-success-border: #a7f3d0;
+      --pm-success-text: #065f46;
+
+      --pm-info: #0284c7;
+      --pm-info-bg: #f0f9ff;
+      --pm-info-border: #bae6fd;
+
+      /* Typography Scale (Kanit Exclusive) */
+      --font-family-base: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      /* Radii */
+      --pm-radius-sm: 8px;
+      --pm-radius-md: 12px;
+      --pm-radius-lg: 16px;
+      --pm-radius-xl: 20px;
+      --pm-radius-sheet: 24px;
+      --pm-radius-pill: 9999px;
+
+      /* Soft UI Apple-style Diffused Shadows */
+      --pm-shadow-1: 0 2px 8px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+      --pm-shadow-2: 0 4px 16px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.03);
+      --pm-shadow-3: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+      --pm-shadow-4: 0 12px 32px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06);
+      --pm-shadow-fab: 0 6px 20px rgba(37, 99, 235, 0.35), 0 2px 6px rgba(37, 99, 235, 0.20);
+    }
+
+    /* Reset & Universal Typography Enforcement */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
+    }
+
+    html {
+      font-family: var(--font-family-base);
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-family-base);
+      background-color: var(--pm-bg);
+      color: var(--pm-text-main);
+      min-height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Form Controls & Interactive Elements Explicit Typography Override */
+    button, input, optgroup, select, textarea {
+      font-family: var(--font-family-base) !important;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Explicit Standard Typography Elements */
+    h1, h2, h3, h4, h5, h6, p, a, span, label, li, td, th, div, strong, b, em, i, small, sub, sup {
+      font-family: var(--font-family-base);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE APP LAYOUT WRAPPER (100vw / 100vh Full Viewport)
+       ========================================================================== */
+    .app-root {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      background-color: var(--pm-bg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Main App Screen Hierarchy */
+    .app-screen {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+
+    .view-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 96px; /* Offset for Mobile Bottom Nav */
+    }
+
+    .view-panel.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Common Utility Cards & Panels */
+    .pm-card {
+      background-color: var(--pm-surface);
+      border-radius: var(--pm-radius-lg);
+      border: 1px solid var(--pm-border);
+      box-shadow: var(--pm-shadow-1);
+      transition: all 0.2s ease;
+    }
+
+    .pm-glass-panel {
+      background-color: var(--pm-surface-trans);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: var(--pm-shadow-3);
+    }
+
+    .svg-icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      stroke: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Primary Action Buttons */
+    .pm-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 48px;
+      padding: 0 20px;
+      background-color: var(--pm-primary);
+      color: #ffffff;
+      font-family: var(--font-family-base);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: var(--pm-radius-md);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+    .pm-btn-primary:hover {
+      background-color: var(--pm-primary-hover);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    .pm-btn-primary:active {
+      background-color: var(--pm-primary-active);
+      transform: scale(0.98);
+    }
+
+    /* Secondary Buttons */
+    .pm-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 44px;
+      padding: 0 16px;
+      background-color: var(--pm-primary-light);
+      color: var(--pm-primary);
+      font-family: var(--font-family-base);
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--pm-radius-md);
+      border: 1px solid var(--pm-primary-subtle);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .pm-btn-secondary:hover {
+      background-color: #dbeafe;
+    }
+
+    /* Status Badges */
+    .pm-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: var(--pm-radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .pm-badge-success {
+      background-color: var(--pm-success-bg);
+      color: var(--pm-success-text);
+      border: 1px solid var(--pm-success-border);
+    }
+    .pm-badge-primary {
+      background-color: var(--pm-primary-light);
+      color: var(--pm-primary);
+      border: 1px solid var(--pm-primary-subtle);
+    }
+    .pm-badge-warning {
+      background-color: var(--pm-warning-bg);
+      color: var(--pm-warning-text);
+      border: 1px solid var(--pm-warning-border);
+    }
+    .pm-badge-danger {
+      background-color: var(--pm-danger-bg);
+      color: var(--pm-danger-text);
+      border: 1px solid var(--pm-danger-border);
+    }
+
+    /* ==========================================================================
+       VIEW 1: HOMEPAGE / DASHBOARD STYLES
+       ========================================================================== */
+    .dashboard-header {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .user-greeting {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .user-greeting-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .user-greeting-location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--pm-text-secondary);
+    }
+    .header-status-pill {
+      display: none;
+    }
+    .header-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--pm-primary-light);
+      border: 2px solid #ffffff;
+      box-shadow: var(--pm-shadow-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pm-primary);
+      cursor: pointer;
+    }
+
+    .dashboard-content {
+      padding: 0 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .dashboard-col-left, .dashboard-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    /* Risk Alert Banner (Red Soft UI Card) */
+    .risk-alert-card {
+      background-color: var(--pm-danger-bg);
+      border: 1.5px solid var(--pm-danger-border);
+      border-radius: var(--pm-radius-lg);
+      padding: 18px;
+      box-shadow: 0 4px 16px rgba(239, 68, 68, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .risk-alert-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .risk-alert-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--pm-danger);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--pm-danger);
+      animation: pulse-ring 1.8s infinite cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.9); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.4; }
+      100% { transform: scale(0.9); opacity: 1; }
+    }
+    .risk-alert-title {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--pm-danger-text);
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .risk-alert-desc {
+      font-size: 13.5px;
+      color: #7f1d1d;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .risk-alert-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pm-danger);
+      background-color: #ffffff;
+      padding: 10px 16px;
+      border-radius: var(--pm-radius-md);
+      border: 1px solid var(--pm-danger-border);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .risk-alert-cta:hover {
+      background-color: #fee2e2;
+    }
+
+    /* E-Voucher Wallet Card */
+    .wallet-card {
+      padding: 20px;
+      position: relative;
+    }
+    .wallet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .wallet-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wallet-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--pm-text-secondary);
+    }
+    .wallet-balance-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .wallet-balance {
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--pm-text-main);
+      letter-spacing: -0.02em;
+    }
+    .wallet-balance-currency {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--pm-primary);
+      margin-right: 2px;
+    }
+    .wallet-subtext {
+      font-size: 12.5px;
+      font-weight: 300;
+      color: var(--pm-text-muted);
+    }
+    .wallet-tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Quick Actions 2x2 Grid */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .quick-action-item {
+      background-color: var(--pm-surface);
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      box-shadow: var(--pm-shadow-1);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-align: left;
+    }
+    .quick-action-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--pm-shadow-2);
+      border-color: var(--pm-border-focus);
+    }
+    .quick-action-item:active {
+      transform: scale(0.98);
+    }
+    .quick-action-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--pm-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quick-action-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--pm-text-main);
+    }
+    .quick-action-sub {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--pm-text-secondary);
+      margin-top: -6px;
+    }
+
+    /* Nearby Micro-Relief Stations Section */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 4px;
+    }
+    .section-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+    }
+    .section-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--pm-primary);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .store-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .store-card {
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .store-card:hover {
+      border-color: var(--pm-border-focus);
+      box-shadow: var(--pm-shadow-2);
+    }
+    .store-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .store-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+    }
+    .store-distance {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--pm-text-secondary);
+      background-color: var(--pm-bg);
+      padding: 3px 8px;
+      border-radius: var(--pm-radius-pill);
+    }
+    .store-address {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--pm-text-secondary);
+      margin-bottom: 10px;
+    }
+    .store-badges {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .store-stock-info {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--pm-text-secondary);
+      background-color: #f8fafc;
+      padding: 8px 10px;
+      border-radius: var(--pm-radius-sm);
+      border: 1px solid #edf2f7;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ==========================================================================
+       VIEW 2: HAZARD MAP & CRISIS ROUTING (Google Maps Canvas)
+       ========================================================================== */
+    .map-view-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      background-color: #e2e8f0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Real Google Maps Native Canvas */
+    #google-map-canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Google Maps Soft UI Zone Text Badges */
+    .map-zone-label {
+      background-color: #ffffff !important;
+      border-radius: var(--pm-radius-pill) !important;
+      font-family: var(--font-family-base) !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      white-space: nowrap !important;
+      padding: 4px 10px !important;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.08) !important;
+      border: 1px solid #e2e8f0 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1.2 !important;
+      transform: translate(-50%, -50%) !important;
+      pointer-events: none !important;
+      user-select: none !important;
+    }
+
+    .map-zone-label-water {
+      color: #2563eb !important;
+      border-color: #bfdbfe !important;
+      background-color: #ffffff !important;
+    }
+
+    .map-zone-label-danger {
+      color: #dc2626 !important;
+      border-color: #fecaca !important;
+      background-color: #ffffff !important;
+    }
+
+    /* ==========================================================================
+       SUPPRESS GOOGLE MAPS API WARNINGS, DEV OVERLAYS & BILLING ALERTS (HACKATHON)
+       ========================================================================== */
+    .gm-err-container { display: none !important; }
+    .gm-err-content { display: none !important; }
+    .gm-err-message { display: none !important; }
+    .dismissButton { display: none !important; }
+    div[style*="z-index: 1000000"] { display: none !important; } 
+    div[style*="background-color: rgba(15, 15, 15, 0.6)"] { display: none !important; }
+    div[style*="background-color: rgba(0, 0, 0, 0.6)"] { display: none !important; }
+    .gm-style-pbc { display: none !important; }
+    .gm-style-cc { display: none !important; }
+    a[href^="https://maps.google.com/maps"] { display: none !important; }
+    a[href^="https://www.google.com/maps"] { display: none !important; }
+    .gmnoprint a, .gmnoprint span { display: none !important; }
+    div[style*="z-index: 1000001"] { display: none !important; }
+    div[style*="z-index: 1000002"] { display: none !important; }
+    .gm-err-autocomplete { display: none !important; }
+
+    /* Floating Controls: Glassmorphic Search Bar */
+    .map-top-bar {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 60;
+      height: 48px;
+      border-radius: var(--pm-radius-pill);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 10px;
+    }
+    .map-back-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--pm-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pm-text-main);
+      cursor: pointer;
+      box-shadow: var(--pm-shadow-1);
+    }
+    .map-search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: var(--font-family-base);
+      font-size: 14px;
+      color: var(--pm-text-main);
+      outline: none;
+    }
+    .map-gps-pill {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--pm-success-text);
+      background-color: var(--pm-success-bg);
+      border: 1px solid var(--pm-success-border);
+      padding: 4px 8px;
+      border-radius: var(--pm-radius-pill);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    /* Floating Controls: Right-Side Layer Toggles */
+    .map-floating-actions {
+      position: absolute;
+      top: 76px;
+      right: 16px;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .map-tool-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--pm-text-secondary);
+      transition: all 0.15s ease;
+      position: relative;
+    }
+    .map-tool-btn:hover {
+      color: var(--pm-primary);
+    }
+    .map-tool-btn.active {
+      background-color: var(--pm-primary);
+      color: #ffffff;
+      border-color: var(--pm-primary);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Collapsible Bottom Sheet (Mobile Experience) */
+    .pm-bottom-sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--pm-surface);
+      border-radius: var(--pm-radius-sheet) var(--pm-radius-sheet) 0 0;
+      box-shadow: var(--pm-shadow-4);
+      z-index: 100;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 10px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Mobile Sheet Snap States */
+    .pm-bottom-sheet.snap-peek {
+      transform: translateY(calc(100% - 90px));
+    }
+    .pm-bottom-sheet.snap-half {
+      transform: translateY(0);
+    }
+    .pm-bottom-sheet.snap-full {
+      transform: translateY(-80px);
+    }
+
+    .sheet-handle-bar {
+      width: 40px;
+      height: 4px;
+      background-color: #cbd5e1;
+      border-radius: var(--pm-radius-pill);
+      margin: 2px auto 6px;
+      cursor: grab;
+    }
+
+    /* Timeline Slider: AI Forecaster */
+    .timeline-container {
+      background-color: #f8fafc;
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-md);
+      padding: 10px 14px;
+    }
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--pm-text-main);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .timeline-prediction-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--pm-primary);
+    }
+    .timeline-slider-wrap {
+      position: relative;
+      margin: 8px 4px 6px;
+    }
+    .timeline-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: var(--pm-radius-pill);
+      background: #e2e8f0;
+      outline: none;
+      cursor: pointer;
+    }
+    .timeline-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid var(--pm-primary);
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    .timeline-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    .timeline-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--pm-text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Vehicle Selector Segmented Control (Track 5) */
+    .vehicle-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .vehicle-card {
+      background-color: #f8fafc;
+      border: 1.5px solid var(--pm-border);
+      border-radius: var(--pm-radius-md);
+      padding: 10px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      gap: 4px;
+    }
+    .vehicle-card.active {
+      background-color: var(--pm-primary-light);
+      border-color: var(--pm-primary);
+      color: var(--pm-primary);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+    }
+    .vehicle-card:not(.active):hover {
+      background-color: #f1f5f9;
+    }
+    .vehicle-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--pm-text-main);
+    }
+    .vehicle-card.active .vehicle-name {
+      color: var(--pm-primary);
+      font-weight: 600;
+    }
+    .vehicle-limit {
+      font-size: 10px;
+      font-weight: 300;
+      color: var(--pm-text-secondary);
+    }
+    .vehicle-card.active .vehicle-limit {
+      color: var(--pm-primary);
+      font-weight: 400;
+    }
+
+    /* Route Stat Summary Card */
+    .route-summary-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background-color: var(--pm-success-bg);
+      border: 1px solid var(--pm-success-border);
+      border-radius: var(--pm-radius-md);
+      font-size: 12px;
+      color: var(--pm-success-text);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       GLOBAL COMPONENTS: NAVIGATION BAR & AI FAB (Mobile Base)
+       ========================================================================== */
+    .bottom-nav-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      z-index: 120;
+      border-top: 1px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 10px;
+    }
+    .sidebar-brand, .sidebar-footer {
+      display: none;
+    }
+    .nav-items-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+    }
+    .nav-tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--pm-text-muted);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 400;
+      background: none;
+      border: none;
+      padding: 8px 12px;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+    .nav-tab-item.active {
+      color: var(--pm-primary);
+      font-weight: 600;
+    }
+    .nav-tab-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--pm-primary);
+      position: absolute;
+      bottom: 2px;
+      display: none;
+    }
+    .nav-tab-item.active .nav-tab-dot {
+      display: block;
+    }
+
+    /* AI Floating Action Button (FAB) */
+    .pm-ai-fab {
+      position: absolute;
+      right: 18px;
+      bottom: 84px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: var(--pm-primary);
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--pm-shadow-fab);
+      z-index: 130;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+    .pm-ai-fab:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+    }
+    .pm-ai-fab:active {
+      transform: scale(0.92);
+    }
+    .fab-pulse-ring {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 99, 235, 0.5);
+      animation: fab-glow 2.5s infinite ease-out;
+      pointer-events: none;
+    }
+    @keyframes fab-glow {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+
+    /* ==========================================================================
+       MODALS & DIALOGS (Glassmorphism & Crisp Interactivity)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+    .modal-backdrop.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-sheet {
+      background-color: var(--pm-surface);
+      border-radius: var(--pm-radius-xl);
+      border: 1px solid var(--pm-border);
+      box-shadow: var(--pm-shadow-4);
+      width: 100%;
+      max-width: 420px;
+      overflow: hidden;
+      transform: translateY(20px) scale(0.96);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-backdrop.show .modal-sheet {
+      transform: translateY(0) scale(1);
+    }
+    .modal-header {
+      padding: 16px 20px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--pm-border);
+    }
+    .modal-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--pm-text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-close-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--pm-bg);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--pm-text-secondary);
+    }
+    .modal-body {
+      padding: 20px;
+      font-size: 14px;
+      color: var(--pm-text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* QR Viewfinder Scanner Simulation */
+    .scanner-viewfinder {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+      border: 2px solid var(--pm-primary);
+      border-radius: 20px;
+      position: relative;
+      background-color: #0f172a;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scanner-laser {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: var(--pm-danger);
+      box-shadow: 0 0 12px var(--pm-danger);
+      animation: scan-vertical 2s infinite ease-in-out;
+    }
+    @keyframes scan-vertical {
+      0% { top: 10%; }
+      50% { top: 90%; }
+      100% { top: 10%; }
+    }
+    .scanner-qr-dummy {
+      width: 150px;
+      height: 150px;
+      opacity: 0.9;
+    }
+
+    /* Toast Notification */
+    .pm-toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background-color: var(--pm-surface);
+      border: 1px solid var(--pm-border);
+      border-radius: var(--pm-radius-md);
+      padding: 12px 20px;
+      box-shadow: var(--pm-shadow-3);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 90vw;
+    }
+    .pm-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .toast-icon {
+      color: var(--pm-primary);
+    }
+    .toast-text {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--pm-text-main);
+    }
+
+    /* ==========================================================================
+       GOOGLE MAPS UI STRICT TYPOGRAPHY OVERRIDE & INFOWINDOW STYLING
+       ========================================================================== */
+    .gm-style,
+    .gm-style *,
+    .gm-style button,
+    .gm-style input,
+    .gm-style label,
+    .gm-style span,
+    .gm-style div,
+    .gm-style-iw,
+    .gm-style-iw *,
+    .gm-style-iw-c,
+    .gm-style-iw-c *,
+    .gm-style-iw-d,
+    .gm-style-iw-d *,
+    .gm-style-iw-t,
+    .gm-style-iw-t *,
+    .gm-style-iw-t::after,
+    .gm-style-moc,
+    .gm-style-moc *,
+    .gmnoprint,
+    .gmnoprint *,
+    .gm-control-active,
+    .gm-control-active *,
+    .gm-ui-hover-effect,
+    .gm-ui-hover-effect *,
+    .map-container,
+    .map-container *,
+    #map,
+    #map *,
+    .map-canvas,
+    .map-canvas *,
+    .custom-map-marker,
+    .custom-map-marker *,
+    .map-zone-label,
+    .map-zone-label * {
+      font-family: var(--font-family-base) !important;
+    }
+
+    /* Custom Google Maps InfoWindow Styling */
+    .gm-style .gm-style-iw-c {
+      border-radius: 14px !important;
+      padding: 12px 14px !important;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+      font-family: var(--font-family-base) !important;
+    }
+    .gm-style .gm-style-iw-t::after {
+      background: #ffffff !important;
+    }
+
+    /* Overlays, Drawers & Modals Strict Typography Enforcement */
+    .modal-backdrop,
+    .modal-backdrop *,
+    .modal-sheet,
+    .modal-sheet *,
+    .pm-bottom-sheet,
+    .pm-bottom-sheet *,
+    .pm-toast,
+    .pm-toast *,
+    .ai-chat-drawer,
+    .ai-chat-drawer *,
+    .quick-action-item,
+    .quick-action-item * {
+      font-family: var(--font-family-base) !important;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ADAPTATIONS: TABLET & DESKTOP (min-width: 768px / 1024px)
+       ========================================================================== */
+    @media (min-width: 768px) {
+      .app-root {
+        flex-direction: row;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      /* 1. Transform Bottom Nav into Left Sidebar Navigation */
+      .bottom-nav-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 260px;
+        height: 100vh;
+        border-top: none;
+        border-right: 1px solid var(--pm-border);
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 24px 16px;
+        z-index: 120;
+        background-color: var(--pm-surface);
+        box-shadow: 2px 0 16px rgba(15, 23, 42, 0.03);
+      }
+
+      .sidebar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 8px 20px;
+        border-bottom: 1px solid var(--pm-border);
+        margin-bottom: 12px;
+      }
+      .brand-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background-color: var(--pm-primary);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+      }
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+      }
+      .brand-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--pm-text-main);
+        line-height: 1.1;
+      }
+      .brand-badge {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--pm-primary);
+        letter-spacing: 0.05em;
+      }
+
+      .nav-items-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .nav-tab-item {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 14px;
+        width: 100%;
+        height: 46px;
+        padding: 0 16px;
+        border-radius: var(--pm-radius-md);
+        font-size: 14px;
+        color: var(--pm-text-secondary);
+        text-align: left;
+      }
+      .nav-tab-item:hover {
+        background-color: var(--pm-bg);
+        color: var(--pm-primary);
+      }
+      .nav-tab-item.active {
+        background-color: var(--pm-primary-light);
+        color: var(--pm-primary);
+        font-weight: 600;
+      }
+      .nav-tab-dot {
+        display: none !important;
+      }
+
+      .sidebar-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px solid var(--pm-border);
+      }
+      .sidebar-user-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px;
+        border-radius: var(--pm-radius-md);
+        background-color: #f8fafc;
+        border: 1px solid var(--pm-border);
+      }
+      .user-avatar-small {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background-color: var(--pm-primary-light);
+        color: var(--pm-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .user-info-text {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .sidebar-user-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--pm-text-main);
+      }
+      .sidebar-user-zone {
+        font-size: 11px;
+        color: var(--pm-text-secondary);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .sidebar-system-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: var(--pm-success-text);
+        font-weight: 500;
+      }
+
+      /* 2. Main Screen Viewport Offset */
+      .app-screen {
+        margin-left: 260px;
+        width: calc(100vw - 260px);
+        height: 100vh;
+      }
+
+      .view-panel {
+        padding-bottom: 40px;
+      }
+
+      /* 3. View 1: Multi-Column Dashboard Layout */
+      .dashboard-header {
+        padding: 28px 40px 16px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .header-status-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #ffffff;
+        border: 1px solid var(--pm-border);
+        padding: 6px 14px;
+        border-radius: var(--pm-radius-pill);
+        font-size: 12px;
+        font-weight: 500;
+        box-shadow: var(--pm-shadow-1);
+      }
+
+      .dashboard-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        padding: 0 40px 48px;
+        max-width: 1400px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .dashboard-col-left, .dashboard-col-right {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* 4. View 2: Map Floating Controls & Side Operational Panel */
+      .map-top-bar {
+        top: 24px;
+        left: 24px;
+        right: auto;
+        width: 380px;
+      }
+      .map-floating-actions {
+        top: 24px;
+        right: 24px;
+      }
+
+      /* Transform Bottom Sheet into Fixed Side Panel */
+      .pm-bottom-sheet {
+        position: absolute;
+        top: 88px;
+        left: 24px;
+        bottom: 24px;
+        right: auto;
+        width: 380px;
+        max-height: calc(100vh - 112px);
+        border-radius: var(--pm-radius-xl);
+        box-shadow: var(--pm-shadow-4);
+        transform: none !important;
+        overflow-y: auto;
+        z-index: 80;
+        background-color: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+      .sheet-handle-bar {
+        display: none;
+      }
+
+      /* AI FAB on Desktop */
+      .pm-ai-fab {
+        bottom: 32px;
+        right: 32px;
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .dashboard-content {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- RESPONSIVE ROOT CONTAINER (100vw / 100vh) -->
+  <div class="app-root">
+
+    <!-- ======================================================================
+         GLOBAL NAVIGATION BAR (Left Sidebar on Desktop / Bottom Bar on Mobile)
+         ====================================================================== -->
+    <nav class="pm-glass-panel bottom-nav-bar">
+      
+      <!-- Desktop Sidebar Brand Header (Hidden on Mobile) -->
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <!-- Shield & Waves SVG Vector -->
+          <svg class="svg-icon" style="width: 22px; height: 22px;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">PromptMesh</span>
+          <span class="brand-badge">HYPERLOCAL D2C MESH</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs (Shared Interactivity for Mobile & Desktop) -->
+      <div class="nav-items-group">
+        <!-- Tab 1: Home -->
+        <button class="nav-tab-item active" data-view="view-home">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>หน้าหลัก</span>
+          <span class="nav-tab-dot"></span>
+        </button>
+
+        <!-- Tab 2: Map -->
+        <button class="nav-tab-item" data-view="view-map">
+          <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
+          <span>แผนที่ภัยพิบัติ</span>
+          <span class="nav-tab-dot"></span>
+        </button>
+
+        <!-- Tab 3: E-Voucher -->
+        <button class="nav-tab-item" id="nav-btn-voucher">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>
+          <span>กระเป๋าเงินเยียวยา</span>
+          <span class="nav-tab-dot"></span>
+        </button>
+
+        <!-- Tab 4: Alerts -->
+        <button class="nav-tab-item" id="nav-btn-alerts">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span>ระบบเตือนภัย</span>
+          <span class="nav-tab-dot"></span>
+        </button>
+      </div>
+
+      <!-- Desktop Sidebar Footer: Profile & Telemetry Link -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div class="user-avatar-small">
+            <svg class="svg-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="user-info-text">
+            <span class="sidebar-user-name">คุณสมศักดิ์ นครปฐม</span>
+            <span class="sidebar-user-zone">ซอยไร่ขิง 26 • อ.สามพราน</span>
+          </div>
+        </div>
+        <div class="sidebar-system-status">
+          <span class="pulse-dot" style="background-color: var(--pm-success);"></span>
+          <span>Google Maps & โทรมาตร HII ออนไลน์</span>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- ======================================================================
+         MAIN SCREEN VIEW CONTAINER
+         ====================================================================== -->
+    <main class="app-screen">
+
+      <!-- ======================================================================
+           VIEW 1: HOMEPAGE / DASHBOARD (Responsive Multi-Column on Desktop)
+           ====================================================================== -->
+      <section id="view-home" class="view-panel active">
+        
+        <!-- Greeting Header -->
+        <header class="dashboard-header">
+          <div class="user-greeting">
+            <h1 class="user-greeting-title">
+              <span>สวัสดีคุณสมศักดิ์</span>
+              <span class="pm-badge pm-badge-primary" style="font-size: 11px;">ยืนยันสิทธิ์ อปท.</span>
+            </h1>
+            <div class="user-greeting-location">
+              <svg class="svg-icon" style="width: 16px; height: 16px; color: var(--pm-primary);" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>ซอยไร่ขิง 26 • ตำบลไร่ขิง อำเภอสามพราน จังหวัดนครปฐม</span>
+            </div>
+          </div>
+          
+          <!-- Desktop Status Bar Widget -->
+          <div class="header-status-pill">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--pm-warning);"></span>
+            <span>สถานะซอย: น้ำเอ่อล้น (เฝ้าระวังระดับ 2)</span>
+          </div>
+
+          <div class="header-avatar" title="โปรไฟล์ผู้ประสบภัย">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+        </header>
+
+        <!-- Main Dashboard Responsive Content Grid -->
+        <div class="dashboard-content">
+
+          <!-- LEFT COLUMN: Early Warning Banner & Digital Wallet -->
+          <div class="dashboard-col-left">
+
+            <!-- 1. Risk Alert Banner (Red Soft UI Card - Mockup AI Prediction) -->
+            <article class="risk-alert-card">
+              <div class="risk-alert-header">
+                <div class="risk-alert-tag">
+                  <span class="pulse-dot"></span>
+                  <span>AI EARLY WARNING • TRACK 6</span>
+                </div>
+                <span class="pm-badge pm-badge-danger">เฝ้าระวังสูงสุด</span>
+              </div>
+              <h2 class="risk-alert-title">น้ำจะถึงซอยท่าน ภายใน 2 ชม.</h2>
+              <p class="risk-alert-desc">
+                แบบจำลอง AI Hydrology Model ชี้มวลน้ำลุ่มน้ำท่าจีนจะเอ่อล้นเข้าท่วม ซอยไร่ขิง 26 ระดับน้ำคาดการณ์ +35 ซม. โปรดย้ายรถยนต์ไปยังพื้นที่ยกสูง และเตรียมสิ่งของจำเป็น
+              </p>
+              <button class="risk-alert-cta" id="cta-open-hazard-map">
+                <span style="transform: rotate(180deg); display: inline-flex;">
+                  <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                </span>
+                <span>ตรวจสอบแผนที่และเส้นทางหลบภัยทันที</span>
+              </button>
+            </article>
+
+            <!-- 2. E-Voucher Wallet Card -->
+            <article class="pm-card wallet-card">
+              <div class="wallet-header">
+                <div class="wallet-badge-wrap">
+                  <svg class="svg-icon" style="color: var(--pm-primary);" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                  <span class="wallet-title">กระเป๋าเงินเยียวยา D2C Mesh</span>
+                </div>
+                <span class="pm-badge pm-badge-success">พร้อมเพย์ อปท.</span>
+              </div>
+              
+              <div class="wallet-balance-row">
+                <div>
+                  <div class="wallet-balance"><span class="wallet-balance-currency">฿</span>1,500</div>
+                  <div class="wallet-subtext">เงินสนับสนุนฉุกเฉินจาก กองทุนช่วยเหลือ อปท. นครปฐม</div>
+                </div>
+              </div>
+
+              <div class="wallet-tags">
+                <span class="pm-badge pm-badge-primary">
+                  <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+                  อาหาร/น้ำดื่ม ฿1,000
+                </span>
+                <span class="pm-badge pm-badge-primary">
+                  <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+                  ยารักษาโรค ฿500
+                </span>
+              </div>
+
+              <!-- Prominent QR Button -->
+              <button class="pm-btn-primary" id="btn-scan-voucher">
+                <svg class="svg-icon" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+                <span>สแกน QR รับเสบียง</span>
+              </button>
+            </article>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Quick Actions & Nearby SME Micro-Relief Stations -->
+          <div class="dashboard-col-right">
+
+            <!-- 3. Quick Actions (2x2 Grid) -->
+            <section>
+              <div class="quick-actions-grid">
+                
+                <!-- Action 1: นำทางปลอดภัย -->
+                <div class="quick-action-item" id="qa-navigation">
+                  <div class="quick-action-icon" style="background-color: var(--pm-primary-light); color: var(--pm-primary);">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-action-title">นำทางปลอดภัย</div>
+                    <div class="quick-action-sub">หลบน้ำตามรุ่นรถ</div>
+                  </div>
+                </div>
+
+                <!-- Action 2: ค้นหาเสบียง -->
+                <div class="quick-action-item" id="qa-find-supplies">
+                  <div class="quick-action-icon" style="background-color: var(--pm-success-bg); color: var(--pm-success);">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-action-title">ค้นหาเสบียง</div>
+                    <div class="quick-action-sub">ร้าน SME มีสต็อก</div>
+                  </div>
+                </div>
+
+                <!-- Action 3: รายงานน้ำท่วม -->
+                <div class="quick-action-item" id="qa-report-flood">
+                  <div class="quick-action-icon" style="background-color: var(--pm-warning-bg); color: var(--pm-warning);">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-action-title">รายงานน้ำท่วม</div>
+                    <div class="quick-action-sub">แชร์ภาพจุดเสี่ยง</div>
+                  </div>
+                </div>
+
+                <!-- Action 4: ติดตามซอย -->
+                <div class="quick-action-item" id="qa-subscribe-soi">
+                  <div class="quick-action-icon" style="background-color: #f3e8ff; color: #9333ea;">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19.3 14.8C18.9 14.2 18 12.8 18 8a6 6 0 0 0-12 0c0 4.8-.9 6.2-1.3 6.8-.3.5-.1 1.2.5 1.2h13.6c.6 0 .8-.7.5-1.2z"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><line x1="19" x2="19" y1="2" y2="8"/><line x1="16" x2="22" y1="5" y2="5"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-action-title">ติดตามซอย</div>
+                    <div class="quick-action-sub">เตือนผ่าน SMS/Push</div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- 4. Nearby Micro-Relief Stations (SME Store Cards) -->
+            <section>
+              <div class="section-header" style="margin-bottom: 12px;">
+                <h2 class="section-title">สถานีเสบียงชุมชนใกล้คุณ</h2>
+                <span class="section-link" id="link-view-all-stores">ดูบนแผนที่</span>
+              </div>
+
+              <div class="store-list">
+                
+                <!-- Store Card 1 -->
+                <article class="pm-card store-card" onclick="openStoreOnMap('ร้านป้าพร โชห่วยซอย 26', 13.7295, 100.2690)">
+                  <div class="store-top-row">
+                    <div>
+                      <h3 class="store-name">ร้านป้าพร โชห่วยซอย 26</h3>
+                      <div class="store-address">ปากซอยไร่ขิง 26 ต.ไร่ขิง</div>
+                    </div>
+                    <span class="store-distance">350 ม.</span>
+                  </div>
+                  <div class="store-badges">
+                    <span class="pm-badge pm-badge-success">
+                      <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                      พร้อมแจกเสบียง
+                    </span>
+                    <span class="pm-badge pm-badge-primary">
+                      <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                      น้ำไม่ท่วมทางเข้า
+                    </span>
+                  </div>
+                  <div class="store-stock-info">
+                    <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--pm-text-muted);" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+                    <span>สต็อก: น้ำดื่ม 45 แพ็ค • ข้าวสาร 28 ถุง • ยาสามัญ 30 ชุด</span>
+                  </div>
+                </article>
+
+                <!-- Store Card 2 -->
+                <article class="pm-card store-card" onclick="openStoreOnMap('มินิมาร์ทเจริญพร สามพราน', 13.7340, 100.2795)">
+                  <div class="store-top-row">
+                    <div>
+                      <h3 class="store-name">มินิมาร์ทเจริญพร สามพราน</h3>
+                      <div class="store-address">ใกล้ซอยวัดท่าพูด อ.สามพราน</div>
+                    </div>
+                    <span class="store-distance">680 ม.</span>
+                  </div>
+                  <div class="store-badges">
+                    <span class="pm-badge pm-badge-success">พร้อมแจกเสบียง</span>
+                    <span class="pm-badge pm-badge-warning">รถกระบะ/4WD เข้าได้</span>
+                  </div>
+                  <div class="store-stock-info">
+                    <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--pm-text-muted);" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+                    <span>สต็อก: น้ำดื่ม 18 แพ็ค • บะหมี่กึ่งสำเร็จรูป 60 ซอง</span>
+                  </div>
+                </article>
+
+                <!-- Store Card 3 -->
+                <article class="pm-card store-card" onclick="openStoreOnMap('สหกรณ์การเกษตรไร่ขิง', 13.7420, 100.2720)">
+                  <div class="store-top-row">
+                    <div>
+                      <h3 class="store-name">สหกรณ์การเกษตรไร่ขิง</h3>
+                      <div class="store-address">ถ.เพชรเกษม กิโลเมตรที่ 32</div>
+                    </div>
+                    <span class="store-distance">1.1 กม.</span>
+                  </div>
+                  <div class="store-badges">
+                    <span class="pm-badge pm-badge-primary">ศูนย์กระจายเสบียงหลัก</span>
+                    <span class="pm-badge pm-badge-success">พื้นที่ปลอดภัยยกสูง</span>
+                  </div>
+                  <div class="store-stock-info">
+                    <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--pm-text-muted);" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+                    <span>สต็อก: น้ำดื่ม 150 แพ็ค • ข้าวสาร 80 ถุง • ชุดยังชีพ 50 ชุด</span>
+                  </div>
+                </article>
+
+              </div>
+            </section>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ======================================================================
+           VIEW 2: HAZARD MAP & CRISIS ROUTING (Google Maps Full Canvas + Controls)
+           ====================================================================== -->
+      <section id="view-map" class="view-panel">
+        
+        <div class="map-view-container">
+
+          <!-- Real Google Maps Interactive Canvas -->
+          <div id="google-map-canvas"></div>
+
+          <!-- Floating Map Controls: Top Glass Search Bar -->
+          <div class="pm-glass-panel map-top-bar">
+            <button class="map-back-btn" id="btn-map-back-home" title="กลับหน้าแรก">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <input type="text" class="map-search-input" value="นำทางไป: จุดปลอดภัยวัดไร่ขิง (ลานยกสูง)" placeholder="ค้นหาจุดหมาย หรือสถานีเสบียง..." readonly />
+            <div class="map-gps-pill">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--pm-success);"></span>
+              <span>GPS ±3ม.</span>
+            </div>
+          </div>
+
+          <!-- Floating Map Controls: Right Layer Toggle Buttons -->
+          <div class="map-floating-actions">
+            <!-- Toggle Flood Water Layer -->
+            <button class="pm-glass-panel map-tool-btn active" id="toggle-layer-water" title="เลเยอร์ระดับน้ำท่วม (Google Maps Circles)">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+            </button>
+            <!-- Toggle TMD Rain Telemetry -->
+            <button class="pm-glass-panel map-tool-btn active" id="toggle-layer-rain" title="เลเยอร์เรดาร์น้ำฝน TMD">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></svg>
+            </button>
+            <!-- Toggle SME Relief Stations -->
+            <button class="pm-glass-panel map-tool-btn active" id="toggle-layer-stores" title="เลเยอร์สถานีเสบียงชุมชน">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/></svg>
+            </button>
+            <!-- Recenter Pin Button -->
+            <button class="pm-glass-panel map-tool-btn" id="btn-recenter-map" title="ตำแหน่งปัจจุบัน">
+              <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+            </button>
+          </div>
+
+          <!-- Crisis Routing Panel (Collapsible Sheet on Mobile, Fixed Side Panel on Desktop) -->
+          <div class="pm-bottom-sheet snap-half" id="crisis-bottom-sheet">
+            
+            <!-- Mobile Drag Handle Bar -->
+            <div class="sheet-handle-bar" id="sheet-handle"></div>
+
+            <!-- Route Stats Info Strip -->
+            <div class="route-summary-bar">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+                <span id="route-stat-text">ระยะทาง 2.4 กม. • 7 นาที</span>
+              </div>
+              <span class="pm-badge pm-badge-success" id="route-badge-text">เลี่ยงจุดท่วม 100%</span>
+            </div>
+
+            <!-- Timeline Slider: AI Hydrology Forecaster (1h / 3h / 6h) -->
+            <div class="timeline-container">
+              <div class="timeline-header">
+                <span class="timeline-title">
+                  <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--pm-primary);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>แบบจำลองน้ำ AI (Hydrology Model)</span>
+                </span>
+                <span class="timeline-prediction-text" id="timeline-readout">+3 ชม. (วิกฤต +35 ซม.)</span>
+              </div>
+              
+              <div class="timeline-slider-wrap">
+                <input type="range" min="1" max="3" step="1" value="2" class="timeline-slider" id="ai-timeline-slider">
+                <div class="timeline-ticks">
+                  <span>+1 ชม. (เฝ้าระวัง)</span>
+                  <span style="font-weight: 600; color: var(--pm-primary);">+3 ชม. (วิกฤต)</span>
+                  <span>+6 ชม. (ทรงตัว)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vehicle Selector Segmented Cards (Track 5: Vehicle-Aware Clearance) -->
+            <div>
+              <div style="font-size: 13px; font-weight: 500; margin-bottom: 6px; color: var(--pm-text-main);">
+                เลือกประเภทยานพาหนะ เพื่อตัดเส้นทางน้ำท่วมลึก:
+              </div>
+              <div class="vehicle-selector-grid">
+                
+                <!-- Vehicle 1: Sedan / Motorcycle -->
+                <div class="vehicle-card active" data-vehicle="sedan" onclick="selectVehicle('sedan', this)">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+                  <span class="vehicle-name">รถเก๋ง / มอเตอร์ไซค์</span>
+                  <span class="vehicle-limit">ลุยได้ ≤ 15 ซม.</span>
+                </div>
+
+                <!-- Vehicle 2: Lifted Pickup / 4WD -->
+                <div class="vehicle-card" data-vehicle="pickup" onclick="selectVehicle('pickup', this)">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                  <span class="vehicle-name">กระบะยกสูง / 4WD</span>
+                  <span class="vehicle-limit">ลุยได้ ≤ 40 ซม.</span>
+                </div>
+
+                <!-- Vehicle 3: Boat / Jet Ski -->
+                <div class="vehicle-card" data-vehicle="boat" onclick="selectVehicle('boat', this)">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/></svg>
+                  <span class="vehicle-name">เรือ / เจ็ตสกี</span>
+                  <span class="vehicle-limit">แนวน้ำลึก > 30 ซม.</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Primary Action Button: คำนวณเส้นทางปลอดภัย -->
+            <button class="pm-btn-primary" id="btn-calc-route">
+              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <span>คำนวณเส้นทางปลอดภัย</span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- ======================================================================
+         GLOBAL FLOATING AI ASSISTANT (FAB)
+         ====================================================================== -->
+    <button class="pm-ai-fab" id="btn-ai-fab" title="AI Crisis Assistant">
+      <span class="fab-pulse-ring"></span>
+      <!-- Sparkles SVG (Clean Vector, Strict No Emoji) -->
+      <svg class="svg-icon" style="width: 26px; height: 26px;" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+    </button>
+
+    <!-- ======================================================================
+         MODAL 1: AI ASSISTANT MODAL (Glassmorphic Analysis Window)
+         ====================================================================== -->
+    <div class="modal-backdrop" id="modal-ai-assistant">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg class="svg-icon" style="color: var(--pm-primary);" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span>AI Crisis Copilot</span>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-ai-assistant')">
+            <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--pm-primary); font-weight: 500;">
+            <span class="pulse-dot" style="background-color: var(--pm-primary);"></span>
+            <span>AI Assistant is analyzing telemetry data...</span>
+          </div>
+          <div style="background-color: #f8fafc; border: 1px solid var(--pm-border); border-radius: 12px; padding: 12px; font-size: 13px; line-height: 1.5;">
+            <p><strong>ผลการประเมินความเสี่ยงลุ่มน้ำท่าจีน (Google Maps GIS Engine):</strong></p>
+            <ul style="margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 4px;">
+              <li>สถานีโทรมาตร HII คลองอ้อมใหญ่ สูงขึ้น <strong>+12 ซม./ชม.</strong></li>
+              <li>เรดาร์ TMD ตรวจพบฝนตกสะสม 42 มม. ในพื้นที่ อ.สามพราน</li>
+              <li>แนะนำให้ <strong>รถเก๋ง / มอเตอร์ไซค์</strong> เคลื่อนย้ายไปยังลานจอดรถวัดไร่ขิงก่อนเวลา 16:45 น.</li>
+              <li>ร้านค้า <strong>ร้านป้าพร โชห่วยซอย 26</strong> มีสต็อกน้ำดื่ม 45 แพ็ค พร้อมรองรับ E-Voucher</li>
+            </ul>
+          </div>
+          <button class="pm-btn-primary" onclick="closeModal('modal-ai-assistant'); switchView('view-map');">
+            <span>ดูแผนที่และเริ่มนำทาง</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         MODAL 2: E-VOUCHER QR SCANNER MODAL (Camera Simulation)
+         ====================================================================== -->
+    <div class="modal-backdrop" id="modal-qr-scanner">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg class="svg-icon" style="color: var(--pm-primary);" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/></svg>
+            <span>สแกนรับเสบียงเยียวยา</span>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-qr-scanner')">
+            <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+          <div class="scanner-viewfinder">
+            <div class="scanner-laser"></div>
+            <!-- Dummy Clean Vector QR Pattern -->
+            <svg class="scanner-qr-dummy" viewBox="0 0 100 100">
+              <rect width="100" height="100" fill="#0f172a"/>
+              <rect x="10" y="10" width="25" height="25" fill="#ffffff" rx="4"/>
+              <rect x="15" y="15" width="15" height="15" fill="#0f172a"/>
+              <rect x="19" y="19" width="7" height="7" fill="#ffffff"/>
+              
+              <rect x="65" y="10" width="25" height="25" fill="#ffffff" rx="4"/>
+              <rect x="70" y="15" width="15" height="15" fill="#0f172a"/>
+              <rect x="74" y="19" width="7" height="7" fill="#ffffff"/>
+
+              <rect x="10" y="65" width="25" height="25" fill="#ffffff" rx="4"/>
+              <rect x="15" y="70" width="15" height="15" fill="#0f172a"/>
+              <rect x="19" y="74" width="7" height="7" fill="#ffffff"/>
+
+              <!-- Noise matrix -->
+              <rect x="42" y="15" width="6" height="6" fill="#ffffff"/>
+              <rect x="52" y="25" width="6" height="6" fill="#ffffff"/>
+              <rect x="42" y="38" width="6" height="6" fill="#ffffff"/>
+              <rect x="65" y="45" width="6" height="6" fill="#ffffff"/>
+              <rect x="75" y="60" width="6" height="6" fill="#ffffff"/>
+              <rect x="45" y="70" width="6" height="6" fill="#ffffff"/>
+              <rect x="60" y="80" width="6" height="6" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div style="font-size: 13px; color: var(--pm-text-secondary); margin-top: 4px;">
+            หันกล้องไปที่ QR ของร้านค้าเพื่อแลกรับชุดเสบียง<br>
+            <span style="font-size: 11px; color: var(--pm-text-muted);">Dynamic Token: PM-2026-NPT-9481 (อัปเดตทุก 60 วิ)</span>
+          </div>
+          <button class="pm-btn-primary" onclick="simulateVoucherRedeem()">
+            <span>ทดลองสแกนแลกชุดเสบียง (฿300)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         MODAL 3: CROWDSOURCED FLOOD REPORTING MODAL
+         ====================================================================== -->
+    <div class="modal-backdrop" id="modal-report-flood">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg class="svg-icon" style="color: var(--pm-warning);" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+            <span>รายงานระดับน้ำท่วมชุมชน</span>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('modal-report-flood')">
+            <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <label style="font-size: 12px; font-weight: 500; display: block; margin-bottom: 6px;">ระดับน้ำจริง ณ ปัจจุบัน:</label>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+              <button class="pm-btn-secondary" onclick="submitReport('ข้อเท้า (≤15 ซม.)')">ข้อเท้า (≤15 ซม.)</button>
+              <button class="pm-btn-secondary" onclick="submitReport('หัวเข่า (16-35 ซม.)')">หัวเข่า (16-35 ซม.)</button>
+              <button class="pm-btn-secondary" onclick="submitReport('ระดับเอว (36-60 ซม.)')">ระดับเอว (36-60 ซม.)</button>
+              <button class="pm-btn-secondary" onclick="submitReport('มิดหลังคารถ (>80 ซม.)')">มิดหลังคารถ (>80 ซม.)</button>
+            </div>
+          </div>
+          <div style="font-size: 12px; color: var(--pm-text-muted); line-height: 1.4;">
+            พิกัด GPS จะถูกแนบเข้าสู่ระบบ Google Maps GIS โดยอัตโนมัติ เพื่อปรับปรุงเส้นทางนำทางแบบเรียลไทม์
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         GLOBAL TOAST NOTIFICATION
+         ====================================================================== -->
+    <div class="pm-toast" id="app-toast">
+      <div class="toast-icon">
+        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="toast-text" id="toast-message">แจ้งเตือนสำเร็จ</div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT: APPLICATION LOGIC & GOOGLE MAPS GIS ENGINE
+       ========================================================================== -->
+  <script>
+    // App State Management
+    const appState = {
+      currentView: 'view-home',
+      activeVehicle: 'sedan',
+      timelineStep: 2, // 1: +1h, 2: +3h, 3: +6h
+      voucherBalance: 1500,
+      layers: {
+        water: true,
+        rain: true,
+        stores: true
+      },
+      sheetState: 'snap-half' // snap-peek, snap-half, snap-full
+    };
+
+    // Geographic Coordinates Configuration (Nakhon Pathom & Tha Chin River Basin)
+    const geoLocations = {
+      center: { lat: 13.7310, lng: 100.2740 },
+      user: { lat: 13.7310, lng: 100.2740 },
+      station: { lat: 13.7390, lng: 100.2710 }, // Micro-Relief Station
+      destination: { lat: 13.7390, lng: 100.2710 }, // Wat Rai Khing Safe Zone & Micro-Relief Station
+      // Curving realistic mockup routes around flood circles (Visual Wow Factor)
+      mockRoutes: {
+        sedan: [
+          { lat: 13.7310, lng: 100.2740 }, // จุดเริ่มต้น: ตำแหน่งของคุณ (ซอยไร่ขิง 26)
+          { lat: 13.7316, lng: 100.2688 }, // เลี้ยวเข้าแนวซอยชุมชนทิศตะวันตก
+          { lat: 13.7334, lng: 100.2652 }, // โค้งอ้อมหลบวงน้ำท่วมสูง (Flood Zone)
+          { lat: 13.7364, lng: 100.2648 }, // แนวถนนคันกั้นน้ำยกสูง
+          { lat: 13.7382, lng: 100.2678 }, // ทางเชื่อมต่อข้ามแนวสันดอน
+          { lat: 13.7390, lng: 100.2710 }  // ปลายทาง: ร้านป้าพร โชห่วยซอย 26 (จุดปลอดภัย)
+        ],
+        pickup: [
+          { lat: 13.7310, lng: 100.2740 },
+          { lat: 13.7330, lng: 100.2710 },
+          { lat: 13.7365, lng: 100.2690 },
+          { lat: 13.7390, lng: 100.2710 }
+        ],
+        boat: [
+          { lat: 13.7310, lng: 100.2740 },
+          { lat: 13.7328, lng: 100.2765 },
+          { lat: 13.7362, lng: 100.2755 },
+          { lat: 13.7385, lng: 100.2735 },
+          { lat: 13.7390, lng: 100.2710 }
+        ]
+      },
+      stores: [
+        {
+          id: 'store-1',
+          name: 'ร้านป้าพร โชห่วยซอย 26 (Micro-Relief Station)',
+          address: 'ปากซอยไร่ขิง 26 ต.ไร่ขิง',
+          lat: 13.7390,
+          lng: 100.2710,
+          stock: 'น้ำดื่ม 45 แพ็ค • ข้าวสาร 28 ถุง',
+          status: 'พร้อมแจกเสบียง'
+        },
+        {
+          id: 'store-2',
+          name: 'มินิมาร์ทเจริญพร สามพราน',
+          address: 'ใกล้ซอยวัดท่าพูด อ.สามพราน',
+          lat: 13.7340,
+          lng: 100.2795,
+          stock: 'น้ำดื่ม 18 แพ็ค • บะหมี่ 60 ซอง',
+          status: 'กระบะ/4WD เข้าได้'
+        },
+        {
+          id: 'store-3',
+          name: 'สหกรณ์การเกษตรไร่ขิง',
+          address: 'ถ.เพชรเกษม กม. 32',
+          lat: 13.7420,
+          lng: 100.2720,
+          stock: 'น้ำดื่ม 150 แพ็ค • ข้าวสาร 80 ถุง',
+          status: 'ศูนย์กระจายหลัก'
+        }
+      ]
+    };
+
+    // Google Maps Object References
+    let map = null;
+    let animatedRoutePolyline = null;
+    let animatedPulsePolyline = null;
+    let routeAnimTimer = null;
+    let floodCircleHigh = null;
+    let floodCircleMod = null;
+    let isolationPolygon = null;
+    let floodLabelHigh = null;
+    let floodLabelMod = null;
+    let isolationLabel = null;
+    let userMarker = null;
+    let destMarker = null;
+    let storeMarkers = [];
+    let activeInfoWindow = null;
+
+    // DOM Elements
+    const views = {
+      home: document.getElementById('view-home'),
+      map: document.getElementById('view-map')
+    };
+
+    const navTabs = document.querySelectorAll('.nav-tab-item');
+    const bottomSheet = document.getElementById('crisis-bottom-sheet');
+    const sheetHandle = document.getElementById('sheet-handle');
+    const timelineSlider = document.getElementById('ai-timeline-slider');
+    const timelineReadout = document.getElementById('timeline-readout');
+    const routeStatText = document.getElementById('route-stat-text');
+    const routeBadgeText = document.getElementById('route-badge-text');
+    const toast = document.getElementById('app-toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    // --------------------------------------------------------------------------
+    // 1. Google Maps Initialization (Soft UI Minimalist Style)
+    // --------------------------------------------------------------------------
+    function initMap() {
+      const mapCanvas = document.getElementById('google-map-canvas');
+      if (!mapCanvas) return;
+
+      // Custom Minimalist Soft UI JSON Theme (Silver/Apple OS Aesthetic)
+      const softUiMapStyles = [
+        { elementType: "geometry", stylers: [{ color: "#f5f7fa" }] },
+        { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#475569" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#ffffff" }] },
+        { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#cbd5e1" }] },
+        { featureType: "administrative.country", elementType: "labels.text.fill", stylers: [{ color: "#0f172a" }] },
+        { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#1e293b" }] },
+        { featureType: "poi", stylers: [{ visibility: "off" }] },
+        { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+        { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#e2e8f0" }] },
+        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#64748b" }] },
+        { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#cbd5e1" }] },
+        { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#94a3b8" }] },
+        { featureType: "transit", stylers: [{ visibility: "off" }] },
+        { featureType: "water", elementType: "geometry", stylers: [{ color: "#bfdbfe" }] }, // River basin light blue
+        { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#2563eb" }] }
+      ];
+
+      // Instantiate Google Map
+      map = new google.maps.Map(mapCanvas, {
+        center: geoLocations.center,
+        zoom: 14,
+        disableDefaultUI: true,
+        styles: softUiMapStyles,
+        clickableIcons: false
+      });
+
+      // ------------------------------------------------------------------------
+      // 2. Dynamic JS Overlays (Circles, Polygon, Polyline, Markers)
+      // ------------------------------------------------------------------------
+
+      // A. Flood Zones (google.maps.Circle)
+      // High Depth Zone (AI Prediction)
+      floodCircleHigh = new google.maps.Circle({
+        strokeColor: '#2563eb',
+        strokeOpacity: 0.8,
+        strokeWeight: 1.5,
+        fillColor: '#2563eb',
+        fillOpacity: 0.28,
+        map: map,
+        center: { lat: 13.7335, lng: 100.2715 },
+        radius: 450 // 450m radius
+      });
+
+      // Moderate Depth Zone
+      floodCircleMod = new google.maps.Circle({
+        strokeColor: '#0284c7',
+        strokeOpacity: 0.7,
+        strokeWeight: 1,
+        fillColor: '#0284c7',
+        fillOpacity: 0.22,
+        map: map,
+        center: { lat: 13.7240, lng: 100.2760 },
+        radius: 320 // 320m radius
+      });
+
+      // B. Isolation Zone (google.maps.Polygon)
+      const isolationCoords = [
+        { lat: 13.7350, lng: 100.2750 },
+        { lat: 13.7375, lng: 100.2795 },
+        { lat: 13.7335, lng: 100.2820 },
+        { lat: 13.7310, lng: 100.2770 }
+      ];
+
+      isolationPolygon = new google.maps.Polygon({
+        paths: isolationCoords,
+        strokeColor: '#ef4444',
+        strokeOpacity: 0.9,
+        strokeWeight: 2,
+        fillColor: '#ef4444',
+        fillOpacity: 0.18,
+        map: map
+      });
+
+      // C. Zone Text Badges (Soft UI Pill Labels in Center of Circles/Polygon)
+      const transparentLabelIcon = {
+        url: 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>',
+        size: new google.maps.Size(1, 1),
+        anchor: new google.maps.Point(0, 0)
+      };
+
+      // 1) Flood Zone High Label Badge (+35 ซม.)
+      floodLabelHigh = new google.maps.Marker({
+        position: { lat: 13.7335, lng: 100.2715 },
+        map: map,
+        icon: transparentLabelIcon,
+        label: {
+          text: "น้ำท่วม +35 ซม.",
+          className: "map-zone-label map-zone-label-water"
+        }
+      });
+
+      // 2) Flood Zone Moderate Label Badge (+18 ซม.)
+      floodLabelMod = new google.maps.Marker({
+        position: { lat: 13.7240, lng: 100.2760 },
+        map: map,
+        icon: transparentLabelIcon,
+        label: {
+          text: "น้ำท่วม +18 ซม.",
+          className: "map-zone-label map-zone-label-water"
+        }
+      });
+
+      // 3) Isolation Zone Label Badge (พื้นที่เสี่ยงถูกตัดขาด)
+      isolationLabel = new google.maps.Marker({
+        position: { lat: 13.7343, lng: 100.2784 },
+        map: map,
+        icon: transparentLabelIcon,
+        label: {
+          text: "พื้นที่เสี่ยงถูกตัดขาด",
+          className: "map-zone-label map-zone-label-danger"
+        }
+      });
+
+      // D. Custom Inline SVG Markers
+      // 1) User Location Marker
+      const userMarkerIcon = {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="15" fill="rgba(37, 99, 235, 0.25)" />
+            <circle cx="18" cy="18" r="8" fill="#2563eb" stroke="#ffffff" stroke-width="2.5" />
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(36, 36),
+        anchor: new google.maps.Point(18, 18)
+      };
+
+      userMarker = new google.maps.Marker({
+        position: geoLocations.user,
+        map: map,
+        title: "ตำแหน่งของคุณ (ซอยไร่ขิง 26)",
+        icon: userMarkerIcon
+      });
+
+      // 2) Destination Safe Haven Marker (Wat Rai Khing)
+      const destMarkerIcon = {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 40 48">
+            <path d="M20 0C9 0 0 9 0 20C0 32 20 48 20 48C20 48 40 32 40 20C40 9 31 0 20 0Z" fill="#10b981" />
+            <circle cx="20" cy="18" r="14" fill="#ffffff" />
+            <path d="M15 18L18 21L25 14" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(38, 46),
+        anchor: new google.maps.Point(19, 46)
+      };
+
+      destMarker = new google.maps.Marker({
+        position: geoLocations.destination,
+        map: map,
+        title: "จุดปลอดภัย วัดไร่ขิง (ลานยกสูง)",
+        icon: destMarkerIcon
+      });
+
+      // 3) SME Micro-Relief Store Markers
+      const storeMarkerIcon = {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="44" viewBox="0 0 36 44">
+            <path d="M18 0C8 0 0 8 0 18C0 29 18 44 18 44C18 44 36 29 36 18C36 8 28 0 18 0Z" fill="#2563eb" />
+            <circle cx="18" cy="16" r="12" fill="#ffffff" />
+            <path d="M12 14L13.5 11H22.5L24 14M12 14V21H24V14M12 14H24" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(34, 42),
+        anchor: new google.maps.Point(17, 42)
+      };
+
+      geoLocations.stores.forEach(store => {
+        const marker = new google.maps.Marker({
+          position: { lat: store.lat, lng: store.lng },
+          map: map,
+          title: store.name,
+          icon: storeMarkerIcon
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: `
+            <div style="font-family: 'Kanit', sans-serif; font-size: 13px; line-height: 1.4; color: #0f172a; max-width: 200px;">
+              <strong style="color: #2563eb; font-size: 14px;">${store.name}</strong><br>
+              <span style="color: #64748b; font-size: 12px;">${store.address}</span><br>
+              <div style="margin-top: 6px; padding: 4px 6px; background-color: #ecfdf5; border-radius: 6px; color: #065f46; font-size: 11px; font-weight: 500;">
+                ${store.stock}
+              </div>
+            </div>
+          `
+        });
+
+        marker.addListener('click', () => {
+          if (activeInfoWindow) activeInfoWindow.close();
+          infoWindow.open(map, marker);
+          activeInfoWindow = infoWindow;
+          showToast(`เลือก ${store.name} (สต็อกพร้อมแลก)`);
+        });
+
+        storeMarkers.push(marker);
+      });
+
+      // ------------------------------------------------------------------------
+      // Initialize Animated Safe Route (Bypasses Directions API for Hackathon Reliability)
+      // ------------------------------------------------------------------------
+      calculateSafeRoute({ silent: true });
+    }
+
+    // --------------------------------------------------------------------------
+    // View Navigation Logic
+    // --------------------------------------------------------------------------
+    function switchView(targetViewId) {
+      if (appState.currentView === targetViewId) return;
+
+      // Update Screen Views
+      Object.keys(views).forEach(key => {
+        if (views[key].id === targetViewId) {
+          views[key].classList.add('active');
+        } else {
+          views[key].classList.remove('active');
+        }
+      });
+
+      // Update Nav Tabs Active State
+      navTabs.forEach(tab => {
+        const viewAttr = tab.getAttribute('data-view');
+        if (viewAttr === targetViewId) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+
+      appState.currentView = targetViewId;
+
+      // Google Maps Resize Trigger (Crucial for correct canvas rendering)
+      if (targetViewId === 'view-map' && map) {
+        setTimeout(() => {
+          google.maps.event.trigger(map, 'resize');
+          map.setCenter(geoLocations.center);
+        }, 120);
+      }
+    }
+
+    // Attach Click Events to Nav Tabs
+    navTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetView = tab.getAttribute('data-view');
+        if (targetView) {
+          switchView(targetView);
+        } else if (tab.id === 'nav-btn-voucher') {
+          openModal('modal-qr-scanner');
+        } else if (tab.id === 'nav-btn-alerts') {
+          showToast('คุณกำลังรับการแจ้งเตือนระดับซอย ไร่ขิง 26 แบบ Real-time');
+        }
+      });
+    });
+
+    // Homepage Direct CTAs
+    document.getElementById('cta-open-hazard-map').addEventListener('click', () => {
+      switchView('view-map');
+    });
+
+    document.getElementById('btn-map-back-home').addEventListener('click', () => {
+      switchView('view-home');
+    });
+
+    // Quick Actions Click Handlers
+    document.getElementById('qa-navigation').addEventListener('click', () => {
+      switchView('view-map');
+      showToast('ระบบพร้อมนำทางหลบเลี่ยงน้ำท่วมตามประเภทยานพาหนะ');
+    });
+
+    document.getElementById('qa-find-supplies').addEventListener('click', () => {
+      switchView('view-map');
+      showToast('กำลังแสดงสถานีเสบียงชุมชน SME ที่เปิดทำการ');
+    });
+
+    document.getElementById('qa-report-flood').addEventListener('click', () => {
+      openModal('modal-report-flood');
+    });
+
+    document.getElementById('qa-subscribe-soi').addEventListener('click', () => {
+      showToast('ลงทะเบียนติดตามเตือนภัย ซอยไร่ขิง 26 ทาง SMS เรียบร้อย');
+    });
+
+    document.getElementById('link-view-all-stores').addEventListener('click', () => {
+      switchView('view-map');
+    });
+
+    // --------------------------------------------------------------------------
+    // Collapsible Bottom Sheet Behavior (Mobile Only)
+    // --------------------------------------------------------------------------
+    if (sheetHandle) {
+      sheetHandle.addEventListener('click', () => {
+        if (window.innerWidth < 768) {
+          if (bottomSheet.classList.contains('snap-half')) {
+            bottomSheet.classList.remove('snap-half');
+            bottomSheet.classList.add('snap-peek');
+          } else if (bottomSheet.classList.contains('snap-peek')) {
+            bottomSheet.classList.remove('snap-peek');
+            bottomSheet.classList.add('snap-half');
+          }
+        }
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // Animated Mockup Safe Route System (Bypasses Directions API for Hackathon Reliability)
+    // --------------------------------------------------------------------------
+    function createMockupRoute(pathCoords, strokeColor = '#2563eb') {
+      if (!map) return;
+
+      // 1) Clean up previous animated polyline instances and timer
+      if (routeAnimTimer) {
+        clearInterval(routeAnimTimer);
+        routeAnimTimer = null;
+      }
+      if (animatedRoutePolyline) {
+        animatedRoutePolyline.setMap(null);
+        animatedRoutePolyline = null;
+      }
+      if (animatedPulsePolyline) {
+        animatedPulsePolyline.setMap(null);
+        animatedPulsePolyline = null;
+      }
+
+      // 2) Base glowing path (High-contrast Safe Route line)
+      animatedRoutePolyline = new google.maps.Polyline({
+        path: pathCoords,
+        geodesic: true,
+        strokeColor: strokeColor,
+        strokeOpacity: 0.35,
+        strokeWeight: 8,
+        map: map
+      });
+
+      // 3) Animated pulse stream with google.maps.SymbolPath.CIRCLE
+      const streamSymbol = {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 5,
+        strokeColor: '#ffffff',
+        strokeWeight: 2,
+        fillColor: strokeColor,
+        fillOpacity: 1
+      };
+
+      animatedPulsePolyline = new google.maps.Polyline({
+        path: pathCoords,
+        geodesic: true,
+        strokeColor: strokeColor,
+        strokeOpacity: 0.95,
+        strokeWeight: 5,
+        icons: [
+          { icon: streamSymbol, offset: '0%' },
+          { icon: streamSymbol, offset: '25%' },
+          { icon: streamSymbol, offset: '50%' },
+          { icon: streamSymbol, offset: '75%' }
+        ],
+        map: map
+      });
+
+      // 4) Continuous Water Flow / Data Pulse Animation Loop
+      let count = 0;
+      routeAnimTimer = window.setInterval(() => {
+        count = (count + 1) % 200;
+        if (!animatedPulsePolyline) return;
+        const icons = animatedPulsePolyline.get('icons');
+        if (icons && icons.length) {
+          icons[0].offset = ((count / 2) % 100) + '%';
+          icons[1].offset = (((count / 2) + 25) % 100) + '%';
+          icons[2].offset = (((count / 2) + 50) % 100) + '%';
+          icons[3].offset = (((count / 2) + 75) % 100) + '%';
+          animatedPulsePolyline.set('icons', icons);
+        }
+      }, 40);
+    }
+
+    function getRouteForDestination(dest) {
+      if (!dest) return geoLocations.mockRoutes[appState.activeVehicle || 'sedan'];
+      if (Math.abs(dest.lat - 13.7340) < 0.001) {
+        return [
+          { lat: 13.7310, lng: 100.2740 },
+          { lat: 13.7315, lng: 100.2760 },
+          { lat: 13.7330, lng: 100.2780 },
+          { lat: 13.7340, lng: 100.2795 }
+        ];
+      } else if (Math.abs(dest.lat - 13.7420) < 0.001) {
+        return [
+          { lat: 13.7310, lng: 100.2740 },
+          { lat: 13.7316, lng: 100.2688 },
+          { lat: 13.7334, lng: 100.2652 },
+          { lat: 13.7364, lng: 100.2648 },
+          { lat: 13.7390, lng: 100.2680 },
+          { lat: 13.7420, lng: 100.2720 }
+        ];
+      }
+      return geoLocations.mockRoutes[appState.activeVehicle || 'sedan'];
+    }
+
+    // --------------------------------------------------------------------------
+    // Vehicle Selector & Safe Routing (Dynamic Route & Color Switching)
+    // --------------------------------------------------------------------------
+    function selectVehicle(vehicleType, cardElement) {
+      document.querySelectorAll('.vehicle-card').forEach(card => card.classList.remove('active'));
+      if (cardElement) cardElement.classList.add('active');
+      appState.activeVehicle = vehicleType;
+
+      calculateSafeRoute({ silent: false });
+
+      if (vehicleType === 'sedan') {
+        showToast('รถเก๋ง (≤15 ซม.): วิ่งเส้นทางเลี่ยงน้ำท่วมอ้อมแนวคันกั้นน้ำ');
+      } else if (vehicleType === 'pickup') {
+        showToast('กระบะยกสูง (≤40 ซม.): วิ่งเส้นทางโครงข่ายหลัก ลุยระดับน้ำตื้นได้');
+      } else if (vehicleType === 'boat') {
+        showToast('เรือ/เจ็ตสกี: วิ่งตามแนวลำน้ำคลองไร่ขิงมุ่งสู่ศูนย์พักพิง');
+      }
+    }
+
+    // --------------------------------------------------------------------------
+    // Safe Route Calculation with Scanning Simulation Effect
+    // --------------------------------------------------------------------------
+    function calculateSafeRoute(options = {}) {
+      const vehicle = appState.activeVehicle || 'sedan';
+      let coords = geoLocations.mockRoutes[vehicle] || geoLocations.mockRoutes.sedan;
+
+      if (options.destination) {
+        coords = getRouteForDestination(options.destination);
+      }
+
+      let strokeColor = '#2563eb';
+      if (vehicle === 'pickup') strokeColor = '#1d4ed8';
+      else if (vehicle === 'boat') strokeColor = '#0284c7';
+
+      const btn = document.getElementById('btn-calc-route');
+      if (btn && !options.silent) {
+        btn.innerHTML = `
+          <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          <span>AI กำลังวิเคราะห์แนวสันดอนหลบน้ำ...</span>
+        `;
+        btn.disabled = true;
+      }
+
+      const scanDuration = options.silent ? 50 : 500;
+      setTimeout(() => {
+        createMockupRoute(coords, strokeColor);
+
+        if (btn) {
+          btn.innerHTML = `
+            <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            <span>คำนวณเส้นทางปลอดภัย</span>
+          `;
+          btn.disabled = false;
+        }
+
+        // Update Stat Cards and Badge
+        if (routeStatText) {
+          if (vehicle === 'sedan') {
+            routeStatText.innerText = 'ระยะทาง 2.1 กม. • 6 นาที (หลบน้ำท่วม 100%)';
+          } else if (vehicle === 'pickup') {
+            routeStatText.innerText = 'ระยะทาง 1.4 กม. • 4 นาที (ลุยระดับน้ำตื้น)';
+          } else if (vehicle === 'boat') {
+            routeStatText.innerText = 'ระยะทาง 1.2 กม. • 7 นาที (เส้นทางลำน้ำ)';
+          }
+        }
+
+        if (routeBadgeText) {
+          routeBadgeText.innerText = 'AI คำนวณเลี่ยงพื้นที่เสี่ยงสำเร็จ';
+          routeBadgeText.style.backgroundColor = 'var(--pm-success-bg)';
+          routeBadgeText.style.color = 'var(--pm-success-text)';
+        }
+
+        if (!options.silent) {
+          showToast(`คำนวณเส้นทางปลอดภัยสำเร็จ (หลบเลี่ยงโซนน้ำท่วม 100%)`);
+        }
+      }, scanDuration);
+    }
+
+    // Attach Click Handler to Calculate Safe Route Button
+    document.getElementById('btn-calc-route').addEventListener('click', () => {
+      calculateSafeRoute({ silent: false });
+    });
+
+    // --------------------------------------------------------------------------
+    // AI Hydrology Timeline Forecaster Slider (Track 6 Dynamic Overlays)
+    // --------------------------------------------------------------------------
+    timelineSlider.addEventListener('input', (e) => {
+      const step = parseInt(e.target.value);
+      appState.timelineStep = step;
+
+      if (step === 1) {
+        timelineReadout.innerText = '+1 ชม. (น้ำเอ่อ 15 ซม.)';
+        if (floodCircleHigh) floodCircleHigh.setRadius(280);
+        if (floodCircleMod) floodCircleMod.setOptions({ fillOpacity: 0.15 });
+        if (isolationPolygon) isolationPolygon.setOptions({ strokeOpacity: 0.4, fillOpacity: 0.1 });
+        if (floodLabelHigh) floodLabelHigh.setLabel({ text: "น้ำท่วม +15 ซม.", className: "map-zone-label map-zone-label-water" });
+        if (floodLabelMod) floodLabelMod.setLabel({ text: "น้ำท่วม +10 ซม.", className: "map-zone-label map-zone-label-water" });
+      } else if (step === 2) {
+        timelineReadout.innerText = '+3 ชม. (วิกฤต +35 ซม.)';
+        if (floodCircleHigh) floodCircleHigh.setRadius(450);
+        if (floodCircleMod) floodCircleMod.setOptions({ fillOpacity: 0.22 });
+        if (isolationPolygon) isolationPolygon.setOptions({ strokeOpacity: 0.9, fillOpacity: 0.18 });
+        if (floodLabelHigh) floodLabelHigh.setLabel({ text: "น้ำท่วม +35 ซม.", className: "map-zone-label map-zone-label-water" });
+        if (floodLabelMod) floodLabelMod.setLabel({ text: "น้ำท่วม +18 ซม.", className: "map-zone-label map-zone-label-water" });
+      } else if (step === 3) {
+        timelineReadout.innerText = '+6 ชม. (มวลน้ำขัง 42 ซม.)';
+        if (floodCircleHigh) floodCircleHigh.setRadius(650);
+        if (floodCircleMod) floodCircleMod.setOptions({ fillOpacity: 0.32 });
+        if (isolationPolygon) isolationPolygon.setOptions({ strokeOpacity: 1.0, fillOpacity: 0.25 });
+        if (floodLabelHigh) floodLabelHigh.setLabel({ text: "น้ำท่วม +42 ซม.", className: "map-zone-label map-zone-label-water" });
+        if (floodLabelMod) floodLabelMod.setLabel({ text: "น้ำท่วม +25 ซม.", className: "map-zone-label map-zone-label-water" });
+      }
+    });
+
+    // --------------------------------------------------------------------------
+    // Map Layer Toggles
+    // --------------------------------------------------------------------------
+    document.getElementById('toggle-layer-water').addEventListener('click', function() {
+      appState.layers.water = !appState.layers.water;
+      this.classList.toggle('active');
+      const targetMap = appState.layers.water ? map : null;
+      if (floodCircleHigh) floodCircleHigh.setMap(targetMap);
+      if (floodCircleMod) floodCircleMod.setMap(targetMap);
+      if (isolationPolygon) isolationPolygon.setMap(targetMap);
+      if (floodLabelHigh) floodLabelHigh.setMap(targetMap);
+      if (floodLabelMod) floodLabelMod.setMap(targetMap);
+      if (isolationLabel) isolationLabel.setMap(targetMap);
+      showToast(appState.layers.water ? 'เปิดเลเยอร์ระดับน้ำท่วม' : 'ปิดเลเยอร์ระดับน้ำท่วม');
+    });
+
+    document.getElementById('toggle-layer-rain').addEventListener('click', function() {
+      appState.layers.rain = !appState.layers.rain;
+      this.classList.toggle('active');
+      showToast(appState.layers.rain ? 'เปิดเลเยอร์เรดาร์น้ำฝน TMD' : 'ปิดเลเยอร์เรดาร์น้ำฝน TMD');
+    });
+
+    document.getElementById('toggle-layer-stores').addEventListener('click', function() {
+      appState.layers.stores = !appState.layers.stores;
+      this.classList.toggle('active');
+      const targetMap = appState.layers.stores ? map : null;
+      storeMarkers.forEach(marker => marker.setMap(targetMap));
+      showToast(appState.layers.stores ? 'เปิดหมุดสถานีเสบียงชุมชน' : 'ซ่อนหมุดสถานีเสบียงชุมชน');
+    });
+
+    document.getElementById('btn-recenter-map').addEventListener('click', () => {
+      if (map) {
+        map.panTo(geoLocations.user);
+        map.setZoom(15);
+        showToast('ปรับแผนที่กลับสู่ตำแหน่งปัจจุบันของคุณ');
+      }
+    });
+
+    // --------------------------------------------------------------------------
+    // E-Voucher & Store Interaction Logic (Track 2)
+    // --------------------------------------------------------------------------
+    document.getElementById('btn-scan-voucher').addEventListener('click', () => {
+      openModal('modal-qr-scanner');
+    });
+
+    function simulateVoucherRedeem() {
+      closeModal('modal-qr-scanner');
+      appState.voucherBalance -= 300;
+      
+      const balanceElement = document.querySelector('.wallet-balance');
+      if (balanceElement) {
+        balanceElement.innerHTML = `<span class="wallet-balance-currency">฿</span>${appState.voucherBalance}`;
+      }
+
+      showToast('แลกชุดเสบียงสำเร็จ ฿300! ยอดคงเหลือ ฿' + appState.voucherBalance);
+    }
+
+    function openStoreOnMap(storeName, lat, lng) {
+      switchView('view-map');
+      if (map) {
+        map.panTo({ lat: lat, lng: lng });
+        map.setZoom(15);
+      }
+      calculateSafeRoute({ destination: { lat: lat, lng: lng } });
+      showToast(`เลือก ${storeName} เป็นเป้าหมายเสบียง`);
+    }
+
+    function navigateToStore(lat, lng, storeName) {
+      openStoreOnMap(storeName, lat, lng);
+    }
+
+    // --------------------------------------------------------------------------
+    // AI Assistant FAB
+    // --------------------------------------------------------------------------
+    document.getElementById('btn-ai-fab').addEventListener('click', () => {
+      openModal('modal-ai-assistant');
+    });
+
+    // --------------------------------------------------------------------------
+    // Modals & Toast Utility
+    // --------------------------------------------------------------------------
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.classList.add('show');
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.classList.remove('show');
+    }
+
+    function submitReport(depth) {
+      closeModal('modal-report-flood');
+      showToast(`บันทึกรายงานระดับน้ำ: ${depth} ขอบคุณสำหรับข้อมูลชุมชน!`);
+    }
+
+    let toastTimer = null;
+    function showToast(message) {
+      if (toastTimer) clearTimeout(toastTimer);
+      toastMsg.innerText = message;
+      toast.classList.add('show');
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2800);
+    }
+
+    // Close Modal when tapping on backdrop outside sheet
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+          backdrop.classList.remove('show');
+        }
+      });
+    });
+  </script>
+
+  <!-- Google Maps JavaScript API (API Key injected from .env) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxiU9TF7fnwTUEbrAi2W1vOpN-Udjg670&callback=initMap&libraries=geometry" async defer></script>
+
+</body>
+</html>

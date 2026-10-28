@@ -1,0 +1,12 @@
+#,Assumption,Origin,Your Decision Needed
+A1,Krungthai Bank's Open API can support the voucher activation/redemption workflow required by D2C Mesh,Stage 3,"Can we proceed on the basis that Krungthai's Open API is technically capable, pending sandbox validation in Phase 0?"
+A2,TMD/HII/RID data accessible at ≤15 min intervals for real-time flood prediction,Stage 3,Are you confident enough in government data frequency to build the prediction model around this? Or should we plan for a degraded-frequency fallback?
+A3,High-resolution DEM for Nakhon Pathom available from GISTDA or acquirable within budget (฿500K–฿1.5M),Stage 3,Do you have any existing contact or knowledge about GISTDA DEM availability for this region?
+A4,Local SMEs in Nakhon Pathom will register as Micro-Relief Stations given the year-round welfare commerce incentive,Stage 3,"Based on your knowledge of the local merchant community, is 50 merchants a realistic target?"
+A5,อปท. municipalities are willing and legally able to route welfare budgets through a third-party digital platform,Stage 3,This is a critical policy assumption. Do you have existing relationships or evidence suggesting อปท. openness to digital welfare distribution?
+A6,อสม. (Village Health Volunteer) network can be leveraged as community coordinators for the relay mechanism,Stage 3,Is there precedent for อสม. taking on disaster coordination roles beyond their health mandate?
+A7,Pre-computed flood scenarios can adequately substitute for real-time model inference for routing purposes,Stage 3,Are you comfortable accepting reduced routing precision in exchange for sub-second response times?
+A8,Cloud infrastructure costs remain within ฿600K–฿1.2M/year at pilot scale,Stage 3,Is this budget range realistic given your funding expectations?
+A9,Google Maps API pricing is viable for pilot-scale map rendering and routing,Stage 4,"Google Maps Platform charges per API call. At 500–1,000 households, are you comfortable with the cost, or should we explore Google for Startups credits?"
+A10,"PWA technology delivers sufficient native-app-like experience on Thai Android devices (Samsung A-series, OPPO, Vivo)",Stage 4,"PWAs have limitations vs. native apps (e.g., push notification support varies). Are you accepting PWA as the delivery model?"
+A11,Kanit font renders correctly across all target devices and browsers,Stage 4,Kanit is a Google Font and renders well on modern browsers. Low-risk assumption — confirm as accepted?
